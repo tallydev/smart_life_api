@@ -46,5 +46,11 @@ group :development do
 
   # rspec
   gem 'rspec-rails', '~> 3.4'
+
+  # Collection of testing matchers extracted from Shoulda
+  gem 'shoulda-matchers', '~> 3.1'
+
+  # Factory Girl & Rails
+  gem 'factory_girl_rails'
 end
 
