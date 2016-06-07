@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Automatically generate API documentation from RSpec
 gem 'rspec_api_documentation'
 
+# A set of Rails responders to dry up your application
+gem "responders"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
