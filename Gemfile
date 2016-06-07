@@ -1,4 +1,4 @@
-source 'https://ruby.taobao.org/'
+source 'https://gems.ruby-china.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -28,6 +28,9 @@ gem 'rspec_api_documentation'
 
 # A set of Rails responders to dry up your application
 gem "responders"
+
+# Easy file attachment management for ActiveRecord
+gem "paperclip", "~> 5.0.0.beta1"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
