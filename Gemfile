@@ -35,6 +35,9 @@ gem "paperclip", "~> 5.0.0.beta1"
 # Annotate Rails classes with schema and routes info
 gem 'annotate'
 
+# An ActiveRecord plugin for managing lists.
+gem 'acts_as_list'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
