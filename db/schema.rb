@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607165921) do
+ActiveRecord::Schema.define(version: 20160608115056) do
 
   create_table "images", force: :cascade do |t|
     t.string   "title"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160607165921) do
     t.string   "imageable_type"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "photo_type"
   end
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
