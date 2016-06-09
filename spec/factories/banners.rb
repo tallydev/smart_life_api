@@ -13,5 +13,6 @@ FactoryGirl.define do
   factory :banner do
     title "MyString"
     position 1
+    association :image, factory: :image
   end
 end

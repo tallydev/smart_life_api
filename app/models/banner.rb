@@ -10,5 +10,5 @@
 #
 
 class Banner < ActiveRecord::Base
-  has_many :images, as: :imageable, dependent: :destroy
+  has_one :image, as: :imageable, dependent: :destroy
 end

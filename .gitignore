@@ -15,3 +15,10 @@
 /log/*
 !/log/.keep
 /tmp
+
+/doc/*
+/public/system/*
+/public/*
+/solr/
+/vendor/*
+/config/database.yml
