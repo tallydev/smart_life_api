@@ -14,4 +14,12 @@ resource "主页相关接口" do
       expect(status).to eq(200)
     end
   end
+
+  get 'home' do
+    example "用户获取主页的信息" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)
+    end
+  end
 end
