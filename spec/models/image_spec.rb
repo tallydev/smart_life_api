@@ -3,16 +3,16 @@
 # Table name: images
 #
 #  id                 :integer          not null, primary key
-#  title              :string(255)
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
+#  title              :string
+#  photo_file_name    :string
+#  photo_content_type :string
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
 #  imageable_id       :integer
-#  imageable_type     :string(255)
+#  imageable_type     :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  photo_type         :string(255)
+#  photo_type         :string
 #
 # Indexes
 #
