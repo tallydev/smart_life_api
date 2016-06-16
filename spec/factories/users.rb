@@ -16,16 +16,21 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  authentication_token   :string(30)
+#  phone                  :string
 #
 # Indexes
 #
 #  index_users_on_authentication_token  (authentication_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_phone                 (phone) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 FactoryGirl.define do
   factory :user do
-    
+    phone "13813813811"
+    password "abcd.1234"
+    sms_token "1981"
+    authentication_token "qwertyuiop"
   end
 end
