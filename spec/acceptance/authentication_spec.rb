@@ -34,7 +34,6 @@ resource "用户注册登录" do
       let(:phone) { sms_attrs[:phone] }
       let(:password) { user_attrs[:password] }
       let(:sms_token) { sms_attrs[:token] }
-      let(:raw_post) { params.to_json }
 
       example "用户注册失败（验证码未获取）" do
         do_request
