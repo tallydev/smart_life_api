@@ -23,6 +23,23 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use Unicorn as the app server
+# gem 'unicorn'
+
+# gem 'sorcery'
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+##################################################################
+# Authentication
+gem 'devise'
+
+# Simple (but safe) token authentication for Rails apps or API with Devise.
+gem 'simple_token_authentication', '~> 1.0'
+
 # Automatically generate API documentation from RSpec
 gem 'rspec_api_documentation'
 
@@ -38,15 +55,7 @@ gem 'annotate'
 # An ActiveRecord plugin for managing lists.
 gem 'acts_as_list'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-gem 'sorcery'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+##################################################################
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

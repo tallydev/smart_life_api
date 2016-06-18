@@ -3,16 +3,13 @@ require "acceptance_helper"
 resource "主页相关接口" do
   header "Accept", "application/json"
 
-  get "banners" do
-    before do
-      create_list(:banner, 3)
-    end
+  user_attrs = FactoryGirl.attributes_for(:user)
 
-    example "用户获取主页广告列表成功" do
-      do_request
-      puts response_body
-      expect(status).to eq(200)
-    end
+  header "X-User-Token", user_attrs[:authentication_token]
+  header "X-User-Phone", user_attrs[:phone]
+
+  before do
+    create(:user)
   end
 
   get 'home' do

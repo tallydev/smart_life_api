@@ -1,14 +1,18 @@
 # == Schema Information
 #
-# Table name: banners
+# Table name: sms_tokens
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  position   :integer
+#  phone      :string
+#  token      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_sms_tokens_on_phone  (phone)
+#
 
-class Banner < ActiveRecord::Base
-  has_one :image, as: :imageable, dependent: :destroy
+class SmsToken < ActiveRecord::Base
+
 end
