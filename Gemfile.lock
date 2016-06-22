@@ -47,6 +47,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.5)
+    china_sms (0.0.7)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -216,6 +217,7 @@ DEPENDENCIES
   acts_as_list
   annotate
   byebug
+  china_sms
   coffee-rails (~> 4.1.0)
   devise
   factory_girl_rails

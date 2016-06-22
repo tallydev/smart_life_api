@@ -1,0 +1,17 @@
+<%= form_for(@sms_token) do |f| %>
+  <% if @sms_token.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sms_token.errors.count, "error") %> prohibited this sms_token from being saved:</h2>
+
+      <ul>
+      <% @sms_token.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

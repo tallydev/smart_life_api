@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   ## Token Authenticatable
   acts_as_token_authenticatable
 
+  has_one :user_info, dependent: :destroy
+
   # virtual attribute
   attr_accessor :sms_token
 
@@ -42,6 +44,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :phone
   validates_presence_of :phone
   validate :sms_token_validate, on: :create
+
+  def info
+    self.user_info || self.create_user_info
+  end
 
   # user phone as the authentication key, so email is not required default
   def email_required?

@@ -55,6 +55,9 @@ gem 'annotate'
 # An ActiveRecord plugin for managing lists.
 gem 'acts_as_list'
 
+# SMS
+gem 'china_sms'
+
 ##################################################################
 
 group :development, :test do

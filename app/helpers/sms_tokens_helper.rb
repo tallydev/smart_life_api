@@ -1,0 +1,2 @@
+module SmsTokensHelper
+end

@@ -84,32 +84,32 @@ resource "用户注册登录" do
 
   end
 
-  # post "sms_tokens/register" do
-  #   parameter :phone, "发送手机号", required: true, scope: :sms_token
+  post "sms_tokens/register" do
+    parameter :phone, "发送手机号", required: true, scope: :sms_token
 
-  #   before do
-  #     @user = create(:user)
-  #   end
+    before do
+      @user = create(:user)
+    end
 
-  #   user_attrs = FactoryGirl.attributes_for :user
-  #   let(:phone) { user_attrs[:phone] }
+    user_attrs = FactoryGirl.attributes_for :user
+    let(:phone) { user_attrs[:phone] }
 
-  #   response_field :id, "验证码ID"
-  #   response_field :phone, "电话号码"
+    response_field :id, "验证码ID"
+    response_field :phone, "电话号码"
 
-  #   example "发送短信验证码" do
-  #     do_request
-  #     puts response_body
-  #     expect(status).to eq(201)
-  #   end
+    example "发送短信验证码" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
 
-  #   example "用户已经被锁定（发送验证码失败）" do
-  #     @user.ban!
-  #     do_request
-  #     puts response_body
-  #     expect(status).to eq(422)
-  #   end
-  # end
+    # example "用户已经被锁定（发送验证码失败）" do
+    #   @user.ban!
+    #   do_request
+    #   puts response_body
+    #   expect(status).to eq(422)
+    # end
+  end
 
   # post "user_info/check" do
   #   parameter :phone, "手机号", required: true, scope: :user
