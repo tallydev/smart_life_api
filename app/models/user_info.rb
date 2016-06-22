@@ -16,9 +16,12 @@
 #
 
 class UserInfo < ActiveRecord::Base
-  belongs_to :user
-
   enum sex: [:male, :female]
 
+  belongs_to :user
+  has_one :avatar, -> { where photo_type: "avatar" }, class_name: "Image", as: :imageable, dependent: :destroy
+
   delegate :phone, to: :user
+
+  accepts_nested_attributes_for :avatar, allow_destroy: true
 end

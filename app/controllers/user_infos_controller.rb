@@ -31,7 +31,7 @@ class UserInfosController < ApplicationController
 
   def update
     @user_info.update(user_info_params)
-    respond_with(@user_info)
+    respond_with(@user_info, template: "user_infos/show")
   end
 
   def destroy
@@ -45,6 +45,9 @@ class UserInfosController < ApplicationController
     end
 
     def user_info_params
-      params[:user_info]
+      params.require(:user_info).permit(
+        :nickname,
+        avatar_attributes: [:id, :photo, :_destroy]
+        )
     end
 end
