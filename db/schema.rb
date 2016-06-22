@@ -48,8 +48,7 @@ ActiveRecord::Schema.define(version: 20160622060144) do
     t.integer  "user_id"
     t.string   "nickname"
     t.string   "identity_card"
-    t.string   "sex"
-    t.string   "integer"
+    t.integer  "sex"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

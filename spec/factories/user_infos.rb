@@ -6,8 +6,7 @@
 #  user_id       :integer
 #  nickname      :string
 #  identity_card :string
-#  sex           :string
-#  integer       :string
+#  sex           :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -18,10 +17,8 @@
 
 FactoryGirl.define do
   factory :user_info do
-    user nil
-    nickname "MyString"
-    identity_card "MyString"
-    sex "MyString"
-    integer "MyString"
+    nickname "my nickname"
+    identity_card "my identity card"
+    sex 1
   end
 end
