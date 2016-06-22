@@ -60,6 +60,9 @@ gem 'china_sms'
 
 ##################################################################
 
+# Use Unicorn as the app server
+gem 'unicorn'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
