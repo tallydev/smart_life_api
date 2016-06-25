@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   resource :user_info, only: [:show, :update]
   ###########################################
 
+  ########### Sport Route ################
+  resources :sports, only: [:create, :show]
+  ###########################################
+
 end
