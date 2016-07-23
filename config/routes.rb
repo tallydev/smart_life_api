@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   resources :sports, only: [:create, :show]
   ###########################################
 
+  ########### Appointment Route ###########################
+  resources :appointments, only: [:show, :create, :index]
+  ##########################################################
 end
