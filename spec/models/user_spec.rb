@@ -30,4 +30,5 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { should have_one(:user_info) } 
+  it { should have_many(:sports) } 
 end

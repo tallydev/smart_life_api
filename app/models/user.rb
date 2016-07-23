@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   acts_as_token_authenticatable
 
   has_one :user_info, dependent: :destroy
+  has_many :sports, dependent: :destroy
 
   # virtual attribute
   attr_accessor :sms_token
