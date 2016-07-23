@@ -58,6 +58,9 @@ gem 'acts_as_list'
 # SMS
 gem 'china_sms'
 
+# The administration framework for Ruby on Rails applications.
+gem 'activeadmin', '~> 1.0.0.pre4'
+
 ##################################################################
 
 # Use Unicorn as the app server
