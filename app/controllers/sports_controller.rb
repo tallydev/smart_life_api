@@ -23,7 +23,7 @@ class SportsController < ApplicationController
   end
 
   def create
-    date = Time.zone.today
+    date = sport_params[:date]
     @sport = current_user.sports.where(date: date).first_or_create
     @sport.count = sport_params[:count]
     @sport.save
@@ -47,7 +47,7 @@ class SportsController < ApplicationController
 
     def sport_params
       params.require(:sport).permit(
-        :count
+        :count, :date
         )
     end
 end
