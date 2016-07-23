@@ -8,6 +8,7 @@
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  count      :integer
 #
 # Indexes
 #
@@ -16,4 +17,7 @@
 
 # 社区活动预约
 class Appointment::Sqhd < Appointment
+  def self.model_name
+    Appointment.model_name
+  end
 end

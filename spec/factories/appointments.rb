@@ -8,6 +8,7 @@
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  count      :integer
 #
 # Indexes
 #
@@ -16,7 +17,7 @@
 
 FactoryGirl.define do
   factory :appointment do
-    user nil
-    idname "MyString"
+    count 3
+    type "Appointment::Zhjk"
   end
 end
