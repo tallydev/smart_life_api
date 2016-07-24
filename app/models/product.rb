@@ -10,4 +10,5 @@
 #
 
 class Product < ActiveRecord::Base
+  has_one :thumb, -> { where photo_type: "thumb" }, class_name: "Image", as: :imageable, dependent: :destroy
 end
