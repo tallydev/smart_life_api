@@ -13,6 +13,12 @@ resource "预约相关接口" do
   end
 
   get 'appointments' do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+    
+    let(:page) { 1 }
+    let(:per_page) { 10 }
+
     before do
       @appointments = create_list(:appointment, 3, user: @user)
     end
