@@ -63,6 +63,9 @@ gem 'activeadmin', '~> 1.0.0.pre4'
 
 # Pagination library for Rails, Sinatra, Merb, DataMapper, and more
 gem 'will_paginate', '~> 3.1.0'
+
+# AASM - State machines for Ruby classes (plain Ruby, ActiveRecord, Mongoid, MongoMapper)
+gem 'aasm'
 ##################################################################
 
 # Use Unicorn as the app server

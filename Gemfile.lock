@@ -1,6 +1,7 @@
 GEM
   remote: https://gems.ruby-china.org/
   specs:
+    aasm (4.11.0)
     actionmailer (4.2.6)
       actionpack (= 4.2.6)
       actionview (= 4.2.6)
@@ -263,6 +264,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activeadmin (~> 1.0.0.pre4)
   acts_as_list
   annotate
