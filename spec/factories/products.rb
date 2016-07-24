@@ -11,7 +11,8 @@
 
 FactoryGirl.define do
   factory :product do
-    title "MyString"
+    title "product title"
     price 1.5
+    association :thumb, factory: :image, photo_type: "thumb"
   end
 end

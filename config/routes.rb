@@ -25,4 +25,9 @@ Rails.application.routes.draw do
   ########### Appointment Route ###########################
   resources :appointments, only: [:show, :create, :index]
   ##########################################################
+
+
+  ########### Product Route ###########################
+  resources :products, only: [:show, :index]
+  ##########################################################
 end
