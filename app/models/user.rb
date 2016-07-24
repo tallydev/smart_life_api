@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_one :user_info, dependent: :destroy
   has_many :sports, dependent: :destroy
   has_many :appointments, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
 
   # virtual attribute
   attr_accessor :sms_token

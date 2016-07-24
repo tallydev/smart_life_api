@@ -11,4 +11,7 @@
 
 class Product < ActiveRecord::Base
   has_one :thumb, -> { where photo_type: "thumb" }, class_name: "Image", as: :imageable, dependent: :destroy
+
+  validates_presence_of :price, on: :create, message: "商品价格不能为空"
+  validates_numericality_of :price, greater_than: 0
 end

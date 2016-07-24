@@ -10,6 +10,8 @@
 #  state      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  price      :float
+#  title      :string
 #
 # Indexes
 #
@@ -19,9 +21,7 @@
 
 FactoryGirl.define do
   factory :cart_item do
-    product nil
-    user nil
-    count 1
-    amount 1.5
+    product_id 1
+    count 3
   end
 end

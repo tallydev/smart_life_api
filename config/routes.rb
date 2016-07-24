@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resource :user_info, only: [:show, :update]
   ###########################################
 
-  ########### Sport Route ################
+  ########### Sport Route ####
   resources :sports, only: [:create, :show]
   ###########################################
 
@@ -29,5 +29,10 @@ Rails.application.routes.draw do
 
   ########### Product Route ###########################
   resources :products, only: [:show, :index]
+  resources :cart_items do
+    collection do
+      post :pay
+    end
+  end
   ##########################################################
 end
