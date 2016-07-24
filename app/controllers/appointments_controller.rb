@@ -6,7 +6,9 @@ class AppointmentsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @appointments = current_user.appointments
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @appointments = current_user.appointments.paginate(page: page, per_page: per_page)
     respond_with(@appointments)
   end
 

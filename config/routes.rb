@@ -18,11 +18,21 @@ Rails.application.routes.draw do
   resource :user_info, only: [:show, :update]
   ###########################################
 
-  ########### Sport Route ################
+  ########### Sport Route ####
   resources :sports, only: [:create, :show]
   ###########################################
 
   ########### Appointment Route ###########################
   resources :appointments, only: [:show, :create, :index]
+  ##########################################################
+
+
+  ########### Product Route ###########################
+  resources :products, only: [:show, :index]
+  resources :cart_items do
+    collection do
+      post :pay
+    end
+  end
   ##########################################################
 end

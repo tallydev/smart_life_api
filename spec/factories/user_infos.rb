@@ -20,6 +20,6 @@ FactoryGirl.define do
     nickname "my nickname"
     identity_card "my identity card"
     sex 1
-    association :avatar, factory: :image
+    association :avatar, factory: :image, photo_type: "avatar"
   end
 end
