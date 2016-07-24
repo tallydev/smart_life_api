@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @products = Product.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @products = Product.paginate(page: page, per_page: per_page)
     puts @products.first.thumb
     respond_with(@products)
   end

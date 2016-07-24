@@ -61,6 +61,8 @@ gem 'china_sms'
 # The administration framework for Ruby on Rails applications.
 gem 'activeadmin', '~> 1.0.0.pre4'
 
+# Pagination library for Rails, Sinatra, Merb, DataMapper, and more
+gem 'will_paginate', '~> 3.1.0'
 ##################################################################
 
 # Use Unicorn as the app server
