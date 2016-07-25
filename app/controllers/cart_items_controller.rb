@@ -32,7 +32,7 @@ class CartItemsController < ApplicationController
 
   def update
     @cart_item.update(cart_item_params)
-    respond_with(@cart_item)
+    respond_with(@cart_item, template: "cart_items/show")
   end
 
   def destroy

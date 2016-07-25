@@ -107,7 +107,7 @@ resource "购物相关接口" do
       example "修改购物车的数量成功" do
         do_request
         puts response_body
-        expect(status).to eq(200)
+        expect(status).to eq(204)
       end
     end
 
@@ -157,91 +157,7 @@ resource "购物相关接口" do
         expect(status).to eq 201
       end
     end
-  end
 
-  describe '用户地址管理相关接口' do
-    user_attrs = FactoryGirl.attributes_for(:user)
-    contact_attrs = FactoryGirl.attributes_for(:contact)
 
-    header "X-User-Token", user_attrs[:authentication_token]
-    header "X-User-Phone", user_attrs[:phone]
-
-    before do
-      @user = create(:user)
-      @contacts = create_list(:contact, 3, user: @user)
-    end
-
-    post 'contacts' do
-      parameter :name, "联系人名称", require: true, scope: :contact
-      parameter :phone, "联系人电话", require: true, scope: :contact
-      parameter :conmunity, "联系人社区", require: true, scope: :contact
-      parameter :address, "联系人地址", require: true, scope: :contact
-      parameter :is_default, "是否默认地址", require: true, scope: :contact
-
-      let(:name) { contact_attrs[:name] }
-      let(:phone) { contact_attrs[:phone] }
-      let(:conmunity) { contact_attrs[:conmunity] }
-      let(:address) { contact_attrs[:address] }
-      let(:is_default) { contact_attrs[:is_default] }
-
-      example "增加一个联系人" do
-        do_request
-        puts response_body
-        expect(status).to eq 201 
-      end
-    end
-
-    get 'contacts' do
-
-      example "查看用户联系人列表" do
-        do_request
-        puts response_body
-        expect(status).to eq 200
-      end
-    end
-
-    get 'contacts/:id' do
-
-      let(:id) { @contacts.first.id }
-
-      example "查看用户联系人详情" do
-        do_request
-        puts response_body
-        expect(status).to eq(200)
-      end
-    end
-
-    put 'contacts/:id' do
-
-      parameter :name, "联系人名称", require: true, scope: :contact
-      parameter :phone, "联系人电话", require: true, scope: :contact
-      parameter :conmunity, "联系人社区", require: true, scope: :contact
-      parameter :address, "联系人地址", require: true, scope: :contact
-      parameter :is_default, "是否默认地址", require: true, scope: :contact
-
-      let(:name) { contact_attrs[:name] }
-      let(:phone) { contact_attrs[:phone] }
-      let(:conmunity) { contact_attrs[:conmunity] }
-      let(:address) { contact_attrs[:address] }
-      let(:is_default) { contact_attrs[:is_default] }
-      let(:id) { @contacts.first.id }
-
-      example "修改用户联系人信息成功" do
-        do_request
-        puts response_body
-        expect(status).to eq(200)
-      end
-    end
-
-    delete 'contacts/:id' do
-
-      let(:id) { @contacts.first.id }
-
-      example "删除用户联系人信息成功" do
-        do_request
-        puts response_body
-        expect(status).to eq(204)
-      end
-    end
   end
 end

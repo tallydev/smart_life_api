@@ -32,4 +32,5 @@ RSpec.describe User, type: :model do
   it { should have_one(:user_info) } 
   it { should have_many(:sports) } 
   it { should have_many(:appointments) } 
+  it { should have_many(:contacts) } 
 end

@@ -34,5 +34,7 @@ Rails.application.routes.draw do
       post :pay
     end
   end
+  resources :contacts
   ##########################################################
+
 end
