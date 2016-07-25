@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @contacts = current_user.contacts.all
+    @contacts = current_user.contacts.rank(:order)
     respond_with(@contacts)
   end
 
@@ -25,12 +25,20 @@ class ContactsController < ApplicationController
   def create
     @contact = current_user.contacts.build(contact_params)
     @contact.save
-    respond_with(@contact)
+    if contact_params[:is_default]
+      @contact.update_attribute :order_position, 0
+    end
+    @contacts = current_user.contacts.rank(:order)
+    respond_with(@contacts, template: "contacts/index", status: 201)
   end
 
   def update
     @contact.update(contact_params)
-    respond_with(@contact, template: "contacts/show")
+    if contact_params[:is_default]
+      @contact.update_attribute :order_position, 0
+    end
+    @contacts = current_user.contacts.rank(:order)
+    respond_with(@contacts, template: "contacts/index", status: 200)
   end
 
   def destroy

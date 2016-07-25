@@ -8,9 +8,9 @@
 #  phone      :string
 #  conmunity  :string
 #  address    :string
-#  is_default :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  order      :integer
 #
 # Indexes
 #

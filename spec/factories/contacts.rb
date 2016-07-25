@@ -8,9 +8,9 @@
 #  phone      :string
 #  conmunity  :string
 #  address    :string
-#  is_default :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  order      :integer
 #
 # Indexes
 #
@@ -23,6 +23,6 @@ FactoryGirl.define do
     phone "contact phone"
     conmunity "contact conmunity"
     address "contact address"
-    is_default false
+    is_default true
   end
 end

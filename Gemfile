@@ -1,4 +1,5 @@
 source 'https://gems.ruby-china.org'
+# source 'https://ruby.taobao.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -66,6 +67,10 @@ gem 'will_paginate', '~> 3.1.0'
 
 # AASM - State machines for Ruby classes (plain Ruby, ActiveRecord, Mongoid, MongoMapper)
 gem 'aasm'
+
+# An acts_as_sortable/acts_as_list replacement built for Rails 3 & 4
+gem 'ranked-model'
+
 ##################################################################
 
 # Use Unicorn as the app server

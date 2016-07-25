@@ -179,6 +179,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.16.0)
     rake (11.1.2)
+    ranked-model (0.4.0)
+      activerecord (>= 3.1.12)
     ransack (1.8.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -278,6 +280,7 @@ DEPENDENCIES
   mysql2
   paperclip (~> 5.0.0.beta1)
   rails (= 4.2.6)
+  ranked-model
   responders
   rspec-rails (~> 3.4)
   rspec_api_documentation

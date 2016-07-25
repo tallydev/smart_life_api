@@ -8,9 +8,9 @@
 #  phone      :string
 #  conmunity  :string
 #  address    :string
-#  is_default :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  order      :integer
 #
 # Indexes
 #
@@ -19,5 +19,10 @@
 
 class Contact < ActiveRecord::Base
   belongs_to :user
-  
+
+  include RankedModel
+  ranks :order
+
+  attr_accessor :is_default
+
 end
