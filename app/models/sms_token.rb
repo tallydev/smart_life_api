@@ -40,7 +40,7 @@ class SmsToken < ActiveRecord::Base
   def self.valid? phone, token
     sms_token = self.find_by(phone: phone)
     token == "1981" || 
-    (token.present? && sms_token.present? && token == sms_token.token && sms_token.updated_at > Time.zone.now - 10.minute)
+    (token.present? && sms_token.present? && token == sms_token.token && sms_token.updated_at > Time.zone.now - 15.minute)
   end
 
 end
