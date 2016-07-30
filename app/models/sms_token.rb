@@ -21,9 +21,9 @@ class SmsToken < ActiveRecord::Base
     sms_token = SmsToken.find_or_initialize_by phone: phone
 
     if phone.present?
-      tpl_id = 2
-      company = "慧生活"
-      sms_hash = {company: company, code: token}
+      tpl_id = 1497512
+      # company = "慧生活"
+      sms_hash = {code: token}
       
       ChinaSMS.use :yunpian, password: "20846dadd786980de1e0170d8a045cf1"
       
