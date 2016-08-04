@@ -17,4 +17,6 @@
 
 class Sport::Weekly < ActiveRecord::Base
   belongs_to :user
+
+  scope :filter_date, ->(date) { where(year: date.year, cweek: date.cweek) }
 end

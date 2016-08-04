@@ -20,6 +20,14 @@ class Sport < ActiveRecord::Base
 
   before_save :cal_relations
 
+  by_star_field :date
+
+  scope :filter_date, ->(date) { where(date: date) }
+
+  def tag
+    date.to_s
+  end
+
   private
     def cal_relations
       increase = self.count.to_i - self.count_was.to_i

@@ -17,4 +17,12 @@
 
 class Sport::Monthly < ActiveRecord::Base
   belongs_to :user
+
+  by_star_field :date
+
+  scope :filter_date, ->(date) { where(year: date.year, month: date.month) }
+
+  def tag
+    "#{year}-#{month}"
+  end
 end
