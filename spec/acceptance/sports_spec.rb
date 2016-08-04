@@ -4,12 +4,20 @@ resource "运动相关接口" do
   header "Accept", "application/json"
 
   user_attrs = FactoryGirl.attributes_for(:user)
+  user1_attrs = FactoryGirl.attributes_for(:user1)
 
   header "X-User-Token", user_attrs[:authentication_token]
   header "X-User-Phone", user_attrs[:phone]
 
   before do
-    create(:user)
+    @user = create(:user)
+    @user1 = create(:user1)
+    create(:user_info, user: @user)
+    create(:user_info, user: @user1)
+    create(:sport, user: @user, date: Time.zone.today-1, count: 100)
+    create(:sport, user: @user, date: Time.zone.today, count: 500)
+    create(:sport, user: @user1, date: Time.zone.today-1, count: 500)
+    create(:sport, user: @user1, date: Time.zone.today, count: 300)
   end
 
   post 'sports' do
@@ -24,5 +32,39 @@ resource "运动相关接口" do
       expect(status).to eq 201
     end
   end
+
+  get 'sports/daily' do
+    example "获取用户当日运动的统计信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+  get 'sports/weekly' do
+    example "获取用户本周运动的统计信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+  get 'sports/monthly' do
+    example "获取用户本月运动的统计信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+  get 'sports/yearly' do
+    example "获取用户本年运动的统计信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+
 
 end

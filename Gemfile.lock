@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/radar/by_star
+  revision: 3fe3ef33e98aebcc226cbfea51d1e5101f948c78
+  specs:
+    by_star (2.2.1)
+      activesupport
+
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -274,6 +281,7 @@ DEPENDENCIES
   activeadmin (~> 1.0.0.pre4)
   acts_as_list
   annotate
+  by_star!
   byebug
   china_sms
   coffee-rails (~> 4.1.0)

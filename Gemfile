@@ -1,5 +1,5 @@
 source 'https://gems.ruby-china.org'
-# source 'https://ruby.taobao.org'
+#source 'https://ruby.taobao.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -74,6 +74,9 @@ gem 'ranked-model'
 # i18n
 gem 'rails-i18n', '~> 4.0.0'
 gem 'devise-i18n'
+
+# Lets you find ActiveRecord + Mongoid objects by year, month, fortnight, week and more!
+gem 'by_star', git: "git://github.com/radar/by_star"
 
 ##################################################################
 

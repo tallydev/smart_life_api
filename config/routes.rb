@@ -19,7 +19,14 @@ Rails.application.routes.draw do
   ###########################################
 
   ########### Sport Route ####
-  resources :sports, only: [:create, :show]
+  resources :sports, only: [:create, :show] do
+    collection do
+      get 'daily'
+      get 'weekly'
+      get 'monthly'
+      get 'yearly'
+    end
+  end
   ###########################################
 
   ########### Appointment Route ###########################
