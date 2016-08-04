@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804073806) do
+ActiveRecord::Schema.define(version: 20160804085045) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 20160804073806) do
   end
 
   add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone"
+
+  create_table "sport_monthlies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "count"
+    t.integer  "year"
+    t.integer  "month"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sport_monthlies", ["user_id"], name: "index_sport_monthlies_on_user_id"
 
   create_table "sports", force: :cascade do |t|
     t.integer  "user_id"
