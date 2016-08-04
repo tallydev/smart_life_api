@@ -12,6 +12,9 @@ zh-CN:
         identity_card: "身份证号码"
         slogan: "个人签名"
         pay_password: "支付密码"
+  appointment_state:
+    commited: "已提交"
+    confirmed: "已确认"
   devise:
     failure:
       already_authenticated: "登录成功"

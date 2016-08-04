@@ -9,6 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  count      :integer
+#  state      :integer
 #
 # Indexes
 #
@@ -16,11 +17,32 @@
 #
 
 class Appointment < ActiveRecord::Base
+
+  include AASM
+
   belongs_to :user
 
   after_create :generate_idname
 
   attr_reader :appointment_type, :date
+
+  enum state: {
+    commited: 0,
+    confirmed: 1
+  }
+
+  aasm column: :state, enum: true do
+    state :commited, initial: true
+    state :confirmed
+
+    event :confirm do
+      transitions from: :commited, to: :confirmed
+    end
+  end
+
+  def state_alias
+    I18n.t :"appointment_state.#{state}"
+  end
 
   def date
     self.created_at.to_date
