@@ -53,6 +53,10 @@ class CartItem < ActiveRecord::Base
     end
   end
 
+  def state_alias
+    I18n.t :"cart_item_state.#{state}"
+  end
+
   private   
 
     def add_product_info

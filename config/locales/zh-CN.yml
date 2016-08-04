@@ -15,6 +15,10 @@ zh-CN:
   appointment_state:
     commited: "已提交"
     confirmed: "已确认"
+  cart_item_state:
+    unpaid: "待支付"
+    paid: "已支付"
+    canceled: "已取消"
   devise:
     failure:
       already_authenticated: "登录成功"
