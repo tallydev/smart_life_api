@@ -11,6 +11,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  order      :integer
+#  area       :string
+#  street     :string
 #
 # Indexes
 #
@@ -21,6 +23,8 @@ FactoryGirl.define do
   factory :contact do
     name "contact name"
     phone "contact phone"
+    area "西山区"
+    street "前卫街道"
     conmunity "contact conmunity"
     address "contact address"
     is_default true

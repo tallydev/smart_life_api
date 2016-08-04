@@ -11,6 +11,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  order      :integer
+#  area       :string
+#  street     :string
 #
 # Indexes
 #
