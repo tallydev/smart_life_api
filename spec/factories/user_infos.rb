@@ -9,6 +9,9 @@
 #  sex           :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  birth         :date
+#  slogan        :string
+#  pay_password  :string
 #
 # Indexes
 #
@@ -20,6 +23,9 @@ FactoryGirl.define do
     nickname "my nickname"
     identity_card "my identity card"
     sex 1
+    birth "1988-5-26"
+    slogan "my slogan"
+    pay_password "123456"
     association :avatar, factory: :image, photo_type: "avatar"
   end
 end

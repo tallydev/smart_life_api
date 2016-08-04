@@ -9,6 +9,9 @@
 #  sex           :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  birth         :date
+#  slogan        :string
+#  pay_password  :string
 #
 # Indexes
 #
