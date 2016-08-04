@@ -71,6 +71,10 @@ gem 'aasm'
 # An acts_as_sortable/acts_as_list replacement built for Rails 3 & 4
 gem 'ranked-model'
 
+# i18n
+gem 'rails-i18n', '~> 4.0.0'
+gem 'devise-i18n'
+
 ##################################################################
 
 # Use Unicorn as the app server

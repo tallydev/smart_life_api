@@ -1,0 +1,25 @@
+zh-CN:
+  activerecord:
+    attributes:
+      user:
+        phone: "手机号码"
+        sms_token: "短信验证码"
+      user_info:
+        sex: "性别"
+        nickname: "昵称"
+        birth: "生日"
+        avatar: "头像"
+        identity_card: "身份证号码"
+        slogan: "个人签名"
+        pay_password: "支付密码"
+  devise:
+    failure:
+      already_authenticated: "登录成功"
+      inactive: "您的账号还未激活"
+      invalid: "手机或密码错误"
+      last_attempt: "你还有一次尝试正确的密码，过后你的帐户会被锁住"
+      locked: "由于您登陆过于频繁，现在我们决定封锁您的账号，请过后再来"
+      not_found_in_database: "手机或密码错误"
+      timeout: "登录超时，请重新登录."
+      unauthenticated: "继续操作前请确保您已登录."
+      unconfirmed: "继续操作前请先确认您的帐号."
