@@ -78,6 +78,9 @@ gem 'devise-i18n'
 # Lets you find ActiveRecord + Mongoid objects by year, month, fortnight, week and more!
 gem 'by_star', git: "git://github.com/radar/by_star"
 
+# Dead simple Rails 3/4 SOAP server library
+gem 'wash_out'
+
 ##################################################################
 
 # Use Unicorn as the app server

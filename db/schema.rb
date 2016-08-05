@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804090640) do
+ActiveRecord::Schema.define(version: 20160805134821) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -94,6 +94,36 @@ ActiveRecord::Schema.define(version: 20160804090640) do
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id"
+
+  create_table "examinations", force: :cascade do |t|
+    t.integer  "user_info_id"
+    t.date     "date"
+    t.float    "sbp"
+    t.float    "dbp"
+    t.float    "pulse"
+    t.float    "bo"
+    t.float    "fetalheart"
+    t.float    "glu"
+    t.float    "chol"
+    t.float    "ua"
+    t.float    "fat"
+    t.float    "bmr"
+    t.float    "water"
+    t.float    "height"
+    t.float    "weight"
+    t.float    "bmi"
+    t.float    "waistline"
+    t.float    "hipline"
+    t.float    "whr"
+    t.float    "bmd_t"
+    t.float    "bmd_z"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "type"
+  end
+
+  add_index "examinations", ["date"], name: "index_examinations_on_date"
+  add_index "examinations", ["user_info_id"], name: "index_examinations_on_user_info_id"
 
   create_table "images", force: :cascade do |t|
     t.string   "title"
@@ -179,6 +209,9 @@ ActiveRecord::Schema.define(version: 20160804090640) do
     t.date     "birth"
     t.string   "slogan"
     t.string   "pay_password"
+    t.string   "name"
+    t.string   "nation"
+    t.string   "addr"
   end
 
   add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id"
