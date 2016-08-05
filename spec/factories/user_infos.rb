@@ -12,6 +12,9 @@
 #  birth         :date
 #  slogan        :string
 #  pay_password  :string
+#  name          :string
+#  nation        :string
+#  addr          :string
 #
 # Indexes
 #

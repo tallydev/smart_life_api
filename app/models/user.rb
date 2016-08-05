@@ -52,6 +52,13 @@ class User < ActiveRecord::Base
     self.user_info || self.create_user_info
   end
 
+  def self.setup phone
+    password = (0..9).to_a.sample(4).join
+    user = User.create(phone: phone, password: password, sms_token: "1981")
+    SmsToken.password_notify phone, password
+    user
+  end
+
   # user phone as the authentication key, so email is not required default
   def email_required?
     false

@@ -12,6 +12,9 @@
 #  birth         :date
 #  slogan        :string
 #  pay_password  :string
+#  name          :string
+#  nation        :string
+#  addr          :string
 #
 # Indexes
 #
@@ -23,4 +26,6 @@ require 'rails_helper'
 RSpec.describe UserInfo, type: :model do
   it { should belong_to(:user) } 
   it { should have_one(:avatar) } 
+  it { should have_many(:exam_records) } 
+  it { should have_one(:exam_report) } 
 end

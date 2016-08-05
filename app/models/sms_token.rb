@@ -37,6 +37,16 @@ class SmsToken < ActiveRecord::Base
 
   end
 
+  def self.password_notify phone, password
+    tpl_id = 1506682
+    # company = "慧生活"
+    sms_hash = {password: password}
+    
+    ChinaSMS.use :yunpian, password: "20846dadd786980de1e0170d8a045cf1"
+    
+    result = ChinaSMS.to phone, sms_hash, {tpl_id: tpl_id}
+  end
+
   def self.valid? phone, token
     sms_token = self.find_by(phone: phone)
     token == "1981" || 
