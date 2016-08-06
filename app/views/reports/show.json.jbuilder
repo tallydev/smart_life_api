@@ -1,4 +1,7 @@
 if @item_info.present?
+  json.total_pages @report_items.total_pages
+  json.current_page @report_items.current_page
+
   json.name @item_name
   json.alias @item_info[:alias]
   json.hint @item_info[:hint]
