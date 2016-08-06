@@ -38,6 +38,9 @@
 class Exam::Record < Examination
   before_save :update_exam_report
 
+  scope :filter, ->(item) { where.not(item => nil) }
+  scope :date_asc, -> { order(date: :asc) }
+
   private
     def update_exam_report
       exam_report = user_info.exam_report || user_info.build_exam_report
