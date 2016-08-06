@@ -44,7 +44,7 @@ class Exam::Record < Examination
       change_attributes = self.changes
       change_attributes.each do |name, values|
         next if ["type", "user_info_id"].include?(name)
-        exam_report.write_attribute(name, values[-1])
+        exam_report.send :write_attribute, name, values[-1]
       end
       exam_report.save
     end
