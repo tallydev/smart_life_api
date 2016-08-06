@@ -65,6 +65,61 @@ resource "运动相关接口" do
     end
   end
 
+  get 'ranks/daily' do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+
+    let(:page) { 1 }
+    let(:per_page) { 10 }
+
+    example "获取用户当日运动的排名信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+  get 'ranks/weekly' do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+
+    let(:page) { 1 }
+    let(:per_page) { 10 }
+    
+    example "获取用户本周运动的的排名信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+  get 'ranks/monthly' do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+
+    let(:page) { 1 }
+    let(:per_page) { 10 }
+    
+    example "获取用户本月运动的的排名信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
+  get 'ranks/weekly' do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+
+    let(:page) { 1 }
+    let(:per_page) { 10 }
+    
+    example "获取用户本年运动的的排名信息" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
 
 
 end

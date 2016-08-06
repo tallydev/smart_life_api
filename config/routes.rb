@@ -27,6 +27,16 @@ Rails.application.routes.draw do
       get 'yearly'
     end
   end
+
+  # 获取具体的排名，支持分页
+  resources :ranks, only: [:show] do
+    collection do
+      get 'daily'
+      get 'weekly'
+      get 'monthly'
+      get 'yearly'
+    end
+  end
   ###########################################
 
   ########### Appointment Route ###########################
