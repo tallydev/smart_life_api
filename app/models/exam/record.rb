@@ -40,6 +40,7 @@ class Exam::Record < Examination
 
   scope :filter, ->(item) { where.not(item => nil) }
   scope :date_asc, -> { order(date: :asc) }
+  scope :date_desc, -> { order(date: :desc) }
 
   private
     def update_exam_report

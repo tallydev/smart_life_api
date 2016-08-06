@@ -54,7 +54,15 @@ Rails.application.routes.draw do
   resources :contacts
   ##########################################################
 
-  ##########################################################
+  ################  健康小屋体检机器相关的接口路由   ###################
+  # 给体检机器提供的webservice接口
   wash_out :healthy_services
+
+  # 提供APP查询的接口
+  resources :reports, only: [:index] do
+    collection do
+      get ':item', action: :show
+    end
+  end
   ##########################################################
 end
