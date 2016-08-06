@@ -7,7 +7,7 @@ class HealthyService::Code2003
       builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
         xml.businessdata {
           xml.errCode 0
-          xml.errMsg "查询结果"
+          xml.errMsg "查询成功"
           xml.result {
             records.each do |record|
               xml.checkdate(value: record.date.to_s) {
@@ -21,7 +21,7 @@ class HealthyService::Code2003
       response = builder
     else
       response["errCode"] = -1
-      response["errMsg"] = "查询结果"
+      response["errMsg"] = "查询失败"
       response["promptInfo"] = ""
     end
     response
