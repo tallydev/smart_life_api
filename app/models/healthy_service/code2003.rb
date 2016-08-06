@@ -11,8 +11,8 @@ class HealthyService::Code2003
           xml.result {
             records.each do |record|
               xml.checkdate(value: record.date.to_s) {
-                xml.sbp record.sbp
-                xml.dbp record.dbp
+                xml.sbp record.sbp.to_i
+                xml.dbp record.dbp.to_i
               }
             end
           }
