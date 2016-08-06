@@ -15,8 +15,8 @@ class HealthyService::Code2001
       response["name"] = user_info.name
       response["sex"] = user_info.sex_alias
       response["birthday"] = user_info.birth.to_s
-      response["height"] = user_info.birth.to_s
-      response["weight"] = user_info.birth.to_s
+      response["height"] = user_info.exam_report.try(:height)
+      response["weight"] = user_info.exam_report.try(:weight)
     else
       response["errCode"] = 1
       response["errMsg"] = "可以自动建档"
