@@ -13,6 +13,7 @@ class HealthyServicesController < ApplicationController
     cmd_xml = params[:cmd]
 
     response = HealthyService.dispatch cmd_xml
+    logger.info "response is: #{response}"
 
     render soap: { funMainResult: response }
   end

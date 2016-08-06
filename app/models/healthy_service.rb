@@ -27,8 +27,6 @@ module HealthyService
         end
       }
     end
-    result = builder.to_xml.to_s
-    logger.info "HealthyService result is:#{result}"
-    result
+    builder.to_xml.to_s
   end
 end
