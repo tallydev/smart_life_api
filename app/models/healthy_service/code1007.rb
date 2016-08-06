@@ -1,4 +1,4 @@
-class HealthyService::Code1008
+class HealthyService::Code1007
   def process params
     response = {}
     user_info = UserInfo.find_by(identity_card: params["cardNo"])
