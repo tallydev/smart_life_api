@@ -3,7 +3,7 @@ class HealthyService::Code2003
     response = {}
     user_info = UserInfo.find_by(identity_card: params["cardNo"])
     if user_info.present? && user_info.try(:exam_report).present?
-      records = Exam::Record.filter("sbp").filter("dbp").date_asc
+      records = user_info.exam_records.filter("sbp").filter("dbp").date_asc
       builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
         xml.businessdata {
           xml.errCode 0

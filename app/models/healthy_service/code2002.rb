@@ -22,7 +22,7 @@ class HealthyService::Code2002
       response["chol"] = exam_report.chol
       response["waistline"] = exam_report.waistline.to_i
       response["hipline"] = exam_report.hipline.to_i
-      response["whr"] = exam_report.whr.to_i
+      response["whr"] = exam_report.whr
       response["bmd_t"] = exam_report.bmd_t.to_i
       response["bmd_z"] = exam_report.bmd_z.to_i
       response["ecg"] = ""
