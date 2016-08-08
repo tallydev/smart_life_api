@@ -1,7 +1,7 @@
 json.self do
-  json.today_count @today_sport.count
+  json.today_count @today_sport.try(:count).to_i
   json.avg_count @avg_count
-  json.count @sport.count
+  json.count @sport.try(:count).to_i
   json.rank @rank
   json.rank_percent @rank_percent
 end

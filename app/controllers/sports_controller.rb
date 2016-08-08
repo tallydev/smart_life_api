@@ -72,7 +72,7 @@ class SportsController < ApplicationController
     def fill
       @today_sport = Sport.filter_date(Time.zone.today).find_by(user: current_user)
       @sport = @relations.find_by(user: current_user)
-      @rank = @relations.where("count > :count", count: @sport.count).count + 1
+      @rank = @relations.where("count > :count", count: @sport.try(:count).to_i).count + 1
       @rank_percent = (1 - (@rank - 1.0) / @relations.count).round(4)  
     end
 
