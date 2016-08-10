@@ -18,11 +18,29 @@ resource "体检相关接口" do
   end
 
   get 'reports' do
-    example "获取用户的体检报告" do
-      do_request
-      puts response_body
-      expect(status).to eq 200
+    context "获取体检报告成功" do
+      example "获取用户的体检报告" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
     end
+
+    context "获取体检报告失败" do
+      before do
+        @user_info.exam_records.destroy_all
+        @user_info.exam_report.destroy
+      end
+      example "当用户不存在时，获取用户的体检报告" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
+  end
+
+  get 'reports' do
+
   end
 
   get 'reports/sbp' do

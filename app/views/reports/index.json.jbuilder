@@ -1,6 +1,6 @@
-json.date @report.date
+json.date @report.try(:date)
 json.items(Exam::Report.item_infos.each) do |name, detail|
-  value = @report.send(name)
+  value = @report.try(:send, name)
   json.name name
   json.alias detail[:alias]
   json.hint detail[:hint]
