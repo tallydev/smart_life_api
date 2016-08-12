@@ -26,8 +26,4 @@ class Contact < ActiveRecord::Base
   ranks :order
 
   attr_accessor :is_default
-
-  def is_default
-  	@is_default ||= false
-  end
 end
