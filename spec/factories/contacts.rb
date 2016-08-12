@@ -25,7 +25,7 @@ FactoryGirl.define do
     phone "contact phone"
     area "西山区"
     street "前卫街道"
-    conmunity "contact conmunity"
+    community "contact community"
     address "contact address"
     is_default true
   end

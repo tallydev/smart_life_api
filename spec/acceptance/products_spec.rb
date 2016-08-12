@@ -176,7 +176,7 @@ resource "购物相关接口" do
       parameter :phone, "联系人电话", require: true, scope: :contact
       parameter :area, "联系人社区所属地区", require: true, scope: :contact
       parameter :street, "联系人社区所属街道", require: true, scope: :contact
-      parameter :conmunity, "联系人社区", require: true, scope: :contact
+      parameter :community, "联系人社区", require: true, scope: :contact
       parameter :address, "联系人地址", require: true, scope: :contact
       parameter :is_default, "是否默认地址", require: true, scope: :contact
 
@@ -184,7 +184,7 @@ resource "购物相关接口" do
       let(:phone) { contact_attrs[:phone] }
       let(:area) { contact_attrs[:area] }
       let(:street) { contact_attrs[:street] }
-      let(:conmunity) { contact_attrs[:conmunity] }
+      let(:community) { contact_attrs[:community] }
       let(:address) { contact_attrs[:address] }
       let(:is_default) { contact_attrs[:is_default] }
 
@@ -221,7 +221,7 @@ resource "购物相关接口" do
       parameter :phone, "联系人电话", require: true, scope: :contact
       parameter :area, "联系人社区所属地区", require: true, scope: :contact
       parameter :street, "联系人社区所属街道", require: true, scope: :contact
-      parameter :conmunity, "联系人社区", require: true, scope: :contact
+      parameter :community, "联系人社区", require: true, scope: :contact
       parameter :address, "联系人地址", require: true, scope: :contact
       parameter :is_default, "是否默认地址", require: true, scope: :contact
 
@@ -229,7 +229,7 @@ resource "购物相关接口" do
       let(:phone) { contact_attrs[:phone] }
       let(:area) { contact_attrs[:area] }
       let(:street) { contact_attrs[:street] }
-      let(:conmunity) { contact_attrs[:conmunity] }
+      let(:community) { contact_attrs[:community] }
       let(:address) { contact_attrs[:address] }
       let(:is_default) { contact_attrs[:is_default] }
       let(:id) { @contacts.first.id }
