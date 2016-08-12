@@ -7,7 +7,7 @@ end
 # 新品上市模块
 json.newer do
   json.url image_url ""
-  json.end_time Time.zone.now + 3.hour
+  json.end_time (Time.zone.now + 3.hour).strftime("%F %T")
 end
 
 # 限量销售模块
