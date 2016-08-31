@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   validates_presence_of :phone
   validate :sms_token_validate, on: :create
 
-  delegate :nickname, :sex, :birth, :name, to: :user_info
+  delegate :nickname, :sex, :birth, :name, to: :user_info, allow_nil: true
 
   def info
     self.user_info || self.create_user_info
