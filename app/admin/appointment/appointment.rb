@@ -4,7 +4,7 @@ ActiveAdmin.register Appointment do
   index do
     selectable_column
     id_column
-    column :human_type
+    column :human_type, sortable: :human_type
     column :phone do |obj|
       obj.user.try(:phone)
     end

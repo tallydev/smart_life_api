@@ -3,10 +3,10 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :phone
-    column :name
-    column :sex
-    column :birth
-    column :nickname
+    column :name, sortable: :name
+    column :sex, sortable: :sex
+    column :birth, sortable: :birth
+    column :nickname, sortable: :nickname
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
