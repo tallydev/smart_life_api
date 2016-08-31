@@ -21,6 +21,13 @@ zh-CN:
         phone: "手机号码"
         sms_token: "短信验证码"
         email: "邮箱"
+        name: "真实姓名"
+        sex: "性别"
+        birth: "生日"
+        nickname: "昵称"
+        current_sign_in_at: "最近登录时间"
+        sign_in_count: "登录次数"
+        created_at: "注册时间"
       user_info:
         sex: "性别"
         nickname: "昵称"
