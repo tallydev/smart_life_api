@@ -81,6 +81,12 @@ gem 'by_star', git: "git://github.com/radar/by_star"
 # Dead simple Rails 3/4 SOAP server library
 gem 'wash_out'
 
+# Active Admin Flat theme design. Read more: https://github.com/ayann/active_admin_flat_skin
+gem 'active_admin_flat_skin'
+
+# Font Awesome, SASS version, with assets pipeline, for Rails 3.1+. Read more: https://github.com/littlebtc/font-awesome-sass-rails
+gem 'font-awesome-sass-rails'
+
 ##################################################################
 
 # Use Unicorn as the app server
