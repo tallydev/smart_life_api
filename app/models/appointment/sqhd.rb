@@ -21,4 +21,8 @@ class Appointment::Sqhd < Appointment
   def self.model_name
     Appointment.model_name
   end
+
+  def human_type
+    "社区活动预约"
+  end
 end

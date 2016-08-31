@@ -21,4 +21,8 @@ class Appointment::Dzmy < Appointment
   def self.model_name
     Appointment.model_name
   end
+
+  def human_type
+    "电子猫眼预约"
+  end
 end

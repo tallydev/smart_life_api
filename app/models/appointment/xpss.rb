@@ -21,4 +21,8 @@ class Appointment::Xpss < Appointment
   def self.model_name
     Appointment.model_name
   end
+
+  def human_type
+    "新品上市预约"
+  end
 end

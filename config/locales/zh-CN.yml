@@ -1,9 +1,26 @@
 zh-CN:
   activerecord:
+    models:
+      appointment: "预约信息"
+      appointment/dzmy: "电子猫眼预约"
+      appointment/itfw: "IT服务预约"
+      appointment/itfw: "IT服务预约"
+      appointment/itxt: "IT学堂预约"
+      appointment/sqhd: "社区活动预约"
+      appointment/sqhd: "社区活动预约"
+      appointment/xpss: "新品上市预约"
+      appointment/zhjk: "智慧健康预约"
+      appointment/znjj: "智能家居预约"
+      user: "用户信息"
+      admin_user: "管理员用户"
+      comment: "后台注释"
     attributes:
+      admin_user:
+        email: "邮箱"
       user:
         phone: "手机号码"
         sms_token: "短信验证码"
+        email: "邮箱"
       user_info:
         sex: "性别"
         nickname: "昵称"
@@ -12,6 +29,16 @@ zh-CN:
         identity_card: "身份证号码"
         slogan: "个人签名"
         pay_password: "支付密码"
+      appointment:
+        human_type: "预约类型"
+        phone: "预约电话"
+        count: "预约人数"
+        idname: "预约号"
+        created_at: "下单时间"
+        updated_at: "预约更新时间"
+        id: "序号"
+        state: "预约状态"
+
   appointment_state:
     commited: "已提交"
     confirmed: "已确认"

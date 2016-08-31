@@ -21,4 +21,8 @@ class Appointment::Itxt < Appointment
   def self.model_name
     Appointment.model_name
   end
+
+  def human_type
+    "IT学堂预约"
+  end
 end

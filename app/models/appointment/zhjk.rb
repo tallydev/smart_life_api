@@ -21,4 +21,8 @@ class Appointment::Zhjk < Appointment
   def self.model_name
     Appointment.model_name
   end
+
+  def human_type
+    "智慧健康预约"
+  end
 end
