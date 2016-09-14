@@ -1,5 +1,6 @@
 ActiveAdmin.register Sport do
   menu parent: "健步达人"
+  config.sort_order = 'count_desc'
 
   index do
     column :rank
