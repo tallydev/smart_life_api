@@ -21,6 +21,6 @@ class Sport::Weekly < ActiveRecord::Base
   scope :filter_date, ->(date) { where(year: date.year, cweek: date.cweek) }
 
   def rank
-    self.class.where("count > :count", count: count).count + 1
+    self.class.where(year: year, cweek: cweek).where("count > :count", count: count).count + 1
   end
 end

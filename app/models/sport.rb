@@ -29,7 +29,7 @@ class Sport < ActiveRecord::Base
   end
 
   def rank
-    self.class.where("count > :count", count: count).count + 1
+    self.class.where(date: date).where("count > :count", count: count).count + 1
   end
 
   private

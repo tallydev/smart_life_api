@@ -25,9 +25,9 @@ class Sport::Monthly < ActiveRecord::Base
   def tag
     "#{year}-#{month}"
   end
-  
+
   def rank
-    self.class.where("count > :count", count: count).count + 1
+    self.class.where(year: year, month: month).where("count > :count", count: count).count + 1
   end
 
 end
