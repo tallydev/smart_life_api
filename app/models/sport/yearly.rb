@@ -18,4 +18,8 @@ class Sport::Yearly < ActiveRecord::Base
   belongs_to :user
 
   scope :filter_date, ->(date) { where(year: date.year) }
+
+  def rank
+    self.class.where("count > :count", count: count).count + 1
+  end
 end

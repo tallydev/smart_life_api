@@ -14,6 +14,9 @@ zh-CN:
       user: "用户信息"
       admin_user: "管理员用户"
       comment: "后台注释"
+      sport: "1.每日统计"
+      sport/weekly: "2.每周统计"
+      sport/monthly: "3.每月统计"
     attributes:
       admin_user:
         email: "邮箱"
@@ -45,6 +48,28 @@ zh-CN:
         updated_at: "预约更新时间"
         id: "序号"
         state: "预约状态"
+      sport:
+        rank: "当日排名"
+        user_phone: "用户手机"
+        user_nickname: "用户昵称"
+        date: "统计日期"
+        count: "步数"
+      sport/weekly:
+        rank: "当周排名"
+        user_phone: "用户手机"
+        user_nickname: "用户昵称"
+        year: "年份"
+        cweek: "第几周"
+        count: "步数"
+        updated_at: "最后更新时间"
+      sport/monthly:
+        rank: "当月排名"
+        user_phone: "用户手机"
+        user_nickname: "用户昵称"
+        year: "年份"
+        month: "月份"
+        count: "步数"
+        updated_at: "最后更新时间"
 
   appointment_state:
     commited: "已提交"

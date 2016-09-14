@@ -28,6 +28,10 @@ class Sport < ActiveRecord::Base
     date.to_s
   end
 
+  def rank
+    self.class.where("count > :count", count: count).count + 1
+  end
+
   private
     def cal_relations
       increase = self.count.to_i - self.count_was.to_i
