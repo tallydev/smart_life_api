@@ -118,10 +118,10 @@ class Exam::Report < Examination
       },
       ua: {
         alias: "尿酸",
-        min: 0.089,
-        max: 0.357,
-        hint: "0.089 -- 0.357mmol/L",
-        unit: "mmol/L"
+        min: 89,
+        max: 357,
+        hint: "89 -- 357ummol/L",
+        unit: "ummol/L"
       },
       chol: {
         alias: "总胆固醇",
