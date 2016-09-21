@@ -8,7 +8,7 @@ class HomesController < ApplicationController
 
   def show
     @today = Time.zone.today
-    @sport = current_user.sports.filter_date(@today)
+    @sport = current_user.sports.filter_date(@today).try(:first)
     @rank = @sport.try(:rank) || "--"
     @step = @sport.try(:count) || 0
   end
