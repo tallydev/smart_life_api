@@ -1,7 +1,8 @@
 # 主页返回健身排名
 json.fitness do
-  json.rank 3
-  json.step 8008
+  json.today @today
+  json.rank @rank
+  json.step @step
 end
 
 # 新品上市模块
