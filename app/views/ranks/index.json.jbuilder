@@ -3,7 +3,7 @@ json.current_page @top_sports.current_page
 
 index = 0
 json.top(@top_sports) do |sport|
-	user_info = sport.user.user_info
+	user_info = sport.user.try(:info)
 	if user_info
 	  index += 1
 	  json.index index
