@@ -66,6 +66,12 @@ class User < ActiveRecord::Base
     false
   end
 
+  def set_sport_count count
+    Sport::Weekly.where(user: self).last.update(count: count)
+    Sport::Monthly.where(user: self).last.update(count: count)
+    Sport::Yearly.where(user: self).last.update(count: count)
+  end
+
   private
     def sms_token_validate
       return if sms_token == "1981"
