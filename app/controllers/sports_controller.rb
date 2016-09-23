@@ -6,8 +6,10 @@ class SportsController < ApplicationController
   def create
     date = sport_params[:date]
     @sport = current_user.sports.where(date: date).first_or_initialize
-    @sport.count = sport_params[:count]
-    @sport.save
+    @sport.with_lock do
+      @sport.count = sport_params[:count]
+      @sport.save  
+    end
     respond_with(@sport)
   end
 

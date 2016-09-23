@@ -35,6 +35,7 @@ class Sport < ActiveRecord::Base
   private
     def cal_relations
       increase = self.count.to_i - self.count_was.to_i
+      logger.info "=============user is:#{self.user.phone}, increase is: #{increase}==================="
       if increase > 0
         cal_weekly increase
         cal_monthly increase
