@@ -24,6 +24,8 @@ class Sport < ActiveRecord::Base
 
   scope :filter_date, ->(date) { where(date: date) }
 
+  validates_uniqueness_of :date, scope: :user_id
+
   def tag
     date.to_s
   end
