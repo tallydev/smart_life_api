@@ -19,6 +19,12 @@ class Sport::Yearly < ActiveRecord::Base
 
   scope :filter_date, ->(date) { where(year: date.year) }
 
+  before_save :output_log
+
+  def output_log
+    logger.info "=====user yearly increase:#{self.user.phone}, old is:#{self.count_was}, new is:#{self.count}, increase is:#{self.count - self.count_was}"
+  end
+
   def rank
     self.class.where(year: year).where("count > :count", count: count).count + 1
   end
