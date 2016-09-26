@@ -25,6 +25,7 @@ class Sport < ActiveRecord::Base
   scope :filter_date, ->(date) { where(date: date) }
 
   validates_uniqueness_of :date, scope: :user_id
+  validate :count_validate
 
   def tag
     date.to_s
@@ -35,6 +36,16 @@ class Sport < ActiveRecord::Base
   end
 
   private
+
+    def count_validate
+      increase = self.count.to_i - self.count_was.to_i
+      if increase < 0
+        self.errors.add(:count, "运动步数不能比原来少")
+      elsif increase > 60000
+        self.errors.add(:count, "一天的运动步数过多")
+      end
+    end
+
     def cal_relations
       increase = self.count.to_i - self.count_was.to_i
       logger.info "=============user is:#{self.user.phone}, increase is: #{increase}==================="
