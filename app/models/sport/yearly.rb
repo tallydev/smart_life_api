@@ -22,7 +22,7 @@ class Sport::Yearly < ActiveRecord::Base
   before_save :output_log
 
   def output_log
-    logger.info "=====user yearly increase:#{self.user.phone}, old is:#{self.count_was}, new is:#{self.count}, increase is:#{self.count - self.count_was}"
+    logger.info "=====user yearly increase:#{self.user.phone}, old is:#{self.count_was}, new is:#{self.count}, increase is:#{self.count.to_i - self.count_was.to_i}"
   end
 
   def rank
