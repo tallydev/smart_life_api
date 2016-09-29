@@ -131,49 +131,48 @@ resource "用户注册登录" do
 
   # end
 
-  # post "user_info/reset" do
-  #   parameter :phone, "手机号", required: true, scope: :user
-  #   parameter :password, "密码", required: true, scope: :user
-  #   parameter :sms_token, "短消息", required: true, scope: :user
+  post "user_info/reset" do
+    parameter :phone, "手机号", required: true, scope: :user
+    parameter :password, "密码", required: true, scope: :user
+    parameter :sms_token, "短消息", required: true, scope: :user
 
-  #   describe "重置密码成功" do
-  #     before do
-  #       @user = create(:user)
-  #     end
+    describe "重置密码成功" do
+      before do
+        @user = create(:user)
+      end
 
-  #     user_attrs = FactoryGirl.attributes_for :user
-  #     let(:phone) { user_attrs[:phone] }
-  #     let(:password) { user_attrs[:password] }
-  #     let(:sms_token) { "1981" }
+      user_attrs = FactoryGirl.attributes_for :user
+      let(:phone) { user_attrs[:phone] }
+      let(:password) { user_attrs[:password] }
+      let(:sms_token) { "1981" }
 
-  #     example "用户重置密码成功" do
-  #       do_request
-  #       # puts response_body
-  #       expect(status).to eq(200)
-  #     end  
-  #   end
+      example "用户重置密码成功" do
+        do_request
+        puts response_body
+        expect(status).to eq(200)
+      end  
+    end
 
-  #   describe "重置密码失败" do
-  #     user_attrs = FactoryGirl.attributes_for :user
-  #     let(:phone) { user_attrs[:phone] }
-  #     let(:password) { user_attrs[:password] }
-  #     let(:raw_post) { params.to_json }
+    describe "重置密码失败" do
+      user_attrs = FactoryGirl.attributes_for :user
+      let(:phone) { user_attrs[:phone] }
+      let(:password) { user_attrs[:password] }
       
-  #     example "用户重置密码失败（用户不存在）" do
-  #       do_request
-  #       puts response_body
-  #       expect(status).to eq(422)
-  #     end
+      example "用户重置密码失败（用户不存在）" do
+        do_request
+        puts response_body
+        expect(status).to eq(422)
+      end
 
-  #     let(:sms_token) { "98978" }
-  #     example "用户重置密码失败（短信验证码不正确）" do
-  #       create(:user)
-  #       do_request
-  #       puts response_body
-  #       expect(status).to eq(422)
-  #     end
-  #   end
+      let(:sms_token) { "98978" }
+      example "用户重置密码失败（短信验证码不正确）" do
+        create(:user)
+        do_request
+        puts response_body
+        expect(status).to eq(422)
+      end
+    end
     
-  # end
+  end
 
 end

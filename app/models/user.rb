@@ -72,6 +72,27 @@ class User < ActiveRecord::Base
     Sport::Yearly.where(user: self).last.update(count: count)
   end
 
+  def self.reset_user_password params
+    phone = params[:phone]
+    password = params[:password]
+    sms_token = params[:sms_token]
+    user = User.find_by phone: phone
+
+    if user.present?
+      if SmsToken.valid? phone, sms_token
+        user.password = password
+        user.sms_token = sms_token
+        user.save
+      else
+        user.errors.add(:sms_token, "验证码不正确，请重试")
+      end
+    else
+      user = User.new
+      user.errors.add(:phone, "手机号码对应的用户不存在")
+    end
+    user
+  end
+
   private
     def sms_token_validate
       return if sms_token == "1981"

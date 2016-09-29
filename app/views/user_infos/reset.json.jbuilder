@@ -1,0 +1,1 @@
+json.extract! @user, :authentication_token, :phone, :id

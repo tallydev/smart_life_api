@@ -39,6 +39,11 @@ class UserInfosController < ApplicationController
     respond_with(@user_info)
   end
 
+  def reset
+    @user = User.reset_user_password reset_params 
+    respond_with @user
+  end
+
   private
     def set_user_info
       @user_info = current_user.info
@@ -48,6 +53,12 @@ class UserInfosController < ApplicationController
       params.require(:user_info).permit(
         :nickname, :identity_card, :sex, :birth, :slogan, :pay_password,
         avatar_attributes: [:id, :photo, :_destroy]
+        )
+    end
+
+    def reset_params
+      params.require(:user).permit(
+        :phone, :password, :sms_token
         )
     end
 end

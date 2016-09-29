@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   ###########################################
 
   ########### UserInfo Route ################
-  resource :user_info, only: [:show, :update]
+  resource :user_info, only: [:show, :update] do
+    member do
+      post 'reset'
+    end
+  end
   ###########################################
 
   ########### Sport Route ####
