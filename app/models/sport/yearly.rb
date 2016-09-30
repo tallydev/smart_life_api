@@ -18,6 +18,7 @@ class Sport::Yearly < ActiveRecord::Base
   belongs_to :user
 
   scope :filter_date, ->(date) { where(year: date.year) }
+  validates_uniqueness_of :user_id, scope: :year
 
   before_save :output_log
 
