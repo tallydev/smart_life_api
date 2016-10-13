@@ -51,7 +51,7 @@ class UserInfosController < ApplicationController
 
     def user_info_params
       params.require(:user_info).permit(
-        :nickname, :identity_card, :sex, :birth, :slogan, :pay_password,
+        :nickname, :identity_card, :birth, :slogan, :pay_password,
         avatar_attributes: [:id, :photo, :_destroy]
         )
     end
