@@ -33,8 +33,8 @@ class RanksController < ApplicationController
 
   private
     def top_sports
-      page = params[:page] || 1
-      per_page = params[:per_page] || 10
-      @relations.order(count: :desc).paginate(page: page, per_page: per_page)
+      @page = params[:page] || 1
+      @per_page = params[:per_page] || 10
+      @relations.order(count: :desc).paginate(page: @page, per_page: @per_page)
     end
 end

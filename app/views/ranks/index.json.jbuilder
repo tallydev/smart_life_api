@@ -1,7 +1,7 @@
 json.total_pages @top_sports.total_pages
 json.current_page @top_sports.current_page
 
-index = 0
+index = (@page - 1) * @per_page rescue 0
 json.top(@top_sports) do |sport|
 	user_info = sport.user.try(:info)
 	index += 1
