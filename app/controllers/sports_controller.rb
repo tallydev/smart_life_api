@@ -8,6 +8,8 @@ class SportsController < ApplicationController
     @sport = current_user.sports.where(date: date).first_or_initialize
     @sport.with_lock do
       @sport.count = sport_params[:count]
+      @sport.platform = sport_params[:platform]
+      @sport.version = sport_params[:version]
       @sport.save  
     end
     respond_with(@sport)
