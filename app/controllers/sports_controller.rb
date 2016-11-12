@@ -80,7 +80,7 @@ class SportsController < ApplicationController
 
     def sport_params
       params.require(:sport).permit(
-        :count, :date
+        :count, :date, :platform, :version
         )
     end
 end

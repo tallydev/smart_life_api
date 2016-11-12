@@ -8,6 +8,8 @@
 #  count      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  platform   :string
+#  version    :integer
 #
 # Indexes
 #
@@ -25,6 +27,7 @@ class Sport < ActiveRecord::Base
   scope :filter_date, ->(date) { where(date: date) }
 
   validates_uniqueness_of :date, scope: :user_id
+  validates_presence_of :version
   validate :count_validate
 
   def tag
@@ -43,6 +46,10 @@ class Sport < ActiveRecord::Base
         self.errors.add(:count, "运动步数不能比原来少")
       elsif increase > 60000
         self.errors.add(:count, "一天的运动步数过多")
+      else
+        seconds = Time.zone.now - Time.zone.today.midnight
+        count_per_second = self.count / seconds
+        self.errors.add(:count, "运动的步数太频繁") if count_per_second > 1
       end
     end
 

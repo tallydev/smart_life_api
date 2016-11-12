@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811085740) do
+ActiveRecord::Schema.define(version: 20161112051852) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -194,6 +194,8 @@ ActiveRecord::Schema.define(version: 20160811085740) do
     t.integer  "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "platform"
+    t.integer  "version"
   end
 
   add_index "sports", ["date"], name: "index_sports_on_date"
