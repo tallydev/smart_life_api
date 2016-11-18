@@ -17,6 +17,7 @@ zh-CN:
       sport: "1.每日统计"
       sport/weekly: "2.每周统计"
       sport/monthly: "3.每月统计"
+      activity/sqhd: "社区活动"
     attributes:
       admin_user:
         email: "邮箱"
@@ -70,6 +71,9 @@ zh-CN:
         month: "月份"
         count: "步数"
         updated_at: "最后更新时间"
+      activity/sqhd:
+        title: "活动标题"
+        image: "活动主图"
 
   appointment_state:
     commited: "已提交"
