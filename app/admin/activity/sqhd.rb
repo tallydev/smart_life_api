@@ -3,7 +3,7 @@ ActiveAdmin.register Activity::Sqhd do
 
   permit_params :title,
     image_attributes: [:id, :desc, :photo, :_destroy],
-    detail_image_attributes: [:id, :desc, :photo, :_destroy],
+    detail_image_attributes: [:id, :desc, :photo, :_destroy]
 
   index do
     column :title

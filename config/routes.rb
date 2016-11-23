@@ -47,7 +47,12 @@ Rails.application.routes.draw do
   resources :appointments, only: [:show, :create, :index]
   ##########################################################
 
-
+  ########### Activity Route ###########################
+  namespace :activity do
+    resources :sqhds, only: [:index, :show]
+  end
+  ##########################################################
+  
   ########### Product Route ###########################
   resources :products, only: [:show, :index]
   resources :cart_items do

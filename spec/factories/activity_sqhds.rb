@@ -10,6 +10,8 @@
 
 FactoryGirl.define do
   factory :activity_sqhd, class: 'Activity::Sqhd' do
-    title "MyString"
+    title "Activity sqhd title"
+    association :image, factory: :image, photo_type: "image"
+    association :detail_image, factory: :image, photo_type: "detail_image"
   end
 end

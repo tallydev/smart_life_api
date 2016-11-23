@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Activity Sqhds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @activity_sqhds.each do |activity_sqhd| %>
+      <tr>
+        <td><%= link_to 'Show', activity_sqhd %></td>
+        <td><%= link_to 'Edit', edit_activity_sqhd_path(activity_sqhd) %></td>
+        <td><%= link_to 'Destroy', activity_sqhd, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sqhd', new_activity_sqhd_path %>
