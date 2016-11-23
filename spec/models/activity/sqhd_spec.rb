@@ -12,4 +12,6 @@ require 'rails_helper'
 
 RSpec.describe Activity::Sqhd, type: :model do
   it { should have_one(:image) } 
+  it { should have_one(:detail_image) }
+  it { should have_many(:appointments) } 
 end

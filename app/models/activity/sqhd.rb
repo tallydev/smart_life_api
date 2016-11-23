@@ -13,4 +13,6 @@ class Activity::Sqhd < ActiveRecord::Base
   has_one :detail_image, -> { where photo_type: "detail_image" }, class_name: "Image", as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :image, allow_destroy: true
   accepts_nested_attributes_for :detail_image, allow_destroy: true
+
+  has_many :appointments, as: :aptable
 end

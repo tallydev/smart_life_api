@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118091514) do
+ActiveRecord::Schema.define(version: 20161123111130) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -56,12 +56,15 @@ ActiveRecord::Schema.define(version: 20161118091514) do
     t.integer  "user_id"
     t.string   "idname"
     t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "count"
     t.integer  "state"
+    t.integer  "aptable_id"
+    t.string   "aptable_type"
   end
 
+  add_index "appointments", ["aptable_type", "aptable_id"], name: "index_appointments_on_aptable_type_and_aptable_id"
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
 
   create_table "banners", force: :cascade do |t|
