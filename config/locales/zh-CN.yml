@@ -74,6 +74,7 @@ zh-CN:
       activity/sqhd:
         title: "活动标题"
         image: "活动主图"
+        detail_image: "活动详细图"
 
   appointment_state:
     commited: "已提交"
