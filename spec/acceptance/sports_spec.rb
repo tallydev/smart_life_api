@@ -23,8 +23,12 @@ resource "运动相关接口" do
   post 'sports' do
     parameter :date, "用户所属的天", require: true, scope: :sport
     parameter :count, "用户当天运动的步数", require: true, scope: :sport
+    parameter :version, "用户客户端版本号", require: true, scope: :sport
+    parameter :count, "用户客户端类型", require: true, scope: :sport
     let(:count) { 600 }
     let(:date) { Time.zone.today }
+    let(:version) { 10 }
+    let(:platform) { "ios" }
 
     example "用户提交当天的运动步数" do
       do_request

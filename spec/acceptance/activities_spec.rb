@@ -79,6 +79,6 @@ resource "活动相关接口" do
     #   puts response_body
     #   expect(status).to eq 201
     # end
-  end
+  # end
 
 end

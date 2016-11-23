@@ -22,5 +22,7 @@ FactoryGirl.define do
     user nil
     date "2016-06-25"
     count 1
+    platform "ios"
+    version 10
   end
 end
