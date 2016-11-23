@@ -1,4 +1,1 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_activity_sqhd_path(@activity_sqhd) %> |
-<%= link_to 'Back', activity_sqhds_path %>
+<%= image_tag @activity_sqhd.detail_image.try(:url, :large), class: "activity_sqhd_image" %>
