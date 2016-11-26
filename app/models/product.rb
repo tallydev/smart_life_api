@@ -7,6 +7,8 @@
 #  price      :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  count      :integer
+#  detail     :text
 #
 
 class Product < ActiveRecord::Base
