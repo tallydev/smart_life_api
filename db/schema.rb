@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126032517) do
+ActiveRecord::Schema.define(version: 20161126033243) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161126032517) do
     t.datetime "updated_at", null: false
     t.float    "price"
     t.string   "title"
+    t.integer  "order_id"
   end
 
   add_index "cart_items", ["product_id"], name: "index_cart_items_on_product_id"
