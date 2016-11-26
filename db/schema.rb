@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126025301) do
+ActiveRecord::Schema.define(version: 20161126032517) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -145,6 +145,32 @@ ActiveRecord::Schema.define(version: 20161126025301) do
   end
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "seq"
+    t.integer  "state"
+    t.string   "pay_way"
+    t.float    "price"
+    t.integer  "contact_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ping_requests", force: :cascade do |t|
+    t.string   "object_type"
+    t.string   "ping_id"
+    t.boolean  "complete"
+    t.integer  "amount"
+    t.string   "subject"
+    t.string   "body"
+    t.string   "client_ip"
+    t.string   "extra"
+    t.string   "order_no"
+    t.string   "channel"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.string   "title"
