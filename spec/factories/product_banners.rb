@@ -10,6 +10,6 @@
 
 FactoryGirl.define do
   factory :product_banner do
-    references ""
+  	association :thumb, factory: :image, photo_type: "thumb"
   end
 end

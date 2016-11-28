@@ -14,5 +14,5 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  it { should have_many(:thumbs) } 
+  it { should have_many(:product_banners) } 
 end

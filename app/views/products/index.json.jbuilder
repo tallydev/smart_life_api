@@ -3,9 +3,9 @@ json.current_page @products.current_page
 
 json.products(@products) do |product|
   json.extract! product, :id, :title, :price
-
-	json.array! product.thumbs do |x|
-		json.id x.id
-		json.url x.try(:url, :medium)		
+  json.product_cover product.product_cover.try(:url, :medium)
+	json.product_banners product.product_banners do |product_banner|
+		json.id product_banner.id
+		json.url product_banner.thumb.try(:url, :medium)		
 	end
 end

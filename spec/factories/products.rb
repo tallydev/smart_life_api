@@ -15,10 +15,13 @@ FactoryGirl.define do
   factory :product do
     title "product title"
     price 1.5
-    # association :thumbs, factory: :image, photo_type: "thumb"
-    after(:build) do |product, eval|
-    	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
-    	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
+    after(:build) do |product|
+    	product.product_banners << FactoryGirl.create(:product_banner)
   	end
+    association :product_cover, factory: :image, photo_type: "product_cover"
+    # after(:build) do |product, eval|
+    #  	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
+    #  	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
+  	# end
   end
 end
