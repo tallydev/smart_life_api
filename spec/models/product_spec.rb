@@ -14,5 +14,5 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  it { should have_one(:thumb) } 
+  it { should have_many(:thumb) } 
 end
