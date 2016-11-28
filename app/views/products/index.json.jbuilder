@@ -6,6 +6,6 @@ json.products(@products) do |product|
 
 	json.array! product.thumbs do |x|
 		json.id x.id
-		json.url x.try(:url, :mini)		
+		json.url x.try(:url, :medium)		
 	end
 end

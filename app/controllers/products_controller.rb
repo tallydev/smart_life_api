@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :create_thumb, :destroy_thumb]
 
   respond_to :html, :json
 
@@ -37,6 +37,21 @@ class ProductsController < ApplicationController
     @product.destroy
     respond_with(@product)
   end
+
+  # def create_thumb
+  #   @thumb = @product.thumbs.build(params[:thumb])
+  #   if @thumb.save
+  #     render nothing: true, status: 201
+  #   else
+  #     render nothing: true, status: 422
+  #   end
+  # end
+
+  # def destroy_thumb
+  #   @thumb = @product.thumbs.find(params[:thumb_id])
+  #   @thumb.destroy
+  #   render nothing: true, status: 204
+  # end
 
   private
     def set_product

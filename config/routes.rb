@@ -54,7 +54,12 @@ Rails.application.routes.draw do
   ##########################################################
   
   ########### Product Route ###########################
-  resources :products, only: [:show, :index]
+  resources :products, only: [:show, :index] do 
+    member do
+      post '/products/:id/thumbs', to: 'products#create_thumb'
+      delete '/products/:id/thumbs/:thumb_id', to: 'products#destroy_thumb'
+    end
+  end
   resources :cart_items do
     collection do
       post :pay

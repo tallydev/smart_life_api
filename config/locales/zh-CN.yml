@@ -18,6 +18,7 @@ zh-CN:
       sport/weekly: "2.每周统计"
       sport/monthly: "3.每月统计"
       activity/sqhd: "社区活动"
+      product: "商品"
     attributes:
       admin_user:
         email: "邮箱"
@@ -75,6 +76,15 @@ zh-CN:
         title: "活动标题"
         image: "活动主图"
         detail_image: "活动详细图"
+      product:
+        title: "名称"
+        price: "单价"
+        count: "库存"
+        product_cover: "封面图"
+        product_banners: "详情图"
+      product_banner:
+        back: "返回"
+        thumb: "详情图" 
 
   appointment_state:
     commited: "已提交"
