@@ -33,7 +33,7 @@ resource "预约相关接口" do
   post 'appointments' do
     parameter :type, "预约的类型【ZHJK:智慧健康】【DZMY:电子猫眼】【ITFW:IT服务】【ITXT:IT学堂】【SQHD:社区活动】【XPSS:新品上市】【ZNJJ:智能家居】", 
       require: true, scope: :appointment
-    parameter :count, "预约的人数", require: false, scope: :appointment
+    parameter :count, "预约的人数", require: true, scope: :appointment
     let(:count) { 3 }
     let(:type) { "ZHJK" }
 

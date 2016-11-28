@@ -1,5 +1,7 @@
 class Activity::SqhdsController < ApplicationController
-  before_action :set_activity_sqhd, only: [:show, :edit, :update, :destroy]
+  acts_as_token_authentication_handler_for User
+
+  before_action :set_activity_sqhd, only: [:show, :edit, :update, :destroy, :appoint]
 
   respond_to :html, :json
 
@@ -12,28 +14,12 @@ class Activity::SqhdsController < ApplicationController
     respond_with(@activity_sqhd)
   end
 
-  def new
-    @activity_sqhd = Activity::Sqhd.new
-    respond_with(@activity_sqhd)
-  end
-
-  def edit
-  end
-
-  def create
-    @activity_sqhd = Activity::Sqhd.new(activity_sqhd_params)
-    @activity_sqhd.save
-    respond_with(@activity_sqhd)
-  end
-
-  def update
-    @activity_sqhd.update(activity_sqhd_params)
-    respond_with(@activity_sqhd)
-  end
-
-  def destroy
-    @activity_sqhd.destroy
-    respond_with(@activity_sqhd)
+  def appoint
+    type = "Appointment::Sqhd"
+    count = appointment_params[:count]
+    @appointment = current_user.appointments.build(type: type, count: count, aptable: @activity_sqhd)
+    @appointment.save
+    respond_with(@appointment, template: "appointments/show")
   end
 
   private
@@ -41,7 +27,9 @@ class Activity::SqhdsController < ApplicationController
       @activity_sqhd = Activity::Sqhd.find(params[:id])
     end
 
-    def activity_sqhd_params
-      params[:activity_sqhd]
+    def appointment_params
+      params.require(:appointment).permit(
+        :count
+        )
     end
 end

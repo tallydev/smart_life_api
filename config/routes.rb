@@ -49,7 +49,11 @@ Rails.application.routes.draw do
 
   ########### Activity Route ###########################
   namespace :activity do
-    resources :sqhds, only: [:index, :show]
+    resources :sqhds, only: [:index, :show] do
+      member do
+        post :appoint
+      end
+    end
   end
   ##########################################################
   
