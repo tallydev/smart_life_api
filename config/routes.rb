@@ -61,7 +61,12 @@ Rails.application.routes.draw do
     end
   end
   resources :contacts
-  resources :orders, only: [:index, :show, :create]
+  resources :orders, only: [:index, :show, :create] do 
+    member do 
+      post 'recover_stocks' 
+      post 'create_payment'   
+    end
+  end
   ##########################################################
 
   ################  健康小屋体检机器相关的接口路由   ###################

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   acts_as_token_authentication_handler_for User
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :recover_stocks]
 
   respond_to :html, :json
 
@@ -40,6 +40,14 @@ class OrdersController < ApplicationController
     @order.canceled!
     @order.cart_items.each {|cart_item| cart_item.canceled!}
     respond_with(@order)
+  end
+
+  def create_payment
+    
+  end
+  
+  def recover_stocks
+    @order.recover_stocks
   end
 
   private

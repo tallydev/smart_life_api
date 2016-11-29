@@ -61,9 +61,6 @@ class Order < ActiveRecord::Base
   			end
         cart_item.order_id = _order.id
         cart_item.unpaid! #从购物车中消失
-        #删除库存
-        cart_item.product.count -= cart_item.count
-        cart_item.product.save!
 
         cart_item.save!
       end
@@ -71,12 +68,32 @@ class Order < ActiveRecord::Base
       _order
   	end   
 
-    rescue => e  
-      e
+    rescue => error  
+      error
   end
 
-  def set_cart_items ids
-  	
+  def create_payment 
+    ActiveRecord::Base.transaction do 
+      self.its_cart_items.each do |cart_item|
+        _product = cart_item.product
+        if cart_item.count > cart_item.product.count
+          raise "\"#{cart_item.title}\"库存不足"
+        end
+        #删除库存
+        cart_item.product.count -= cart_item.count
+        cart_item.product.save!
+      end
+    end   
+
+    rescue => error  
+      error
+  end
+
+  def recover_stocks
+  	self.its_cart_items.each do |cart_item|
+      cart_item.product.count += cart_item.count
+      cart_item.product.save
+    end
   end
 
   private 
