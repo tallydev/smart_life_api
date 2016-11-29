@@ -12,9 +12,9 @@ resource "订单与支付相关接口" do
 		@products = create_list(:product, 3)
     @user = create(:user)
     
-    @order = create(:order, user: @user)
+    @orders = create_list(:order, 2, user: @user)
     @cart_item1 = create(:cart_item, user: @user, product: @products.first,
-                          order: @order)
+                          order: @orders.first)
     @cart_item2 = create(:cart_item, user: @user, product: @products.second)
     @cart_item3 = create(:cart_item, user: @user, product: @products.last)
     @cart_item4 = create(:cart_item, user: @user, product: @products.last,
@@ -55,5 +55,30 @@ resource "订单与支付相关接口" do
       end
     end
   end
+
+  post 'orders/:id/create_payment' do
+    let(:id) { @orders.first.id }
+
+    example "扣除库存后，发起支付" do
+      do_request
+      puts response_body
+      expect(status).to eq 201
+    end
+
+  end 
+
+  post 'orders/:id/recover_stocks' do
+    let(:id) { @orders.first.id }
+
+    example "恢复库存" do
+      do_request
+      puts response_body
+      expect(status).to eq 201
+    end
+
+  end 
+
+
+
 
 end

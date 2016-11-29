@@ -80,4 +80,9 @@ Rails.application.routes.draw do
     end
   end
   ##########################################################
+
+  ############# Pingpp Routes ###########################
+  # post 'get_pingpp_pay_order', to: 'pingpp#get_pay_order'
+  post 'get_pingpp_webhooks', to: 'pingpp#get_pingpp_webhooks'
+  #####################################################
 end

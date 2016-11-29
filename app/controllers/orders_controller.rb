@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   acts_as_token_authentication_handler_for User
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :recover_stocks]
+  before_action :check_stocks, only: [:index, :show]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :recover_stocks, :create_payment]
 
   respond_to :html, :json
 
@@ -27,7 +28,7 @@ class OrdersController < ApplicationController
     if @order.is_a?(Order)
       respond_with @order, template: 'orders/show', status: 201
     else
-      render json: {error: @order.to_s}, status: 422
+      render json: { error: @order.to_s }, status: 422
     end
   end
 
@@ -39,15 +40,29 @@ class OrdersController < ApplicationController
   def destroy
     @order.canceled!
     @order.cart_items.each {|cart_item| cart_item.canceled!}
-    respond_with(@order)
+    respond_with @order, template: "orders/show", status: 204
   end
 
-  def create_payment
-    
+  def create_payment #params[:pay_way]
+    @order.cut_stocks
+    if @order.is_a?(Order)
+      p @order.its_cart_items.map{|x|x.product.count}
+      render nothing: true, status: 201
+      #请求ping++ 支付
+      # @charge = PingRequest.get_pay_order(self, params[:pay_way])
+      # if @change.is_a?(Pingpp::Charge)
+      #   render json: @change, status: 200
+      # else
+      #   render json: @change, status: 422
+    else
+      render json: { error: @order.to_s }, status: 422
+    end
   end
-  
+
   def recover_stocks
     @order.recover_stocks
+    # p @order.its_cart_items.map{|x|x.product.count}
+    render nothing: true, status: 201
   end
 
   private
@@ -59,5 +74,9 @@ class OrdersController < ApplicationController
       params.require(:order).permit(
         :user_id
         )
+    end
+
+    def check_stocks
+      CartItem.check_stocks(current_user.cart_items)
     end
 end

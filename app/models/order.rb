@@ -72,7 +72,7 @@ class Order < ActiveRecord::Base
       error
   end
 
-  def create_payment 
+  def cut_stocks 
     ActiveRecord::Base.transaction do 
       self.its_cart_items.each do |cart_item|
         _product = cart_item.product
@@ -84,7 +84,7 @@ class Order < ActiveRecord::Base
         cart_item.product.save!
       end
     end   
-
+    self
     rescue => error  
       error
   end
@@ -92,7 +92,10 @@ class Order < ActiveRecord::Base
   def recover_stocks
   	self.its_cart_items.each do |cart_item|
       cart_item.product.count += cart_item.count
-      cart_item.product.save
+      p cart_item.product.count 
+      p "ssss"
+      p cart_item.product.save
+      p cart_item.product
     end
   end
 

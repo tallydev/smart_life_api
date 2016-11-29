@@ -73,7 +73,7 @@ resource "购物相关接口" do
         @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
       end
 
-      example "查看用户的购物车列表" do
+      example "查看用户的购物车列表(购物中与无库存）" do
         do_request
         puts response_body
         expect(status).to eq 200
