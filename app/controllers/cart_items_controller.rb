@@ -1,15 +1,15 @@
 class CartItemsController < ApplicationController
   acts_as_token_authentication_handler_for User
 
-  before_action :set_cart_item, only: [:show, :edit, :update, :destroy]
   before_action :check_stocks, only: [:index, :show]
+  before_action :set_cart_item, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
 
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @cart_items = current_user.cart_items.state_is("shopping").paginate(page: page, per_page: per_page)
+    @cart_items = current_user.cart_items.state_is(["shopping",8]).paginate(page: page, per_page: per_page)
     respond_with(@cart_items)
   end
 
@@ -51,7 +51,7 @@ class CartItemsController < ApplicationController
 
   private
     def set_cart_item
-      @cart_item = current_user.cart_items.state_is("shopping").find(params[:id])
+      @cart_item = current_user.cart_items.state_is(["shopping",8]).find(params[:id])
     end
 
     def cart_item_params

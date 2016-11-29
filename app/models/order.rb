@@ -14,10 +14,13 @@
 #
 
 class Order < ActiveRecord::Base
+
+  include AASM
+  
 	belongs_to :user
 	has_many :cart_items
 
-	before_save :cal_price
+	after_save :cal_price
 	after_save :set_seq
 
 	enum state: {
@@ -31,7 +34,7 @@ class Order < ActiveRecord::Base
     state :paid, :canceled, :disable
 
     event :pay do
-      transitions from: :unpaid, to: :rpaid
+      transitions from: :unpaid, to: :paid
     end
 
     event :cancel do
@@ -43,19 +46,38 @@ class Order < ActiveRecord::Base
     I18n.t :"order.#{state}"
   end
 
+  def its_cart_items
+    CartItem.where(order_id: self.id)  
+  end
+
+  def self.create_one order_params, ids
+  	ActiveRecord::Base.transaction do  
+  	  _order = Order.new(order_params)
+      _order.save!
+      CartItem.in_ids(ids).each do |cart_item|
+    		_product = cart_item.product
+    		if cart_item.count > cart_item.product.count
+  				raise "\"#{cart_item.title}\"库存不足"
+  			end
+        cart_item.order_id = _order.id
+        cart_item.unpaid! #从购物车中消失
+        #删除库存
+        cart_item.product.count -= cart_item.count
+        cart_item.product.save!
+
+        cart_item.save!
+      end
+      _order.save!
+      _order
+  	end   
+
+    rescue => e  
+      e
+  end
+
   def set_cart_items ids
-  	CartItem.in_ids(ids).each do |cart_item|
-      cart_item.order = self
-      cart_item.unpaid! #从购物车中消失
-      cart_item.save!
-    end
+  	
   end
-
-  def set_disable_if_necessary
-  	self.cart_items.each {|cart_item| cart_item.set_disable_if_necessary}
-  	self.disable! if self.cart_items.state_is("disable").any?
-  end
-
 
   private 
   	def set_seq
@@ -64,10 +86,8 @@ class Order < ActiveRecord::Base
 
   	def cal_price
   		_sum = 0.00
-  		self.cart_items.each {|cart_item| _sum += cart_item.amount}
+  		self.its_cart_items.each {|cart_item| _sum += cart_item.amount}
   		self.price = _sum
   	end
-
-
 
 end

@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     end
   end
   resources :contacts
+  resources :orders, only: [:index, :show, :create]
   ##########################################################
 
   ################  健康小屋体检机器相关的接口路由   ###################

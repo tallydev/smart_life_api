@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders.all
-    @orders.each {|order| order.set_disable_if_necessary}
     respond_with(@orders)
   end
 
@@ -24,15 +23,17 @@ class OrdersController < ApplicationController
   # end
 
   def create #params [id数组]
-    @order = Order.new(order_params)
-    @order.set_cart_items
-    @order.save
-    respond_with(@order)
+    @order = Order.create_one(order_params, params[:cart_item_ids])
+    if @order.is_a?(Order)
+      respond_with @order, template: 'orders/show', status: 201
+    else
+      render json: {error: @order.to_s}, status: 422
+    end
   end
 
   def update
     @order.update(order_params)
-    respond_with @order, template: "orders/show"
+    respond_with @order, template: "orders/show", status: 201
   end
 
   def destroy
@@ -48,6 +49,7 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(
+        :user_id
         )
     end
 end
