@@ -142,21 +142,21 @@ resource "购物相关接口" do
       end
     end
 
-    post 'cart_items/pay' do
-      before do
-        @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
-      end
+    # post 'cart_items/pay' do
+    #   before do
+    #     @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
+    #   end
 
-      parameter :cart_item_ids, "需要支付的购物清单列表", require: true, scope: :cart_item
+    #   parameter :cart_item_ids, "需要支付的购物清单列表", require: true, scope: :cart_item
 
-      let(:cart_item_ids) { @cart_items.map(&:id) }
+    #   let(:cart_item_ids) { @cart_items.map(&:id) }
 
-      example "支付购物列表成功" do
-        do_request
-        puts response_body
-        expect(status).to eq 201
-      end
-    end
+    #   example "支付购物列表成功" do
+    #     do_request
+    #     puts response_body
+    #     expect(status).to eq 201
+    #   end
+    # end
   end
 
   describe '用户地址管理相关接口' do

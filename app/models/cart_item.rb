@@ -35,15 +35,19 @@ class CartItem < ActiveRecord::Base
   before_save :add_product_info, only: :create
   before_save :cal_amount
 
+  scope :state_is, -> (state){where(state: state)}
+  scope :in_ids, -> (ids){where(id: ids)}
   enum state: {
+    shopping: 0,
     unpaid: 1,
     paid: 2,
+    disable: 8, 
     canceled: 9
   }
 
   aasm column: :state, enum: true do
-    state :unpaid, initial: true
-    state :paid, :canceled
+    state :shopping, initial: true
+    state :unpaid, :paid, :canceled, :disable
 
     event :pay do
       transitions from: :unpaid, to: :paid
@@ -58,7 +62,14 @@ class CartItem < ActiveRecord::Base
     I18n.t :"cart_item_state.#{state}"
   end
 
-  private   
+  def check_stocks cart_items
+    cart_items.each do |cart_item|
+      cart_item.disable! if cart_item.count > cart_item.product.count && cart_item.state == 'shopping'
+      cart_item.shopping! if cart_item.count <= cart_item.product.count && cart_item.state == 'disable'
+    end
+  end
+
+  private
 
     def add_product_info
       self.price = self.product.price
@@ -68,4 +79,5 @@ class CartItem < ActiveRecord::Base
     def cal_amount
       self.amount = self.price.to_f * self.count
     end
+
 end
