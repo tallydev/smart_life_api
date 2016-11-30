@@ -21,6 +21,7 @@ FactoryGirl.define do
     	product.product_banners << FactoryGirl.create(:product_banner)
   	end
     association :product_cover, factory: :image, photo_type: "product_cover"
+    association :product_detail, factory: :image, photo_type: "product_detail"
     # after(:build) do |product, eval|
     #  	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
     #  	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')

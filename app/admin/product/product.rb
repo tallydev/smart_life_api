@@ -64,6 +64,13 @@ ActiveAdmin.register Product do
           : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url(:s750), target: "_blank")
       end
 
+      f.fields_for :product_detail, for: [:product_detail, f.object.product_detail || f.object.build_product_detail] do |cf|
+        image = cf.object
+        cf.input :photo, as: :file, label: "商品详情图", hint: (image.try(:photo).blank?) \
+          ? cf.template.content_tag(:span, "还未上传图片文件")
+          : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url(:s750), target: "_blank")
+      end
+
     end
 
     f.actions
@@ -85,7 +92,7 @@ ActiveAdmin.register Product do
 
       row :product_detail do
         if product.product_detail
-          link_to(image_tag(product.product_detail.photo.url(:s750)), product.product_detail.photo.url(:s750), target: "_blank")
+          link_to(image_tag(product.product_detail.photo.url(:medium)), product.product_detail.photo.url(:s750), target: "_blank")
         end
       end
 
