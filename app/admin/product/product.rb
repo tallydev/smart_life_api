@@ -36,7 +36,7 @@ ActiveAdmin.register Product do
         image = cf.object
         cf.input :photo, as: :file, label: "商品主图", hint: (image.try(:photo).blank?) \
           ? cf.template.content_tag(:span, "还未上传图片文件")
-          : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url, target: "_blank")
+          : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url(:s750), target: "_blank")
       end
 
     end
@@ -54,7 +54,7 @@ ActiveAdmin.register Product do
       # row :updated_at
       row :product_cover do
         if product.product_cover
-          link_to(image_tag(product.product_cover.photo.url(:medium)), product.product_cover.photo.url, target: "_blank")
+          link_to(image_tag(product.product_cover.photo.url(:medium)), product.product_cover.photo.url(:s750), target: "_blank")
         end
       end
 

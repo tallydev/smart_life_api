@@ -18,7 +18,7 @@ ActiveAdmin.register ProductBanner do
 
 		link_to "商品详情图", admin_product_product_banners_path(product)
     column :thumb do |product_banner|
-      link_to(image_tag(product_banner.thumb.photo.url(:medium)), product_banner.thumb.photo.url) if product_banner.thumb
+      link_to(image_tag(product_banner.thumb.photo.url(:medium)), product_banner.thumb.photo.url(:s750)) if product_banner.thumb
     end
 		actions
 	end
@@ -41,7 +41,7 @@ ActiveAdmin.register ProductBanner do
     attributes_table do
       row :thumb do
         if product_banner.thumb
-          link_to(image_tag(product_banner.thumb.photo.url(:medium)), product_banner.thumb.photo.url, target: "_blank")
+          link_to(image_tag(product_banner.thumb.photo.url(:medium)), product_banner.thumb.photo.url（:s750), target: "_blank")
         end
       end
      	
