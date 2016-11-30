@@ -65,6 +65,12 @@ Rails.application.routes.draw do
     end
   end
   resources :contacts
+  resources :orders, only: [:index, :show, :create] do 
+    member do 
+      post 'recover_stocks' 
+      post 'create_payment'   
+    end
+  end
   ##########################################################
 
   ################  健康小屋体检机器相关的接口路由   ###################
@@ -78,4 +84,9 @@ Rails.application.routes.draw do
     end
   end
   ##########################################################
+
+  ############# Pingpp Routes ###########################
+  # post 'get_pingpp_pay_order', to: 'pingpp#get_pay_order'
+  post 'get_pingpp_webhooks', to: 'pingpp#get_pingpp_webhooks'
+  #####################################################
 end

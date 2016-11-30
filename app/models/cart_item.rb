@@ -12,9 +12,11 @@
 #  updated_at :datetime         not null
 #  price      :float
 #  title      :string
+#  order_id   :integer
 #
 # Indexes
 #
+#  index_cart_items_on_order_id    (order_id)
 #  index_cart_items_on_product_id  (product_id)
 #  index_cart_items_on_user_id     (user_id)
 #
@@ -25,6 +27,7 @@ class CartItem < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :user
+  belongs_to :order
 
   validates_presence_of :user, on: :create, message: "购物车的用户信息不能为空"
   validates_presence_of :product, on: :create, message: "购买的商品不存在"
@@ -34,15 +37,20 @@ class CartItem < ActiveRecord::Base
   before_save :add_product_info, only: :create
   before_save :cal_amount
 
+  scope :state_is, -> (state){where(state: state)}
+  scope :in_ids, -> (ids){where(id: ids)}
+  
   enum state: {
+    shopping: 0,
     unpaid: 1,
     paid: 2,
+    no_stocks: 8, #不能以"no_stocks"查询？？？
     canceled: 9
   }
 
   aasm column: :state, enum: true do
-    state :unpaid, initial: true
-    state :paid, :canceled
+    state :shopping, initial: true
+    state :unpaid, :paid, :canceled, :no_stocks
 
     event :pay do
       transitions from: :unpaid, to: :paid
@@ -57,7 +65,14 @@ class CartItem < ActiveRecord::Base
     I18n.t :"cart_item_state.#{state}"
   end
 
-  private   
+  def self.check_stocks cart_items
+    cart_items.each do |cart_item|
+      cart_item.no_stocks! if cart_item.count > cart_item.product.count && cart_item.state == 'shopping'
+      cart_item.shopping! if cart_item.count <= cart_item.product.count && cart_item.state == 'no_stocks'
+    end
+  end
+
+  private
 
     def add_product_info
       self.price = self.product.price
@@ -67,4 +82,5 @@ class CartItem < ActiveRecord::Base
     def cal_amount
       self.amount = self.price.to_f * self.count
     end
+
 end

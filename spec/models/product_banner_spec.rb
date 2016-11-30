@@ -1,18 +1,15 @@
 # == Schema Information
 #
-# Table name: products
+# Table name: product_banners
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  price      :float
+#  product_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  count      :integer
-#  detail     :text
 #
 
 require 'rails_helper'
 
-RSpec.describe Product, type: :model do
-  it { should have_many(:product_banners) } 
+RSpec.describe ProductBanner, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

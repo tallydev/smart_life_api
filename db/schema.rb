@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123111130) do
+
+ActiveRecord::Schema.define(version: 20161129064640) do
+
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -84,8 +86,10 @@ ActiveRecord::Schema.define(version: 20161123111130) do
     t.datetime "updated_at", null: false
     t.float    "price"
     t.string   "title"
+    t.integer  "order_id"
   end
 
+  add_index "cart_items", ["order_id"], name: "index_cart_items_on_order_id"
   add_index "cart_items", ["product_id"], name: "index_cart_items_on_product_id"
   add_index "cart_items", ["user_id"], name: "index_cart_items_on_user_id"
 
@@ -149,11 +153,45 @@ ActiveRecord::Schema.define(version: 20161123111130) do
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
 
+  create_table "orders", force: :cascade do |t|
+    t.string   "seq"
+    t.integer  "state"
+    t.string   "pay_way"
+    t.float    "price"
+    t.integer  "contact_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ping_requests", force: :cascade do |t|
+    t.string   "object_type"
+    t.string   "ping_id"
+    t.boolean  "complete"
+    t.integer  "amount"
+    t.string   "subject"
+    t.string   "body"
+    t.string   "client_ip"
+    t.string   "extra"
+    t.string   "order_no"
+    t.string   "channel"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "product_banners", force: :cascade do |t|
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "title"
     t.float    "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "count"
+    t.text     "detail"
   end
 
   create_table "sms_tokens", force: :cascade do |t|

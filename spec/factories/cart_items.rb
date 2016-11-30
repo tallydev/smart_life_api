@@ -12,9 +12,11 @@
 #  updated_at :datetime         not null
 #  price      :float
 #  title      :string
+#  order_id   :integer
 #
 # Indexes
 #
+#  index_cart_items_on_order_id    (order_id)
 #  index_cart_items_on_product_id  (product_id)
 #  index_cart_items_on_user_id     (user_id)
 #
