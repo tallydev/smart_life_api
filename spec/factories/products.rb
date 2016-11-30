@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  count      :integer
 #  detail     :text
+#  state      :integer
 #
 
 FactoryGirl.define do

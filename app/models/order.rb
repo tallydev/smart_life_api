@@ -43,7 +43,7 @@ class Order < ActiveRecord::Base
   end
 
   def state_alias
-    I18n.t :"order.#{state}"
+    I18n.t :"order_state.#{state}"
   end
 
   def pay_each_cart_item

@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @products = Product.paginate(page: page, per_page: per_page)
+    @products = Product.for_sale.paginate(page: page, per_page: per_page)
     respond_with(@products)
   end
 
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
 
   private
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.for_sale.find(params[:id])
     end
 
     def product_params

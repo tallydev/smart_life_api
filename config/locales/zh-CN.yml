@@ -19,7 +19,7 @@ zh-CN:
       sport/monthly: "3.每月统计"
       activity/sqhd: "社区活动"
       product: "商品"
-      product_banner: "商品详情图"
+      product_banner: "商品轮播图"
     attributes:
       admin_user:
         email: "邮箱"
@@ -82,8 +82,10 @@ zh-CN:
         price: "单价"
         count: "库存"
         product_cover: "封面图"
-        product_banners: "详情图"
+        product_detail: "详情图"
+        product_banners: "轮播图"
         detail: "商品介绍"
+        state: "状态"
       product_banner:
         back: "返回"
         thumb: "详情图" 
@@ -97,11 +99,15 @@ zh-CN:
     paid: "已支付"
     no_stocks: "无库存"
     canceled: "已取消"
-  order:
+  order_state:
     unpaid: "待支付"
     paid: "已支付"
     disable: "已失效"
     canceled: "已取消"
+  product_state: 
+    for_sale: "上架中"
+    sale_off: "已下架"
+
   devise:
     failure:
       already_authenticated: "登录成功"
