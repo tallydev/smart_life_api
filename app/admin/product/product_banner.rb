@@ -44,7 +44,7 @@ ActiveAdmin.register ProductBanner do
         end
       end
      	
-      row "" do
+      row " " do
       	link_to "返回详情图列表", admin_product_product_banners_path(product)
     	end
     end
