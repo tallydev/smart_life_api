@@ -6,6 +6,7 @@ ActiveAdmin.register ProductBanner do
 	permit_params thumb_attributes: [:id, :desc, :photo, :_destroy]
 
 	index do 
+    selectable_column
 		# column :id
 		i = 1
 		column "" do |product_banner|
