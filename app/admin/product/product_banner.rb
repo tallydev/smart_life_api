@@ -7,9 +7,12 @@ ActiveAdmin.register ProductBanner do
 
 	index do 
 		# column :id
-		
-		column :back do |product_banner|
-			link_to "返回商品", admin_product_path(product_banner.product)
+		i = 1
+		column "" do |product_banner|
+			if i == 1 
+        i -= 1
+        link_to "返回商品详情", admin_product_path(product_banner.product)
+      end
 		end
 
 		link_to "商品详情图", admin_product_product_banners_path(product)
@@ -25,7 +28,7 @@ ActiveAdmin.register ProductBanner do
       f.fields_for :thumb, for: [:thumb, f.object.thumb || f.object.build_thumb] do |cf|
         thumb = cf.object
         cf.input :photo, as: :file, label: "商品详情图", hint: (thumb.try(:photo).blank?) \
-          ? cf.template.content_tag(:span, "还未选择图片文件")
+          ? cf.template.content_tag(:span, "还未上传图片文件")
           : cf.template.link_to(image_tag(thumb.photo.url(:medium)), thumb.photo.url, target: "_blank")
       end
      
@@ -41,8 +44,8 @@ ActiveAdmin.register ProductBanner do
         end
       end
      	
-      row :back do
-      	link_to "返回", admin_product_path(product_banner.product)
+      row "" do
+      	link_to "返回详情图列表", admin_product_product_banners_path(product)
     	end
     end
   end

@@ -33,7 +33,7 @@ ActiveAdmin.register Product do
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
         cf.input :photo, as: :file, label: "商品主图", hint: (image.try(:photo).blank?) \
-          ? cf.template.content_tag(:span, "还未选择图片文件")
+          ? cf.template.content_tag(:span, "还未上传图片文件")
           : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url, target: "_blank")
       end
 
@@ -57,6 +57,10 @@ ActiveAdmin.register Product do
 
       row :product_banners do
         link_to "商品详情图", admin_product_product_banners_path(product)
+      end
+
+      row " " do
+        link_to "返回商品列表", admin_products_path
       end
 
     end

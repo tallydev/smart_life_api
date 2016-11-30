@@ -19,6 +19,7 @@ zh-CN:
       sport/monthly: "3.每月统计"
       activity/sqhd: "社区活动"
       product: "商品"
+      product_banner: "商品详情图"
     attributes:
       admin_user:
         email: "邮箱"
