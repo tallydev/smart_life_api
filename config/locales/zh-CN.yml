@@ -83,6 +83,7 @@ zh-CN:
         count: "库存"
         product_cover: "封面图"
         product_banners: "详情图"
+        detail: "商品介绍"
       product_banner:
         back: "返回"
         thumb: "详情图" 

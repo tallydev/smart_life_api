@@ -14,29 +14,29 @@ class ProductsController < ApplicationController
     respond_with(@product)
   end
 
-  def new
-    @product = Product.new
-    respond_with(@product)
-  end
+  # def new
+  #   @product = Product.new
+  #   respond_with(@product)
+  # end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def create
-    @product = Product.new(product_params)
-    @product.save
-    respond_with(@product)
-  end
+  # def create
+  #   @product = Product.new(product_params)
+  #   @product.save
+  #   respond_with(@product)
+  # end
 
-  def update
-    @product.update(product_params)
-    respond_with(@product)
-  end
+  # def update
+  #   @product.update(product_params)
+  #   respond_with(@product)
+  # end
 
-  def destroy
-    @product.destroy
-    respond_with(@product)
-  end
+  # def destroy
+  #   @product.destroy
+  #   respond_with(@product)
+  # end
 
   # def create_thumb
   #   @thumb = @product.thumbs.build(params[:thumb])

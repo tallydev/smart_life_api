@@ -1,7 +1,7 @@
 ActiveAdmin.register Product do
   # menu parent: "商品信息"
   actions :all
-  permit_params :title, :price, :count, product_cover_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :title, :price, :count, :detail, product_cover_attributes: [:id, :desc, :photo, :_destroy]
 
   index do 
     selectable_column
@@ -10,6 +10,7 @@ ActiveAdmin.register Product do
     column :title
     column :price
     column :count
+    column :detail
     # column :created_at
     # column :updated_at
     column :product_cover do |product|
@@ -29,6 +30,7 @@ ActiveAdmin.register Product do
       f.input :title
       f.input :price,  min: 0
       f.input :count
+      f.input :detail
       
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
@@ -47,6 +49,7 @@ ActiveAdmin.register Product do
       row :title
       row :price
       row :count
+      row :detail
       # row :created_at
       # row :updated_at
       row :product_cover do
