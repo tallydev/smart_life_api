@@ -41,7 +41,7 @@ ActiveAdmin.register ProductBanner do
     attributes_table do
       row :thumb do
         if product_banner.thumb
-          link_to(image_tag(product_banner.thumb.photo.url(:medium)), product_banner.thumb.photo.url（:s750), target: "_blank")
+          link_to(image_tag(product_banner.thumb.photo.url(:medium)), product_banner.thumb.photo.url(:s750), target: "_blank")
         end
       end
      	
