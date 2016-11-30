@@ -5,13 +5,19 @@ ActiveAdmin.register Product do
 
   filter :title
   # filter :state, emun: true
+
+  # scope_to do 
+  #   Product.sale_off
+  # end
+  # scope :for_sale, default: true
+
   controller do 
-    # def index
-    #   # @products  =  Product.state_is("sale_off") 
-    #   super
-    # end
-
-
+    #更改默认搜索范围
+    #index仅显示 正在销售
+    def scoped_collection
+      Product.for_sale
+    end
+    
     def destroy
       @product =  Product.find(params[:id])
       @product.sale_off!
@@ -25,7 +31,7 @@ ActiveAdmin.register Product do
 
     selectable_column
     # id_column
-    # column :state
+    column :state
     column :title
     column :price
     column :count
