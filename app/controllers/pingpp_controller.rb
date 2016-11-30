@@ -77,10 +77,10 @@ class PingppController < ApplicationController
           @ping_request.complete = event['data']['object']['paid']  
 
           if @ping_request.save 
-            #生成账单记录
-            _purchase_log = PurchaseLog.create_one_with_ping_request(@ping_request)
+            @ping_request.order.pay!
+            
             #发送微信消息 
-            @ping_request.send_recharge_success_message(_purchase_log.balance)
+            # @ping_request.send_recharge_success_message(_purchase_log.balance)
 
             status = 200
           else

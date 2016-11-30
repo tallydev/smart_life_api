@@ -15,10 +15,12 @@
 #  channel     :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  order_id    :integer
 #
 
 class PingRequest < ActiveRecord::Base
-
+	belongs_to :order 
+	
 	def get_pay_order  extra
 	  Pingpp::Charge.create(
                           :order_no  => self.order_no,

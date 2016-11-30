@@ -15,6 +15,7 @@
 #  channel     :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  order_id    :integer
 #
 
 require 'rails_helper'

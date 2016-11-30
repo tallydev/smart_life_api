@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
     state :paid, :canceled, :disable
 
     event :pay do
-      transitions from: :unpaid, to: :paid
+      transitions from: :unpaid, to: :paid, after: :pay_each_cart_item
     end
 
     event :cancel do
@@ -44,6 +44,10 @@ class Order < ActiveRecord::Base
 
   def state_alias
     I18n.t :"order.#{state}"
+  end
+
+  def pay_each_cart_item
+    self.its_cart_items.each { |cart_item| cart_item.pay! }
   end
 
   def its_cart_items
