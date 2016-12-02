@@ -31,7 +31,7 @@ ActiveAdmin.register Product do
 
     selectable_column
     # id_column
-    column :state
+    # column :state
     column :title
     column :price
     column :count
