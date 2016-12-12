@@ -86,6 +86,7 @@ zh-CN:
         product_banners: "轮播图"
         detail: "商品介绍"
         state: "状态"
+        sort: "分类"
       product_banner:
         back: "返回"
         thumb: "详情图" 
@@ -107,6 +108,10 @@ zh-CN:
   product_state: 
     for_sale: "上架中"
     sale_off: "已下架"
+  product_sort:
+    food: "休闲美食"
+    living_good: "生活用品"
+    best_item: "精选优品"
 
   devise:
     failure:

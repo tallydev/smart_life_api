@@ -58,7 +58,11 @@ Rails.application.routes.draw do
   ##########################################################
   
   ########### Product Route ###########################
-  resources :products, only: [:show, :index]
+  resources :products, only: [:show, :index] do
+    collection do 
+      get :sort 
+    end
+  end
   resources :cart_items do
     collection do
       post :pay

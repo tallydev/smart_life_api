@@ -14,6 +14,13 @@ class ProductsController < ApplicationController
     respond_with(@product)
   end
 
+  def sort
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @products = Product.for_sale.sort_is(params[:sort]).paginate(page: page, per_page: per_page)
+    respond_with(@products)
+  end
+
   # def new
   #   @product = Product.new
   #   respond_with(@product)

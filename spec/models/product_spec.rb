@@ -10,6 +10,7 @@
 #  count      :integer
 #  detail     :text
 #  state      :integer
+#  sort       :string
 #
 
 require 'rails_helper'

@@ -10,6 +10,7 @@
 #  count      :integer
 #  detail     :text
 #  state      :integer
+#  sort       :integer
 #
 
 class Product < ActiveRecord::Base
@@ -28,11 +29,17 @@ class Product < ActiveRecord::Base
 
   scope :state_is, -> (state) {where(state: state)}
   scope :for_sale, -> {where(state: "for_sale")}
-  
+  scope :sort_is, -> (sort) {where(sort: sort)}
   enum state: {
     for_sale: 0,
     sale_off: 1,
   }
+
+  # enum sort: {
+  #   food: 0,
+  #   living_good: 1,
+  #   best_item: 2,
+  # }
 
   aasm column: :state, enum: true do
     state :for_sale, initial: true
@@ -46,6 +53,10 @@ class Product < ActiveRecord::Base
   def state_alias
     I18n.t :"product_state.#{state}"
   end
+
+  # def sort_alias
+  #   I18n.t :"product_sort.#{sort}"
+  # end
 
 
 end

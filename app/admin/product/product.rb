@@ -1,7 +1,7 @@
 ActiveAdmin.register Product do
   # menu parent: "商品信息"
   actions :all
-  permit_params :title, :price, :count, :detail, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :title, :price, :count, :detail, :sort, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
 
   filter :title
   # filter :state, emun: true
@@ -36,6 +36,7 @@ ActiveAdmin.register Product do
     column :price
     column :count
     column :detail
+    column :sort
     # column :created_at
     # column :updated_at
     column :product_cover do |product|
@@ -62,7 +63,7 @@ ActiveAdmin.register Product do
       f.input :price,  min: 0
       f.input :count
       f.input :detail
-      
+      f.input :sort, as: :select, :collection => ['休闲美食', '生活用品', '精选优品']
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
         cf.input :photo, as: :file, label: "商品主图", hint: (image.try(:photo).blank?) \
@@ -88,6 +89,7 @@ ActiveAdmin.register Product do
       row :price
       row :count
       row :detail
+      row :sort
       # row :created_at
       # row :updated_at
       row :product_cover do

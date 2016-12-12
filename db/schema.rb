@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212081203) do
+ActiveRecord::Schema.define(version: 20161212124444) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20161212081203) do
     t.integer  "count"
     t.text     "detail"
     t.integer  "state"
+    t.string   "sort"
   end
 
   create_table "sms_tokens", force: :cascade do |t|
