@@ -3,5 +3,5 @@ json.current_page @cart_items.current_page if @cart_items.respond_to? :current_p
 
 json.cart_items(@cart_items) do |cart_item|
   json.extract! cart_item, :id, :product_id, :amount, :count, :title, :price, :state, :state_alias, :created_at
-  json.thumb cart_item.product.try(:product_cover).try(:url, :medium)
+  json.thumb image_url cart_item.product.try(:product_cover).try(:url, :medium)
 end
