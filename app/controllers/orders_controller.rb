@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order.set_disable_if_necessary
     respond_with(@order)
   end
 

@@ -30,6 +30,15 @@ resource "订单与支付相关接口" do
     end
   end
 
+  get 'orders/:id' do 
+    let(:id) {@orders.first.id}
+    example "查看某订单详情成功" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+  end
+
 	post 'orders' do
 		parameter :cart_item_ids, "购物车项目的id数组", required: true
 		parameter :user_id, "用户的id", required: true, scope: :order
