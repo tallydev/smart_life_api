@@ -11,6 +11,7 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  postage    :float            default(0.0)
 #
 
 class Order < ActiveRecord::Base
@@ -20,8 +21,8 @@ class Order < ActiveRecord::Base
 	belongs_to :user
 	has_many :cart_items
 
-	after_save :cal_price
-	after_save :set_seq
+  before_save :cal_price
+	after_create :set_seq
 
 	enum state: {
     unpaid: 1,
@@ -48,6 +49,10 @@ class Order < ActiveRecord::Base
 
   def pay_each_cart_item
     self.its_cart_items.each { |cart_item| cart_item.pay! }
+  end
+
+  def need_postage
+    self.postage != 0 
   end
 
   def its_cart_items
@@ -105,13 +110,14 @@ class Order < ActiveRecord::Base
 
   private 
   	def set_seq
-  		self.seq = "#{Time.zone.now.strftime('%Y%m%d')}#{id.to_s.rjust(6, '0')}"
+      self.update_attributes(seq: "#{Time.zone.now.strftime('%Y%m%d')}#{id.to_s.rjust(6, '0')}")
   	end
 
   	def cal_price
   		_sum = 0.00
   		self.its_cart_items.each {|cart_item| _sum += cart_item.amount}
-  		self.price = _sum
+      self.postage = _sum < 50 ? 8.00 : 0.00
+  		self.price = _sum + self.postage 
   	end
 
 end

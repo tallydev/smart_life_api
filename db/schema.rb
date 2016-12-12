@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130071306) do
+ActiveRecord::Schema.define(version: 20161212081203) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -158,8 +158,9 @@ ActiveRecord::Schema.define(version: 20161130071306) do
     t.float    "price"
     t.integer  "contact_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.float    "postage",    default: 0.0
   end
 
   create_table "ping_requests", force: :cascade do |t|
