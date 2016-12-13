@@ -2,15 +2,15 @@
 #
 # Table name: products
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  price      :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  count      :integer
-#  detail     :text
-#  state      :integer
-#  sort       :string
+#  id              :integer          not null, primary key
+#  title           :string
+#  price           :float
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  count           :integer
+#  detail          :text
+#  state           :integer
+#  product_sort_id :integer
 #
 
 require 'rails_helper'

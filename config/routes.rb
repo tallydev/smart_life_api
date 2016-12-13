@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       get :sort 
     end
   end
+  resources :product_sorts 
   resources :cart_items do
     collection do
       post :pay

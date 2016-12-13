@@ -274,4 +274,30 @@ resource "购物相关接口" do
       end
     end
   end
+
+  describe "商品分类相关接口" do
+
+    before do 
+      @product_sorts = create_list(:product_sort, 3)
+    end
+
+    get 'product_sorts' do
+
+      example "查看商品分类项列表" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
+
+    # get 'product_sorts/:id' do
+
+    #   example "查看用户联系人列表" do
+    #     do_request
+    #     puts response_body
+    #     expect(status).to eq 200
+    #   end
+    # end
+  end
+
 end

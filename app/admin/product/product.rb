@@ -1,8 +1,8 @@
 ActiveAdmin.register Product do
-  # menu parent: "商品信息"
+  # menu parent: "商品相关"
   actions :all
   permit_params :title, :price, :count, :detail, :sort, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
-
+  
   filter :title
   # filter :state, emun: true
 
@@ -10,7 +10,7 @@ ActiveAdmin.register Product do
   #   Product.sale_off
   # end
   # scope :for_sale, default: true
-
+  
   controller do 
     #更改默认搜索范围
     #index仅显示 正在销售
@@ -19,12 +19,29 @@ ActiveAdmin.register Product do
     end
     
     def destroy
-      @product =  Product.find(params[:id])
+      @product = Product.find(params[:id])
       @product.sale_off!
       @product.count = 0 #防止下架商品加入购物车
       @product.save
       redirect_to :back
     end
+
+    def update
+      @product = Product.find(params[:id])
+      @product.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
+      @product.update_attributes(product_params)
+      redirect_to admin_product_path(@product)
+
+    end
+
+    private
+      def product_params
+        params.require(:product).permit(:title, :price, :count, :detail, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy])
+      end
+
+      def sort_params
+        params.require(:product).permit(:sort)
+      end
   end
 
   index do 
@@ -63,7 +80,8 @@ ActiveAdmin.register Product do
       f.input :price,  min: 0
       f.input :count
       f.input :detail
-      f.input :sort, as: :select, :collection => ['休闲美食', '生活用品', '精选优品']
+
+      f.input :sort, as: :select, collection: ProductSort.all.collect(&:title)
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
         cf.input :photo, as: :file, label: "商品主图", hint: (image.try(:photo).blank?) \
@@ -90,6 +108,7 @@ ActiveAdmin.register Product do
       row :count
       row :detail
       row :sort
+      row :product_sort_id
       # row :created_at
       # row :updated_at
       row :product_cover do
@@ -110,6 +129,10 @@ ActiveAdmin.register Product do
 
       row " " do
         link_to "返回商品列表", admin_products_path
+      end
+
+      row " " do
+        link_to "修改商品信息", edit_admin_product_path(product)
       end
 
     end

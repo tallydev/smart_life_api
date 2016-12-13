@@ -20,6 +20,7 @@ zh-CN:
       activity/sqhd: "社区活动"
       product: "商品"
       product_banner: "商品轮播图"
+      product_sort: "商品类别"
     attributes:
       admin_user:
         email: "邮箱"
@@ -90,6 +91,9 @@ zh-CN:
       product_banner:
         back: "返回"
         thumb: "详情图" 
+      product_sort:
+        title: "类别名称"
+        product_sort_icon: "类别图标"
 
   appointment_state:
     commited: "已提交"
