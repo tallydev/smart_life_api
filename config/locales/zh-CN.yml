@@ -104,7 +104,8 @@ zh-CN:
     shopping: "购物中"
     unpaid: "待支付"
     paid: "已支付"
-    no_stocks: "无库存"
+    no_stocks: "库存不足"
+    sale_off: "已下架"
     canceled: "已取消"
   order_state:
     unpaid: "待支付"

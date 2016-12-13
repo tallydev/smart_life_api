@@ -17,7 +17,4 @@ class ProductSort < ActiveRecord::Base
   validates_uniqueness_of :title, message: "分类名称不能重复"
 
   scope :title_is, ->(title) {where(title: title)}
-  def sort
-  	
-  end
 end

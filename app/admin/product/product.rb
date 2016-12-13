@@ -19,11 +19,16 @@ ActiveAdmin.register Product do
     end
     
     def destroy
-      @product = Product.find(params[:id])
-      @product.sale_off!
-      @product.count = 0 #防止下架商品加入购物车
-      @product.save
-      redirect_to :back
+      ActiveRecord::Base.transaction do
+        @product = Product.find(params[:id])
+        @product.sale_off!
+        @product.count = 0 #防止下架商品加入购物车
+        @product.cart_items.each do |cart_item|
+          cart_item.sale_off!
+        end
+        @product.save
+        redirect_to :back
+      end
     end
 
     def update
@@ -131,13 +136,12 @@ ActiveAdmin.register Product do
       end
 
       row " " do
-        link_to "返回商品列表", admin_products_path
-      end
-
-      row " " do
         link_to "修改商品信息", edit_admin_product_path(product)
       end
 
+      row " " do
+        link_to "返回商品列表", admin_products_path
+      end
     end
   end
 

@@ -39,7 +39,7 @@ resource "购物相关接口" do
 
       let(:product_sort_id) { @product_sort.id }
 
-      example "按类别查询 查看商品列表" do
+      example "按类别 查询 商品列表" do
         do_request
         puts response_body
         expect(status).to eq 200
@@ -70,6 +70,7 @@ resource "购物相关接口" do
     before do
       @products = create_list(:product, 3)
       @user = create(:user)
+      create(:cart_item, user: @user, product: @products.first, count: 1)
     end
 
     post 'cart_items' do
@@ -277,7 +278,7 @@ resource "购物相关接口" do
     end
   end
 
-  describe "商品分类相关接口" do
+  describe "商品分类项目相关接口" do
 
     before do 
       @product_sorts = create_list(:product_sort, 3)
@@ -285,7 +286,7 @@ resource "购物相关接口" do
 
     get 'product_sorts' do
 
-      example "查看商品分类项列表" do
+      example "查看商品分类项目 列表" do
         do_request
         puts response_body
         expect(status).to eq 200

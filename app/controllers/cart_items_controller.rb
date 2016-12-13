@@ -9,7 +9,7 @@ class CartItemsController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @cart_items = current_user.cart_items.state_is(["shopping",8]).paginate(page: page, per_page: per_page)
+    @cart_items = current_user.cart_items.editing.paginate(page: page, per_page: per_page)
     respond_with(@cart_items)
   end
 
@@ -26,7 +26,12 @@ class CartItemsController < ApplicationController
   # end
 
   def create
-    @cart_item = current_user.cart_items.build(cart_item_params)
+    @cart_item = current_user.cart_items.editing.product_id_is(params[:cart_item][:product_id]).try(:first)
+    if @cart_item
+      @cart_item.count += params[:cart_item][:count].to_i
+    else
+      @cart_item = current_user.cart_items.build(cart_item_params)
+    end
     @cart_item.save
     respond_with(@cart_item)
   end

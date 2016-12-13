@@ -39,18 +39,21 @@ class CartItem < ActiveRecord::Base
 
   scope :state_is, -> (state){where(state: state)}
   scope :in_ids, -> (ids){where(id: ids)}
-  
+  #"no_stock" 无法查询？
+  scope :editing, -> {where(state: ["shopping", "no_stocks", 8, "sale_off", 7])}
+  scope :product_id_is, -> (product_id){where(product_id: product_id)}
   enum state: {
     shopping: 0,
     unpaid: 1,
     paid: 2,
     no_stocks: 8, #不能以"no_stocks"查询？？？
-    canceled: 9
+    canceled: 9,
+    sale_off: 7,
   }
 
   aasm column: :state, enum: true do
     state :shopping, initial: true
-    state :unpaid, :paid, :canceled, :no_stocks
+    state :unpaid, :paid, :canceled, :no_stocks, :sale_off
 
     event :pay do
       transitions from: :unpaid, to: :paid
@@ -65,10 +68,15 @@ class CartItem < ActiveRecord::Base
     I18n.t :"cart_item_state.#{state}"
   end
 
+  def product_sort
+    self.product.sort
+  end
+
   def self.check_stocks cart_items
     cart_items.each do |cart_item|
       cart_item.no_stocks! if cart_item.count > cart_item.product.count && cart_item.state == 'shopping'
       cart_item.shopping! if cart_item.count <= cart_item.product.count && cart_item.state == 'no_stocks'
+      # cart_item.sale_off! if cart_item.product.count < 0
     end
   end
 

@@ -24,10 +24,12 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_detail, allow_destroy: true
  
   has_many :product_banners
+  has_many :cart_items
   belongs_to :product_sort
 
   validates_presence_of :price, on: :create, message: "商品价格不能为空"
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
+  validates_numericality_of :count, greater_than: 0, only_integer: true, message: "库存必须是正整数"
   validates_numericality_of :discount_rate, greater_than: 0, less_than_or_equal_to: 1.0, message: "折扣信息错误"
 
   scope :state_is, -> (state) {where(state: state)}
