@@ -10,8 +10,6 @@
 #  state      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  price      :float
-#  title      :string
 #  order_id   :integer
 #
 # Indexes
@@ -34,7 +32,7 @@ class CartItem < ActiveRecord::Base
   validates_presence_of :count, on: :save, message: "请输入购买商品的数量"
   validates_numericality_of :count, greater_than_or_equal_to: 1, message: "购买的商品数量至少为1"
 
-  before_save :add_product_info, only: :create
+  # before_save :add_product_info, only: :create
   before_save :cal_amount
 
   scope :state_is, -> (state){where(state: state)}
@@ -71,7 +69,7 @@ class CartItem < ActiveRecord::Base
   def product_sort
     self.product.sort
   end
-
+# 
   def self.check_stocks cart_items
     cart_items.each do |cart_item|
       cart_item.no_stocks! if cart_item.count > cart_item.product.count && cart_item.state == 'shopping'
@@ -80,12 +78,20 @@ class CartItem < ActiveRecord::Base
     end
   end
 
+  def title
+    self.product.title
+  end
+
+  def price
+    self.product.price
+  end
+
   private
 
-    def add_product_info
-      self.price = self.product.price
-      self.title = self.product.title
-    end
+    # def add_product_info
+    #   self.price = self.product.price
+    #   self.title = self.product.title
+    # end
 
     def cal_amount
       self.amount = self.price.to_f * self.count
