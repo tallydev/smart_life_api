@@ -9,6 +9,7 @@ class ProductSortsController < ApplicationController
   end
 
   def show
+    @products = @product_sort.products
     respond_with(@product_sort)
   end
 

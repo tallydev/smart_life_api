@@ -88,6 +88,8 @@ zh-CN:
         detail: "商品介绍"
         state: "状态"
         sort: "分类"
+        discount_rate: "折扣"
+        after_discount: "优惠价"
       product_banner:
         back: "返回"
         thumb: "详情图" 

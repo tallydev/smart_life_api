@@ -25,19 +25,21 @@ resource "购物相关接口" do
     get 'products/sort' do
       parameter :page, "页码", required: false
       parameter :per_page, "每页个数", required: false
-      parameter :sort, "商品分类(休闲食品，生活用品，精选优品)", required: true
+      parameter :product_sort_id, "商品类别id", required: true
 
       let(:page) { 1 }
       let(:per_page) { 10 }
-      let(:sort) { "休闲食品" }
 
       before do
         @products = create_list(:product, 3)
-        @products.second.sort = "休闲食品"
+        @product_sort = create(:product_sort, title: "我是分类")
+        @products.second.product_sort_id = @product_sort.id 
         @products.second.save
       end
 
-      example "按分类查看商品列表" do
+      let(:product_sort_id) { @product_sort.id }
+
+      example "按类别查询 查看商品列表" do
         do_request
         puts response_body
         expect(status).to eq 200

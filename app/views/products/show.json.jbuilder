@@ -1,4 +1,4 @@
-json.extract! @product, :id, :title, :price, :count, :detail, :sort
+json.extract! @product, :id, :title, :price, :count, :detail, :sort, :discount_rate, :after_discount
 
 json.product_banners @product.product_banners do |product_banner|
 	json.id product_banner.id

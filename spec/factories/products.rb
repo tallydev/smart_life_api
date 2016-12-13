@@ -11,6 +11,7 @@
 #  detail          :text
 #  state           :integer
 #  product_sort_id :integer
+#  discount_rate   :float            default(1.0)
 #
 
 FactoryGirl.define do

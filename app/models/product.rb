@@ -11,6 +11,7 @@
 #  detail          :text
 #  state           :integer
 #  product_sort_id :integer
+#  discount_rate   :float            default(1.0)
 #
 
 class Product < ActiveRecord::Base
@@ -26,14 +27,12 @@ class Product < ActiveRecord::Base
   belongs_to :product_sort
 
   validates_presence_of :price, on: :create, message: "商品价格不能为空"
-  validates_numericality_of :price, greater_than: 0
-  # validate :right_product_sort_title?
-
-  # before_save :set_product_sort_id
+  validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
+  validates_numericality_of :discount_rate, greater_than: 0, less_than_or_equal_to: 1.0, message: "折扣信息错误"
 
   scope :state_is, -> (state) {where(state: state)}
   scope :for_sale, -> {where(state: "for_sale")}
-  scope :sort_is, -> (sort) {where(sort: sort)}
+  scope :product_sort_is, -> (id) {where(product_sort_id: id)}
   enum state: {
     for_sale: 0,
     sale_off: 1,
@@ -57,15 +56,7 @@ class Product < ActiveRecord::Base
     self.product_sort.try(:title)
   end
 
-  private
-    # def set_product_sort_id
-    #   _product_sort = ProductSort.title_is(self.sort).try(:first)
-    #   self.product_sort_id =  _product_sort ?  _product_sort.id : nil
-    # end
-
-    # def right_product_sort_title?
-    #   unless self.sort == nil || ProductSort.title_is(self.sort).any?
-    #     errors.add(:sort, "商品分类名称错误")
-    #   end
-    # end
+  def after_discount
+    (self.price * self.discount_rate).round(2)
+  end
 end

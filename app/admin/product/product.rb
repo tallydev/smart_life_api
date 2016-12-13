@@ -1,7 +1,7 @@
 ActiveAdmin.register Product do
   # menu parent: "商品相关"
   actions :all
-  permit_params :title, :price, :count, :detail, :sort, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :title, :price, :count, :detail, :discount_rate, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
   
   filter :title
   # filter :state, emun: true
@@ -29,16 +29,16 @@ ActiveAdmin.register Product do
     def update
       @product = Product.find(params[:id])
       @product.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
-      @product.update_attributes(product_params)
-      redirect_to admin_product_path(@product)
+      super
+    end
 
+    def create
+      super
+      @product.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
+      @product.save
     end
 
     private
-      def product_params
-        params.require(:product).permit(:title, :price, :count, :detail, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy])
-      end
-
       def sort_params
         params.require(:product).permit(:sort)
       end
@@ -53,6 +53,8 @@ ActiveAdmin.register Product do
     column :price
     column :count
     column :detail
+    column :discount_rate
+    column :after_discount
     column :sort
     # column :created_at
     # column :updated_at
@@ -80,7 +82,7 @@ ActiveAdmin.register Product do
       f.input :price,  min: 0
       f.input :count
       f.input :detail
-
+      f.input :discount_rate, min: 0, maximum: 1
       f.input :sort, as: :select, collection: ProductSort.all.collect(&:title)
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
@@ -95,7 +97,7 @@ ActiveAdmin.register Product do
           ? cf.template.content_tag(:span, "还未上传图片文件")
           : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url(:s750), target: "_blank")
       end
-
+      f.semantic_errors *f.object.errors.keys
     end
 
     f.actions
@@ -108,7 +110,8 @@ ActiveAdmin.register Product do
       row :count
       row :detail
       row :sort
-      row :product_sort_id
+      row :discount_rate
+      row :after_discount
       # row :created_at
       # row :updated_at
       row :product_cover do
