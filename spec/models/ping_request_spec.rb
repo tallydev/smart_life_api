@@ -16,6 +16,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  order_id    :integer
+#  metadata    :string
 #
 
 require 'rails_helper'
