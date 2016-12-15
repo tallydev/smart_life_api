@@ -23,6 +23,13 @@ resource "订单与支付相关接口" do
 
 
   get 'orders' do 
+
+    parameter :page, "当前页", require: false
+    parameter :per_page, "每页的数量", require: false
+
+    let(:page) {2}
+    let(:per_page) {1}
+
     example "查看订单列表成功" do
       do_request
       puts response_body
