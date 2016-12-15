@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @contacts = current_user.contacts.rank(:order)
+    @contacts = current_user.contacts.rank(:row_order)
     respond_with(@contacts)
   end
 
@@ -26,18 +26,18 @@ class ContactsController < ApplicationController
     @contact = current_user.contacts.build(contact_params)
     @contact.save
     if contact_params[:is_default]
-      @contact.update_attribute :order_position, 0
+      @contact.update_attribute :row_order_position, 0
     end
-    @contacts = current_user.contacts.rank(:order)
+    @contacts = current_user.contacts.rank(:row_order)
     respond_with(@contacts, template: "contacts/index", status: 201)
   end
 
   def update
     @contact.update(contact_params)
     if contact_params[:is_default]
-      @contact.update_attribute :order_position, 0
+      @contact.update_attribute :row_order_position, 0
     end
-    @contacts = current_user.contacts.rank(:order)
+    @contacts = current_user.contacts.rank(:row_order)
     respond_with(@contacts, template: "contacts/index", status: 200)
   end
 

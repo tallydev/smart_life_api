@@ -10,7 +10,7 @@
 #  address    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  order      :integer
+#  row_order  :integer
 #  area       :string
 #  street     :string
 #
@@ -23,7 +23,7 @@ class Contact < ActiveRecord::Base
   belongs_to :user
 
   include RankedModel
-  ranks :order
+  ranks :row_order, with_same: :user_id
 
   attr_accessor :is_default
 end
