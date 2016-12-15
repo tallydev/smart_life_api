@@ -59,9 +59,9 @@ class Order < ActiveRecord::Base
     CartItem.where(order_id: self.id)  
   end
 
-  def self.create_one order_params, ids
+  def self.create_one user_id, ids
   	ActiveRecord::Base.transaction do  
-  	  _order = Order.new(order_params)
+  	  _order = Order.new(user_id: user_id)
       _order.save!
       CartItem.in_ids(ids).each do |cart_item|
     		_product = cart_item.product

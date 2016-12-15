@@ -56,7 +56,7 @@ class CartItemsController < ApplicationController
 
   private
     def set_cart_item
-      @cart_item = current_user.cart_items.state_is(["shopping",8]).find(params[:id])
+      @cart_item = current_user.cart_items.editing.find(params[:id])
     end
 
     def cart_item_params

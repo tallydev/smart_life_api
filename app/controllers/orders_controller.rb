@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
   # end
 
   def create #params [id数组]
-    @order = Order.create_one(order_params, params[:cart_item_ids])
+    @order = Order.create_one(current_user.id, params[:cart_item_ids])
     if @order.is_a?(Order)
       respond_with @order, template: 'orders/show', status: 201
     else
@@ -31,10 +31,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def update
-    @order.update(order_params)
-    respond_with @order, template: "orders/show", status: 201
-  end
+  # def update
+  #   @order.update(order_params)
+  #   respond_with @order, template: "orders/show", status: 201
+  # end
 
   def destroy
     @order.canceled!
@@ -71,7 +71,7 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(
-        :user_id
+       
         )
     end
 

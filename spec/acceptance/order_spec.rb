@@ -41,11 +41,8 @@ resource "订单与支付相关接口" do
 
 	post 'orders' do
 		parameter :cart_item_ids, "购物车项目的id数组", required: true
-		parameter :user_id, "用户的id", required: true, scope: :order
-
 
 		let(:cart_item_ids) {[@cart_item2.id, @cart_item3.id]}
-		let(:user_id) {@user.id}
 
 		example "创建订单成功" do
       do_request
