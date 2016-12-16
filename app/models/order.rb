@@ -61,7 +61,7 @@ class Order < ActiveRecord::Base
   end
 
   def without_postage
-    need_postage? ? self.price - self.postage : self.price
+    need_postage ? self.price - self.postage : self.price
   end
 
   def created_at_output
