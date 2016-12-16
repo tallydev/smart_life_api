@@ -1,7 +1,4 @@
 json.total_pages @cart_items.total_pages if @cart_items.respond_to? :total_pages
 json.current_page @cart_items.current_page if @cart_items.respond_to? :current_page
 
-json.cart_items(@cart_items) do |cart_item|
-  json.extract! cart_item, :id, :product_id, :amount, :count, :title, :price, :state, :state_alias, :product_sort, :created_at
-  json.thumb image_url cart_item.product.try(:product_cover).try(:url, :medium)
-end
+json.cart_items @cart_items, partial: 'cart_items/cart_item', as: :cart_item

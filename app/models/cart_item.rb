@@ -38,13 +38,13 @@ class CartItem < ActiveRecord::Base
   scope :state_is, -> (state){where(state: state)}
   scope :in_ids, -> (ids){where(id: ids)}
   #"no_stock" 无法查询？
-  scope :editing, -> {where(state: ["shopping", "no_stocks", 8, "sale_off", 7])}
+  scope :editing, -> {where(state: [0, 8, 7])}
   scope :product_id_is, -> (product_id){where(product_id: product_id)}
   enum state: {
     shopping: 0,
     unpaid: 1,
     paid: 2,
-    no_stocks: 8, #不能以"no_stocks"查询？？？
+    no_stocks: 8, #不能以"no_stocks"scope 查询？？？
     canceled: 9,
     sale_off: 7,
   }
@@ -66,24 +66,14 @@ class CartItem < ActiveRecord::Base
     I18n.t :"cart_item_state.#{state}"
   end
 
-  def product_sort
-    self.product.sort
-  end
-# 
+  delegate :title, :price, :after_discount, :product_sort, :sales, to: :product, allow_nil: true
+
   def self.check_stocks cart_items
     cart_items.each do |cart_item|
       cart_item.no_stocks! if cart_item.count > cart_item.product.count && cart_item.state == 'shopping'
       cart_item.shopping! if cart_item.count <= cart_item.product.count && cart_item.state == 'no_stocks'
       # cart_item.sale_off! if cart_item.product.count < 0
     end
-  end
-
-  def title
-    self.product.title
-  end
-
-  def price
-    self.product.price
   end
 
   private

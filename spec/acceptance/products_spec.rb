@@ -96,6 +96,8 @@ resource "购物相关接口" do
 
       before do
         @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
+        p @cart_items.first.paid!
+        p @cart_items
       end
 
       example "查看用户的购物车列表(购物中、已下架与库存不足）" do

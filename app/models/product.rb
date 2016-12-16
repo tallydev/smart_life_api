@@ -33,7 +33,7 @@ class Product < ActiveRecord::Base
   validates_numericality_of :discount_rate, greater_than: 0, less_than_or_equal_to: 1.0, message: "折扣信息错误"
 
   scope :state_is, -> (state) {where(state: state)}
-  scope :for_sale, -> {where(state: "for_sale")}
+  scope :for_sale, -> {where(state: 1)}
   scope :product_sort_is, -> (id) {where(product_sort_id: id)}
   enum state: {
     for_sale: 0,
@@ -60,5 +60,11 @@ class Product < ActiveRecord::Base
 
   def after_discount
     (self.price * self.discount_rate).round(2)
+  end
+
+  def sales#销量
+    _sum = 0
+    self.cart_items.state_is(2).each { |cart_item| _sum += cart_item.count }
+    _sum
   end
 end

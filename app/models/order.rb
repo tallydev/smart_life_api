@@ -47,12 +47,20 @@ class Order < ActiveRecord::Base
     I18n.t :"order_state.#{state}"
   end
 
-  def pay_each_cart_item
-    self.its_cart_items.each { |cart_item| cart_item.pay! }
-  end
-
   def need_postage
     self.postage != 0 
+  end
+
+  def created_at_output
+    self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+  end
+
+  def updated_at_output
+    self.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+  end
+
+  def pay_each_cart_item
+    self.its_cart_items.each { |cart_item| cart_item.pay! }
   end
 
   def its_cart_items
