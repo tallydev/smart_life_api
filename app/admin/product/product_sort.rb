@@ -7,11 +7,13 @@ ActiveAdmin.register ProductSort do
     
     def destroy
       @product_sort =  ProductSort.find(params[:id])
-      if @product_sort.destroy
-	      @product_sort.products.each do |product|
-	      	product.product_sort_id = nil
-	      	product.save
-	    	end
+
+      ActiveRecord::Base.transaction do
+        @product_sort.products.each do |product|
+        	product.product_sort_id = nil
+        	product.save
+      	end
+        @product_sort.destroy
     	end
       redirect_to :back
     end
