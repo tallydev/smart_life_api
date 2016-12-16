@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  postage    :float            default(0.0)
+#  paid_time  :datetime
 #
 
 FactoryGirl.define do

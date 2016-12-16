@@ -21,6 +21,7 @@ zh-CN:
       product: "商品"
       product_banner: "商品轮播图"
       product_sort: "商品类别"
+      order: "订单交易记录"
     attributes:
       admin_user:
         email: "邮箱"
@@ -96,6 +97,15 @@ zh-CN:
       product_sort:
         title: "类别名称"
         product_sort_icon: "类别图标"
+      order: 
+        seq: "序列号"
+        pay_way_alias: "支付方式"
+        price: "成交价"
+        postage: "运费"
+        phone: "成交人"
+        paid_time_output: "成交时间"
+        user: "用户"
+
 
   appointment_state:
     commited: "已提交"
@@ -119,6 +129,9 @@ zh-CN:
     food: "休闲美食"
     living_good: "生活用品"
     best_item: "精选优品"
+  pay_way: 
+    wx: "微信支付"
+    alipay: "支付宝支付"
 
   devise:
     failure:

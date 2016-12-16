@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  postage    :float            default(0.0)
+#  paid_time  :datetime
 #
 
 class Order < ActiveRecord::Base
@@ -43,12 +44,24 @@ class Order < ActiveRecord::Base
     end
   end
 
+  scope :is_paid, -> {where(state: 2)}
+  
+  delegate :phone, to: :user, allow_nil: true
+
   def state_alias
     I18n.t :"order_state.#{state}"
   end
 
+  def pay_way_alias
+    I18n.t :"pay_way.#{pay_way}"
+  end
+
   def need_postage
     self.postage != 0 
+  end
+
+  def without_postage
+    need_postage? ? self.price - self.postage : self.price
   end
 
   def created_at_output
@@ -57,6 +70,10 @@ class Order < ActiveRecord::Base
 
   def updated_at_output
     self.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+  end
+
+  def paid_time_output
+    self.paid_time.strftime("%Y-%m-%d %H:%M:%S") if self.paid_time
   end
 
   def pay_each_cart_item
@@ -109,10 +126,6 @@ class Order < ActiveRecord::Base
   def recover_stocks
   	self.its_cart_items.each do |cart_item|
       cart_item.product.count += cart_item.count
-      p cart_item.product.count 
-      p "ssss"
-      p cart_item.product.save
-      p cart_item.product
     end
   end
 

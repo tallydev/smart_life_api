@@ -66,7 +66,7 @@ class CartItem < ActiveRecord::Base
     I18n.t :"cart_item_state.#{state}"
   end
 
-  delegate :title, :price, :after_discount, :product_sort, :sales, to: :product, allow_nil: true
+  delegate :title, :price, :after_discount, :discount_rate, :product_sort, :sales, to: :product, allow_nil: true
 
   def self.check_stocks cart_items
     cart_items.each do |cart_item|

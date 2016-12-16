@@ -78,6 +78,7 @@ class PingppController < ApplicationController
 
           if @ping_request.save 
             @ping_request.order.pay!
+            @ping_request.order.update_attributes(paid_time: Time.zone.now)
             
             #发送微信消息 
             # @ping_request.send_recharge_success_message(_purchase_log.balance)
