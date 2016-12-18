@@ -47,14 +47,17 @@ class OrdersController < ApplicationController
   def create_payment #params[:pay_way]
     @order.cut_stocks
     if @order.is_a?(Order)
-      p @order.its_cart_items.map{|x|x.product.count}
-      render nothing: true, status: 201
-      #请求ping++ 支付
-      # @charge = PingRequest.get_pay_order(self, params[:pay_way])
-      # if @change.is_a?(Pingpp::Charge)
-      #   render json: @change, status: 200
-      # else
-      #   render json: @change, status: 422
+      # p @order.its_cart_items.map{|x| x.product.count}
+      # render nothing: true, status: 201
+      # 请求ping++ 支付
+      @charge = PingRequest.get_pay_order(@order, params[:pay_way])
+
+      if @charge.is_a?(Pingpp::Charge)
+        render json: @charge, status: 201
+      else
+        render json: @charge, status: 422
+      end
+
     else
       render json: { error: @order.to_s }, status: 422
     end

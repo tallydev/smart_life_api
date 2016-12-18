@@ -70,7 +70,11 @@ resource "订单与支付相关接口" do
   end
 
   post 'orders/:id/create_payment' do
+
+    parameter :pay_way, "支付渠道 alipay wx", require: true
+
     let(:id) { @orders.first.id }
+    let(:pay_way) { "alipay" }
 
     example "扣除库存后，发起支付" do
       do_request

@@ -33,7 +33,7 @@ class PingRequest < ActiveRecord::Base
                           :subject   => self.subject,
                           :body      => self.body,
                           :extra     => extra, #直接从数据库去除的是一个字符串 需要解成 hash
-                          :metadata  => self.metadata ? JSON.parse(self.metadata) : {}
+                          # :metadata  => self.metadata ? JSON.parse(self.metadata) : {}
                            ) 
 	end
 
@@ -59,8 +59,8 @@ class PingRequest < ActiveRecord::Base
 			amount: order.price.round(2) * 100,
 			subject: order.seq,
 			body: order.its_cart_items.collect(&:title).join(","),
-			openid: params[:openid],#?
-      metadata: params[:metadata]#?
+			# openid: params[:openid],#?
+      # metadata: params[:metadata]#?
 			)
 
 		#在ping++平台创建一条记录
