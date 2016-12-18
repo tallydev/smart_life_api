@@ -97,7 +97,7 @@ resource "订单与支付相关接口" do
 
   delete 'orders/:id' do
     before do
-      @order = create(:order, user: @user, product: @products.first)
+      @order = create(:order, user: @user)
     end
 
     let(:id) { @order.id }

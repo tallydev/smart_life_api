@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     end
   end
   resources :contacts
-  resources :orders, only: [:index, :show, :create] do 
+  resources :orders, only: [:index, :show, :create, :destroy] do 
     member do 
       post 'recover_stocks' 
       post 'create_payment'   
