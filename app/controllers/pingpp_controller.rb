@@ -17,7 +17,7 @@ class PingppController < ApplicationController
 		@ping_request = PingRequest.new(
 			order_no: PingRequest.create_order_no,
 			channel: _channel,
-			client_ip: '127.0.0.1', #request.remote_ip,
+			client_ip: request.remote_ip,
 			extra: _extra,
 			amount: params[:amount],
 			subject: params[:subject],
