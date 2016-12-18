@@ -96,17 +96,18 @@ resource "订单与支付相关接口" do
   end 
 
   delete 'orders/:id' do
-      before do
-        @order = create(:order, user: @user, product: @products.first)
-      end
+    before do
+      @order = create(:order, user: @user, product: @products.first)
+    end
 
-      let(:id) { @order.id }
+    let(:id) { @order.id }
 
-      example "删除（取消）订单" do
-        do_request
-        puts response_body
-        expect(status).to eq(204)
-      end
+    example "删除（取消）订单" do
+      do_request
+      puts response_body
+      expect(status).to eq(204)
+    end
+  end
 
 
 
