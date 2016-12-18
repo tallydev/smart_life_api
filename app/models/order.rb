@@ -20,7 +20,8 @@ class Order < ActiveRecord::Base
   include AASM
   
 	belongs_to :user
-	has_many :cart_items
+	has_many :cart_items, dependent: :destroy
+  has_many :ping_requests, dependent: :destroy
 
   before_save :cal_price
 	after_create :set_seq
