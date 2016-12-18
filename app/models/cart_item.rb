@@ -84,7 +84,7 @@ class CartItem < ActiveRecord::Base
     # end
 
     def cal_amount
-      self.amount = self.price.to_f * self.count
+      self.amount = self.after_discount.to_f * self.count
     end
 
 end
