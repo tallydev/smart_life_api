@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
       # p @order.its_cart_items.map{|x| x.product.count}
       # render nothing: true, status: 201
       # 请求ping++ 支付
-      @charge = PingRequest.get_pay_order(@order, params[:pay_way])
+      @charge = PingRequest.get_pay_order(@order, params[:pay_way], request)
 
       if @charge.is_a?(Pingpp::Charge)
         render json: @charge, status: 201

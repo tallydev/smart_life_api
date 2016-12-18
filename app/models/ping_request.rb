@@ -42,7 +42,7 @@ class PingRequest < ActiveRecord::Base
     Array.new(8).collect{chars[rand(chars.size - 1)]}.join 
   end
 
-  def self.get_pay_order order, pay_way
+  def self.get_pay_order order, pay_way, request
 
 		_extra = {}
 		# case pay_way
@@ -59,6 +59,7 @@ class PingRequest < ActiveRecord::Base
 			amount: order.price.round(2) * 100,
 			subject: order.seq,
 			body: order.its_cart_items.collect(&:title).join(","),
+			order: order
 			# openid: params[:openid],#?
       # metadata: params[:metadata]#?
 			)
