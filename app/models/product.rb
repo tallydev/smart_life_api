@@ -59,7 +59,7 @@ class Product < ActiveRecord::Base
   end
 
   def after_discount
-    (self.price * self.discount_rate).round(2)
+    (self.price * self.discount_rate).round(1)
   end
 
   def sales#销量
