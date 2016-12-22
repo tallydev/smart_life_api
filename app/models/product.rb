@@ -12,6 +12,7 @@
 #  state           :integer
 #  product_sort_id :integer
 #  discount_rate   :float            default(1.0)
+#  after_discount  :float
 #
 
 class Product < ActiveRecord::Base
@@ -58,11 +59,11 @@ class Product < ActiveRecord::Base
     self.product_sort.try(:title)
   end
 
-  def after_discount
-    (self.price * self.discount_rate).round(1)
-  end
+  # def after_discount
+  #   (self.price * self.discount_rate).round(1)
+  # end
 
-  def sales#销量
+  def sales #销量
     _sum = 0
     self.cart_items.state_is(2).each { |cart_item| _sum += cart_item.count }
     _sum

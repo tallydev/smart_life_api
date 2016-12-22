@@ -12,6 +12,7 @@
 #  state           :integer
 #  product_sort_id :integer
 #  discount_rate   :float            default(1.0)
+#  after_discount  :float
 #
 
 require 'rails_helper'
