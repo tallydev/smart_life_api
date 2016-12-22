@@ -1,7 +1,7 @@
 ActiveAdmin.register Product do
   # menu parent: "商品相关"
   actions :all
-  permit_params :title, :price, :count, :detail, :discount_rate, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :title, :price, :count, :detail, :after_discount, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
   
   filter :title
   # filter :state, emun: true
@@ -56,10 +56,10 @@ ActiveAdmin.register Product do
     # column :state
     column :title
     column :price
+    column :after_discount
+    column :discount_rate
     column :count
     column :detail
-    column :discount_rate
-    column :after_discount
     column :sort
     # column :created_at
     # column :updated_at
@@ -85,9 +85,9 @@ ActiveAdmin.register Product do
     f.inputs do 
       f.input :title
       f.input :price,  min: 0
+      f.input :after_discount,  min: 0
       f.input :count
       f.input :detail
-      f.input :discount_rate, min: 0, maximum: 1
       f.input :sort, as: :select, collection: ProductSort.all.collect(&:title)
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
@@ -112,11 +112,11 @@ ActiveAdmin.register Product do
     attributes_table do
       row :title
       row :price
+      row :after_discount
+      row :discount_rate
       row :count
       row :detail
       row :sort
-      row :discount_rate
-      row :after_discount
       # row :created_at
       # row :updated_at
       row :product_cover do

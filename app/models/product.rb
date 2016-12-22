@@ -11,7 +11,6 @@
 #  detail          :text
 #  state           :integer
 #  product_sort_id :integer
-#  discount_rate   :float            default(1.0)
 #  after_discount  :float
 #
 
@@ -31,7 +30,6 @@ class Product < ActiveRecord::Base
   validates_presence_of :price, on: :create, message: "商品价格不能为空"
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
   validates_numericality_of :count, greater_than: 0, only_integer: true, message: "库存必须是正整数"
-  validates_numericality_of :discount_rate, greater_than: 0, less_than_or_equal_to: 1.0, message: "折扣信息错误"
 
   scope :state_is, -> (state) {where(state: state)}
   scope :for_sale, -> {where(state: 1)}
@@ -59,6 +57,9 @@ class Product < ActiveRecord::Base
     self.product_sort.try(:title)
   end
 
+  def discount_rate
+    self.after_discount ? (self.after_discount / self.price).round(2) : nil
+  end
   # def after_discount
   #   (self.price * self.discount_rate).round(1)
   # end
