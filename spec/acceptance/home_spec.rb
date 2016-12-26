@@ -10,6 +10,7 @@ resource "主页相关接口" do
 
   before do
     create(:user)
+    create_list(:banner, 2)
   end
 
   get 'home' do

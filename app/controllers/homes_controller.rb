@@ -11,6 +11,7 @@ class HomesController < ApplicationController
     @sport = current_user.sports.filter_date(@today).try(:first)
     @rank = @sport.try(:rank) || "--"
     @step = @sport.try(:count) || 0
+    @banners = Banner.all
   end
 
   def new

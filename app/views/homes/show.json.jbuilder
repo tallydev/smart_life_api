@@ -15,3 +15,9 @@ end
 json.product do
   json.url image_url ""
 end
+
+# 轮播图
+json.banners @banners.each do |banner|
+	json.(banner, :id, :title, :position)
+	json.url image_url banner.image.try(:url, :s750)
+end

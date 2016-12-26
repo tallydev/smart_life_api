@@ -22,6 +22,7 @@ zh-CN:
       product_banner: "商品轮播图"
       product_sort: "商品类别"
       order: "订单交易记录"
+      banner: "首页轮播图"
     attributes:
       admin_user:
         email: "邮箱"
@@ -105,6 +106,10 @@ zh-CN:
         phone: "成交人"
         paid_time_output: "成交时间"
         user: "用户"
+      banner:
+        title: "标题"
+        position: "位置"
+        imgae: "图片"
 
 
   appointment_state:
