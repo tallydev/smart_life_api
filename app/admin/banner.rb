@@ -1,7 +1,7 @@
 ActiveAdmin.register Banner do
   # menu parent: "首页轮播图"
   actions :all 
-  permit_params :title, :position, image_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :title, :position, banner_cover_attributes: [:id, :desc, :photo, :_destroy], banner_detail_attributes: [:id, :desc, :photo, :_destroy]
 
   # controller do 
     
@@ -27,10 +27,14 @@ ActiveAdmin.register Banner do
     column :position
     # column :created_at
     # column :updated_at
-    column :image do |banner|
-      link_to(image_tag(banner.image.photo.url(:mini)), banner.image.photo.url, target: "_blank") if banner.image
+    column :banner_cover do |banner|
+      link_to(image_tag(banner.banner_cover.photo.url(:mini)), banner.banner_cover.photo.url, target: "_blank") if banner.banner_cover
     end
-   
+
+    column :banner_detail do |banner|
+      link_to(image_tag(banner.banner_detail.photo.url(:mini)), banner.banner_detail.photo.url, target: "_blank") if banner.banner_detail
+    end
+
     actions 
   end
 
@@ -40,9 +44,16 @@ ActiveAdmin.register Banner do
       f.input :title
       f.input :position
 
-      f.fields_for :image, for: [:image, f.object.image || f.object.build_image] do |cf|
+      f.fields_for :banner_cover, for: [:banner_cover, f.object.banner_cover || f.object.build_banner_cover] do |cf|
         image = cf.object
         cf.input :photo, as: :file, label: "轮播图主图", hint: (image.try(:photo).blank?) \
+          ? cf.template.content_tag(:span, "还未上传图片文件")
+          : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url(:s750), target: "_blank") 
+      end
+
+      f.fields_for :banner_detail, for: [:banner_detail, f.object.banner_detail || f.object.build_banner_detail] do |cf|
+        image = cf.object
+        cf.input :photo, as: :file, label: "轮播图详情图", hint: (image.try(:photo).blank?) \
           ? cf.template.content_tag(:span, "还未上传图片文件")
           : cf.template.link_to(image_tag(image.photo.url(:medium)), image.photo.url(:s750), target: "_blank") 
       end
@@ -58,9 +69,15 @@ ActiveAdmin.register Banner do
       row :position
       # row :created_at
       # row :updated_at
-      row :image do
-        if banner.image
-          link_to(image_tag(banner.image.photo.url(:medium)), banner.image.photo.url, target: "_blank")
+      row :banner_cover do
+        if banner.banner_cover
+          link_to(image_tag(banner.banner_cover.photo.url(:medium)), banner.banner_cover.photo.url, target: "_blank")
+        end
+      end
+
+      row :banner_detail do
+        if banner.banner_detail
+          link_to(image_tag(banner.banner_detail.photo.url(:medium)), banner.banner_detail.photo.url, target: "_blank")
         end
       end
 
