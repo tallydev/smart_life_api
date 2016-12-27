@@ -1,5 +1,4 @@
 ActiveAdmin.register Sport::Monthly do
-  menu priority: 1
   menu parent: "健步达人"
   config.sort_order = 'count_desc'
 
