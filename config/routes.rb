@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :banners, only: [:index]
   resource :home, only: [:show]
-
+  get 'home_info', to: 'homes#home_info'
+  
   ############ SMS Routes ###################
   resources :sms_tokens, only: [:show]  do
     collection do

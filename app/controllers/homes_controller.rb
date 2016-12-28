@@ -2,16 +2,20 @@ class HomesController < ApplicationController
   acts_as_token_authentication_handler_for User
   
   respond_to :html, :json
+  # 其他内容
+  def home_info
+    @banners = Banner.all
+    respond_with @banners, template: 'homes/home_info', status: 200
+  end
 
   def index
   end
-
+  # 步数 定时访问
   def show
     @today = Time.zone.today
     @sport = current_user.sports.filter_date(@today).try(:first)
     @rank = @sport.try(:rank) || "--"
     @step = @sport.try(:count) || 0
-    @banners = Banner.all
   end
 
   def new
