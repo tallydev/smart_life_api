@@ -10,7 +10,7 @@ ActiveAdmin.register Order do
     #更改默认搜索范围
     #index仅显示 正在销售
     def scoped_collection
-      Order.is_paid
+      Order.paid
     end
   end
 

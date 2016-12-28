@@ -26,6 +26,9 @@ class Order < ActiveRecord::Base
   before_save :cal_price
 	after_create :set_seq
 
+  default_scope {order("created_at DESC")}
+  # scope :state_is, -> (state){where(state: state)}
+
 	enum state: {
     unpaid: 1,
     paid: 2,
@@ -44,8 +47,6 @@ class Order < ActiveRecord::Base
       transitions from: :unpaid, to: :canceled
     end
   end
-
-  scope :is_paid, -> {where(state: 2)}
   
   delegate :phone, to: :user, allow_nil: true
 

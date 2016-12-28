@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 20
-    @orders = current_user.orders.paginate(page: page, per_page: per_page)
+    @orders = current_user.orders.send(params[:state] || "all").paginate(page: page, per_page: per_page)
     respond_with(@orders)
   end
 

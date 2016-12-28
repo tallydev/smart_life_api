@@ -26,11 +26,13 @@ resource "订单与支付相关接口" do
 
     parameter :page, "当前页", require: false
     parameter :per_page, "每页的数量", require: false
+    parameter :state, "状态, state:{ unpaid: 未支付, paid: 已支付, canceled: 已取消}, require: :false"
 
-    let(:page) {2}
-    let(:per_page) {1}
-
-    example "查看订单列表成功" do
+    let(:page) {1}
+    let(:per_page) {5}
+    let(:state) {"unpaid"}
+    example "查看订单列表成功, 默认为全部, 可单参数查询" do
+      @orders.first.paid!
       do_request
       puts response_body
       expect(status).to eq 200
