@@ -54,7 +54,7 @@ class Order < ActiveRecord::Base
   end
 
   def pay_way_alias
-    I18n.t :"pay_way.#{pay_way}"
+    pay_way.nil? ? "" : (I18n.t :"pay_way.#{pay_way}" )
   end
 
   def need_postage
