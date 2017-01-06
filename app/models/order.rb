@@ -50,6 +50,10 @@ class Order < ActiveRecord::Base
   
   delegate :phone, to: :user, allow_nil: true
 
+  def contact
+    Contact.find(contact_id)
+  end
+
   def state_alias
     I18n.t :"order_state.#{state}"
   end
@@ -86,9 +90,9 @@ class Order < ActiveRecord::Base
     CartItem.where(order_id: self.id)  
   end
 
-  def self.create_one user_id, ids
+  def self.create_one user_id, ids, contact_id
   	ActiveRecord::Base.transaction do  
-  	  _order = Order.new(user_id: user_id)
+  	  _order = Order.new(user_id: user_id, contact_id: contact_id)
       _order.save!
       CartItem.in_ids(ids).each do |cart_item|
     		_product = cart_item.product

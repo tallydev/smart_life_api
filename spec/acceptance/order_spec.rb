@@ -11,8 +11,9 @@ resource "订单与支付相关接口" do
 	before do 
 		@products = create_list(:product, 3)
     @user = create(:user)
+    @contact = create(:contact)
     
-    @orders = create_list(:order, 2, user: @user)
+    @orders = create_list(:order, 2, user: @user, contact_id: @contact.id)
     @cart_item1 = create(:cart_item, user: @user, product: @products.first,
                           order: @orders.first)
     @cart_item2 = create(:cart_item, user: @user, product: @products.second)
@@ -50,8 +51,10 @@ resource "订单与支付相关接口" do
 
 	post 'orders' do
 		parameter :cart_item_ids, "购物车项目的id数组", required: true
+    parameter :contact_id, "联系人id", required: true, scope: :order
 
 		let(:cart_item_ids) {[@cart_item2.id, @cart_item3.id]}
+    let(:contact_id) { @contact.id }
 
 		example "创建订单成功" do
       do_request
@@ -98,11 +101,8 @@ resource "订单与支付相关接口" do
   end 
 
   delete 'orders/:id' do
-    before do
-      @order = create(:order, user: @user)
-    end
 
-    let(:id) { @order.id }
+    let(:id) { @orders.first.id }
 
     example "删除（取消）订单" do
       do_request
