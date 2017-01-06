@@ -4,14 +4,14 @@
 #
 #  id           :integer          not null, primary key
 #  user_id      :integer
-#  idname       :string
-#  type         :string
+#  idname       :string(191)
+#  type         :string(191)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  count        :integer
 #  state        :integer
 #  aptable_id   :integer
-#  aptable_type :string
+#  aptable_type :string(191)
 #
 # Indexes
 #

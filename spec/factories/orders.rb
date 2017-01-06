@@ -3,15 +3,15 @@
 # Table name: orders
 #
 #  id         :integer          not null, primary key
-#  seq        :string
+#  seq        :string(191)
 #  state      :integer
-#  pay_way    :string
-#  price      :float
+#  pay_way    :string(191)
+#  price      :float(24)
 #  contact_id :integer
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  postage    :float            default(0.0)
+#  postage    :float(24)        default(0.0)
 #  paid_time  :datetime
 #
 

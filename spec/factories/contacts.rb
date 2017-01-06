@@ -4,15 +4,15 @@
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  name       :string
-#  phone      :string
-#  community  :string
-#  address    :string
+#  name       :string(191)
+#  phone      :string(191)
+#  community  :string(191)
+#  address    :string(191)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  row_order  :integer
-#  area       :string
-#  street     :string
+#  area       :string(191)
+#  street     :string(191)
 #
 # Indexes
 #

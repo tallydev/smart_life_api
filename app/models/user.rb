@@ -3,20 +3,20 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
+#  email                  :string(191)      default(""), not null
+#  encrypted_password     :string(191)      default(""), not null
+#  reset_password_token   :string(191)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
+#  current_sign_in_ip     :string(191)
+#  last_sign_in_ip        :string(191)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  authentication_token   :string(30)
-#  phone                  :string
+#  phone                  :string(191)
 #
 # Indexes
 #

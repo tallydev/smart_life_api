@@ -110,6 +110,9 @@ zh-CN:
         title: "标题"
         position: "位置"
         imgae: "图片"
+      cart_item:
+        title: "商品名称"
+        count: "商品数量"
 
 
   appointment_state:

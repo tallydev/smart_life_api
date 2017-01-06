@@ -8,7 +8,7 @@
 #  count      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  platform   :string
+#  platform   :string(191)
 #  version    :integer
 #
 # Indexes

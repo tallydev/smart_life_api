@@ -1,5 +1,5 @@
 ActiveAdmin.register Order do
-	# menu parent: "商品相关"
+	# menu parent, "商品相关"
   actions :index, :show
 
   filter :title
@@ -44,6 +44,24 @@ ActiveAdmin.register Order do
       row :paid_time_output
       # row :created_at
       # row :updated_at
+      _contact =   order.user.contacts.where(id: order.contact_id).first
+
+      row "收货地址" do
+        _contact ? _contact.output : ""
+      end
+
+      row "联系电话" do 
+        _contact ? _contact.phone : ""
+      end
+
+      row "联系人" do 
+        _contact ? _contact.name : ""
+      end
+
+      table_for order.cart_items do
+        column :title
+        column :count
+      end
 
       row " " do
         link_to "返回列表", admin_orders_path
