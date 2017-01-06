@@ -44,7 +44,7 @@ ActiveAdmin.register Order do
       row :paid_time_output
       # row :created_at
       # row :updated_at
-      _contact =   order.user.contacts.where(id: order.contact_id).first
+      _contact = order.contact
 
       row "收货地址" do
         _contact ? _contact.output : ""

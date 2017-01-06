@@ -51,7 +51,7 @@ class Order < ActiveRecord::Base
   delegate :phone, to: :user, allow_nil: true
 
   def contact
-    Contact.find(contact_id)
+    self.user.contacts.where(id: self.contact_id).first || self.user.contacts.rank(:row_order).first
   end
 
   def state_alias
