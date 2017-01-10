@@ -26,7 +26,7 @@ class Subdistrict < ActiveRecord::Base
 	
 	def self.list
 		_all = Subdistrict.all.to_a
-		_all.chunk{ |x| x.province }.map{|province| {province[0] => province[1].chunk{ |x| x.city }.map{|city| {city[0] => city[1].chunk{ |x| x.district  }.map{|district| { district[0] => district[1]}}}}}}[0]
+		_all.chunk{ |x| x.province }.map{|province| {province[0] => province[1].chunk{ |x| x.city }.map{|city| {city[0] => city[1].chunk{ |x| x.district  }.map{|district| { district[0] => district[1].map{ |x| { x.subdistrict => x }}}}}}}}
 	end 
 	# province: "1", city: "4", district: "4", subdistrict: "4")
 
