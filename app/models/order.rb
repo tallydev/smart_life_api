@@ -84,6 +84,8 @@ class Order < ActiveRecord::Base
 
   def pay_each_cart_item
     self.its_cart_items.each { |cart_item| cart_item.pay! }
+    # 发送通知短信
+    SmsToken.order_message "蒋冬冬", self.seq
   end
 
   def its_cart_items

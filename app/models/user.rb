@@ -75,11 +75,11 @@ class User < ActiveRecord::Base
     Sport.get_const(subdistrict_id).where(user: self)
   end
 
-  def set_sport_count count
-    Sport::Weekly.where(user: self).last.update(count: count)
-    Sport::Monthly.where(user: self).last.update(count: count)
-    Sport::Yearly.where(user: self).last.update(count: count)
-  end
+  # def set_sport_count count
+  #   Sport::Weekly.where(user: self).last.update(count: count)
+  #   Sport::Monthly.where(user: self).last.update(count: count)
+  #   Sport::Yearly.where(user: self).last.update(count: count)
+  # end
 
   def self.reset_user_password params
     phone = params[:phone]
