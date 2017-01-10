@@ -11,7 +11,8 @@ resource "用户注册登录" do
     header "X-User-Phone", user_attrs[:phone]
 
     before do
-      @user = create(:user)
+      @subdistrict = create(:subdistrict)
+      @user = create(:user, subdistrict: @subdistrict)
       @user.info.update_attributes(user_info_attrs)
     end
 
@@ -33,6 +34,7 @@ resource "用户注册登录" do
 
     before do
       @user = create(:user)
+      @subdistrict = create(:subdistrict)
     end
 
     parameter :nickname, "昵称", require: false, scope: :user_info
@@ -42,6 +44,9 @@ resource "用户注册登录" do
     parameter :birth, "生日", require: false, scope: :user_info
     parameter :slogan, "个性签名", require: false, scope: :user_info
     parameter :pay_password, "支付密码", require: false, scope: :user_info
+    parameter :community, "小区名称", require: false, scope: :user_info
+
+    parameter :subdistrict_id, "社区街道id", require: true, scope: :user
 
 
     let(:nickname) { "new nickname" }
@@ -51,6 +56,8 @@ resource "用户注册登录" do
     let(:slogan) { "new slogan" }
     let(:pay_password) { "123456" }
     let(:avatar_attributes) { image_attrs }
+    let(:community) { "哈哈哈小区" }
+    let(:subdistrict_id) { @subdistrict.id }
 
     example "用户修改自己的信息成功" do
       do_request

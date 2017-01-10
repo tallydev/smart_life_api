@@ -23,10 +23,19 @@ zh-CN:
       product_sort: "商品类别"
       order: "订单交易记录"
       banner: "首页轮播图"
+      subdistrict: "社区"
     attributes:
       admin_user:
         email: "邮箱"
+<<<<<<< HEAD
         postage: "邮费"
+=======
+      subdistrict: 
+        province: "省"
+        city: "市"
+        district: "区/县"
+        subdistrict: "街道社区"
+>>>>>>> submeter
       user:
         phone: "手机号码"
         sms_token: "短信验证码"

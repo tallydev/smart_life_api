@@ -20,6 +20,8 @@ class Sport::Yearly < ActiveRecord::Base
   belongs_to :user
 
   scope :filter_date, ->(date) { where(year: date.year) }
+  scope :subdistrict_is, ->(subdistrict_id) { where(subdistrict_id: subdistrict_id)}
+  
   validates_uniqueness_of :user_id, scope: :year
 
   before_save :output_log

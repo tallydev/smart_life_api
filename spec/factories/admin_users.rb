@@ -16,9 +16,14 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  postage                :float(24)
+<<<<<<< HEAD
+=======
+#  subdistrict_id         :integer
+>>>>>>> submeter
 #
 # Indexes
 #
+#  fk_rails_3215fdb9a2                        (subdistrict_id)
 #  index_admin_users_on_email                 (email) UNIQUE
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #

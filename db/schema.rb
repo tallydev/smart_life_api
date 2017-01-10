@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170109112305) do
+=======
+ActiveRecord::Schema.define(version: 20170110015304) do
+>>>>>>> submeter
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -48,10 +52,15 @@ ActiveRecord::Schema.define(version: 20170109112305) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.float    "postage",                limit: 24
+<<<<<<< HEAD
+=======
+    t.integer  "subdistrict_id",         limit: 4
+>>>>>>> submeter
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["subdistrict_id"], name: "fk_rails_3215fdb9a2", using: :btree
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -291,6 +300,10 @@ ActiveRecord::Schema.define(version: 20170109112305) do
     t.string   "subdistrict", limit: 191
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+<<<<<<< HEAD
+=======
+    t.string   "district",    limit: 191
+>>>>>>> submeter
   end
 
   create_table "user_infos", force: :cascade do |t|
@@ -334,6 +347,7 @@ ActiveRecord::Schema.define(version: 20170109112305) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["subdistrict_id"], name: "fk_rails_30f1da5737", using: :btree
 
+  add_foreign_key "admin_users", "subdistricts"
   add_foreign_key "ping_requests", "orders"
   add_foreign_key "products", "product_sorts"
   add_foreign_key "sport_monthlies", "subdistricts"

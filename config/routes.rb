@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :user, :controllers => { :sessions => "custom_sessions" }
   resources :banners, only: [:index]
   resource :home, only: [:show]
   get 'home_info', to: 'homes#home_info'
@@ -90,6 +90,9 @@ Rails.application.routes.draw do
     end
   end
   ##########################################################
+
+  ################  分社区相关的接口路由   ###################
+  resources :subdistricts
 
   ############# Pingpp Routes ###########################
   post 'get_pingpp_pay_order', to: 'pingpp#get_pay_order'

@@ -10,14 +10,16 @@ resource "运动相关接口" do
   header "X-User-Phone", user_attrs[:phone]
 
   before do
-    @user = create(:user)
-    @user1 = create(:user1)
+    @subdistrict = create(:subdistrict)
+    # @subdistrict1 = create(:subdistrict)
+    @user = create(:user, subdistrict_id: @subdistrict.id)
+    @user1 = create(:user1, subdistrict_id: @subdistrict.id)
     create(:user_info, user: @user)
     create(:user_info, user: @user1)
-    create(:sport, user: @user, date: Time.zone.today-1, count: 100)
-    create(:sport, user: @user, date: Time.zone.today, count: 500)
-    create(:sport, user: @user1, date: Time.zone.today-1, count: 500)
-    create(:sport, user: @user1, date: Time.zone.today, count: 300)
+    create(:sport, user: @user, date: Time.zone.today-1, count: 100, subdistrict_id: @user.subdistrict_id)
+    create(:sport, user: @user, date: Time.zone.today, count: 500, subdistrict_id: @user.subdistrict_id)
+    create(:sport, user: @user1, date: Time.zone.today-1, count: 500, subdistrict_id: @user1.subdistrict_id)
+    create(:sport, user: @user1, date: Time.zone.today, count: 300, subdistrict_id: @user1.subdistrict_id)
   end
 
   post 'sports' do
