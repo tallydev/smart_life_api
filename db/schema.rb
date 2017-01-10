@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170109112305) do
-=======
 ActiveRecord::Schema.define(version: 20170110015304) do
->>>>>>> submeter
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -52,10 +48,7 @@ ActiveRecord::Schema.define(version: 20170110015304) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.float    "postage",                limit: 24
-<<<<<<< HEAD
-=======
     t.integer  "subdistrict_id",         limit: 4
->>>>>>> submeter
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -300,10 +293,7 @@ ActiveRecord::Schema.define(version: 20170110015304) do
     t.string   "subdistrict", limit: 191
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-<<<<<<< HEAD
-=======
     t.string   "district",    limit: 191
->>>>>>> submeter
   end
 
   create_table "user_infos", force: :cascade do |t|

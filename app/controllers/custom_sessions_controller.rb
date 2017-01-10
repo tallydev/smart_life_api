@@ -3,7 +3,7 @@ class CustomSessionsController < Devise::SessionsController
   after_filter :after_login, :only => :create
 
   def before_login
-  	User.check_subdistrict
+  	current_user.check_subdistrict
   end
 
   def after_login

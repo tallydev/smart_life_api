@@ -16,10 +16,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  postage                :float(24)
-<<<<<<< HEAD
-=======
 #  subdistrict_id         :integer
->>>>>>> submeter
 #
 # Indexes
 #

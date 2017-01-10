@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :user, :controllers => { :sessions => "custom_sessions" }
+  devise_for :users, :controllers => { :sessions => "custom_sessions" }
   resources :banners, only: [:index]
   resource :home, only: [:show]
   get 'home_info', to: 'homes#home_info'

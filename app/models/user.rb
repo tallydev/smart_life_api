@@ -102,6 +102,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def check_subdistrict
+    self.update_attributes(subdistrict_id: Subdistrict.first.id) unless self.subdistrict_id && Subdistrict.find(self.subdistrict_id)
+  end
+
   private
     def sms_token_validate
       return if sms_token == "1981"
@@ -116,7 +120,5 @@ class User < ActiveRecord::Base
       end
     end
 
-    def check_subdistrict
-      self.update_attribute(subdistrict_id: Subdistrict.frist.id) unless self.subdistrict_id && Subdistrict.find(self.subdistrict_id)
-    end
+    
 end

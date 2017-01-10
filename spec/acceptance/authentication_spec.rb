@@ -60,6 +60,7 @@ resource "用户注册登录" do
 
     before do
       @user = create(:user)
+      @subdistrict = create(:subdistrict)
     end
 
     parameter :phone, "登录的手机号", required: true, scope: :user
