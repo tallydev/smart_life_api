@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109013345) do
+ActiveRecord::Schema.define(version: 20170110015304) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -47,10 +47,13 @@ ActiveRecord::Schema.define(version: 20170109013345) do
     t.string   "last_sign_in_ip",        limit: 191
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.float    "postage",                limit: 24
+    t.integer  "subdistrict_id",         limit: 4
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["subdistrict_id"], name: "fk_rails_3215fdb9a2", using: :btree
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -216,6 +219,21 @@ ActiveRecord::Schema.define(version: 20170109013345) do
 
   add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone", using: :btree
 
+  create_table "sport1s", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4
+  end
+
+  add_index "sport1s", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "sport1s", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "sport1s", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
   create_table "sport_monthlies", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
     t.integer  "count",          limit: 4
@@ -275,6 +293,7 @@ ActiveRecord::Schema.define(version: 20170109013345) do
     t.string   "subdistrict", limit: 191
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "district",    limit: 191
   end
 
   create_table "user_infos", force: :cascade do |t|
@@ -318,6 +337,7 @@ ActiveRecord::Schema.define(version: 20170109013345) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["subdistrict_id"], name: "fk_rails_30f1da5737", using: :btree
 
+  add_foreign_key "admin_users", "subdistricts"
   add_foreign_key "ping_requests", "orders"
   add_foreign_key "products", "product_sorts"
   add_foreign_key "sport_monthlies", "subdistricts"

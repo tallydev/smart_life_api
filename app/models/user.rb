@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :cart_items, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :orders, dependent: :destroy
+  belongs_to :subdistrict
 
   # virtual attribute
   attr_accessor :sms_token
@@ -49,6 +50,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :phone
   validates_presence_of :phone
+
   validate :sms_token_validate, on: :create
 
   delegate :nickname, :sex, :birth, :name, to: :user_info, allow_nil: true
@@ -114,4 +116,7 @@ class User < ActiveRecord::Base
       end
     end
 
+    def check_subdistrict
+      self.update_attribute(subdistrict_id: Subdistrict.frist.id) unless self.subdistrict_id && Subdistrict.find(self.subdistrict_id)
+    end
 end

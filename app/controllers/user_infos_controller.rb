@@ -31,6 +31,7 @@ class UserInfosController < ApplicationController
 
   def update
     @user_info.update(user_info_params)
+    current_user.update(subdistrict_id: (params[:user].try(:subdistrict_id) || Subdistrict.first.id))
     respond_with(@user_info, template: "user_infos/show")
   end
 
@@ -51,7 +52,7 @@ class UserInfosController < ApplicationController
 
     def user_info_params
       params.require(:user_info).permit(
-        :nickname, :identity_card, :birth, :slogan, :pay_password,
+        :nickname, :identity_card, :birth, :slogan, :pay_password, :community,
         avatar_attributes: [:id, :photo, :_destroy]
         )
     end

@@ -10,6 +10,9 @@ class SportsController < ApplicationController
       @sport.count = sport_params[:count]
       @sport.platform = sport_params[:platform]
       @sport.version = sport_params[:version]
+      p "++++++++"
+      p current_user.subdistrict_id
+      @sport.subdistrict_id = current_user.subdistrict_id
       @sport.save  
     end
     respond_with(@sport)
@@ -17,7 +20,7 @@ class SportsController < ApplicationController
 
   def daily
     @date = Time.zone.today
-    @relations = Sport.filter_date(@date)
+    @relations = Sport.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
     @detail_sports = []
     @avg_count = current_user.sports.by_day.average(:count).to_i
     fill
@@ -26,7 +29,7 @@ class SportsController < ApplicationController
 
   def weekly
     @date = Time.zone.today
-    @relations = Sport::Weekly.filter_date(@date)
+    @relations = Sport::Weekly.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
     detail_hash = {}
     current_user.sports.by_week.order(date: :asc).each { |sport| detail_hash[sport.date] = sport.count}
     @detail_sports = {}
@@ -41,7 +44,7 @@ class SportsController < ApplicationController
 
   def monthly
     @date = Time.zone.today
-    @relations = Sport::Monthly.filter_date(@date)
+    @relations = Sport::Monthly.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
     detail_hash = {}
     current_user.sports.by_month.order(date: :asc).each { |sport| detail_hash[sport.date] = sport.count}
     @detail_sports = {}
@@ -55,9 +58,9 @@ class SportsController < ApplicationController
 
   def yearly
     @date = Time.zone.today
-    @relations = Sport::Yearly.filter_date(@date)
+    @relations = Sport::Yearly.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
     detail_hash = {}
-    Sport::Monthly.where(user: current_user, year: @date.year).order(created_at: :asc).each do |sport|
+    Sport::Monthly.subdistrict_is(current_user.subdistrict_id).where(user: current_user, year: @date.year).order(created_at: :asc).each do |sport|
       detail_hash[sport.tag] = sport.count
     end
     @detail_sports = {}
@@ -74,7 +77,7 @@ class SportsController < ApplicationController
   private
 
     def fill
-      @today_sport = Sport.filter_date(Time.zone.today).find_by(user: current_user)
+      @today_sport = Sport.subdistrict_is(current_user.subdistrict_id).filter_date(Time.zone.today).find_by(user: current_user)
       @sport = @relations.find_by(user: current_user)
       @rank = @relations.where("count > :count", count: @sport.try(:count).to_i).count + 1
       @rank_percent = (1 - (@rank - 1.0) / @relations.count).round(4)  

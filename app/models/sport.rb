@@ -29,7 +29,8 @@ class Sport < ActiveRecord::Base
   by_star_field :date
 
   scope :filter_date, ->(date) { where(date: date) }
-
+  scope :subdistrict_is, ->(subdistrict_id) { where(subdistrict_id: subdistrict_id)}
+  
   validates_uniqueness_of :date, scope: :user_id
   validates_presence_of :version
   validate :count_validate

@@ -23,6 +23,8 @@ class Sport::Monthly < ActiveRecord::Base
   by_star_field :date
 
   scope :filter_date, ->(date) { where(year: date.year, month: date.month) }
+  scope :subdistrict_is, ->(subdistrict_id) { where(subdistrict_id: subdistrict_id)}
+  
   validates_uniqueness_of :user_id, scope: [:year, :month]
 
   def tag

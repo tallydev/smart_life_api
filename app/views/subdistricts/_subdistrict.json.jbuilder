@@ -1,0 +1,1 @@
+json.extract! subdistrict, :id, :name, :province, :city, :subdistrict, :subdistrict

@@ -15,9 +15,12 @@
 #  last_sign_in_ip        :string(191)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  postage                :float(24)
+#  subdistrict_id         :integer
 #
 # Indexes
 #
+#  fk_rails_3215fdb9a2                        (subdistrict_id)
 #  index_admin_users_on_email                 (email) UNIQUE
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
