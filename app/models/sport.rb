@@ -53,7 +53,7 @@ class Sport < ActiveRecord::Base
         self.errors.add(:count, "一天的运动步数过多")
       else
         seconds = Time.zone.now - Time.zone.today.midnight
-        count_per_second = self.count / seconds
+        count_per_second = self.count == 0 || self.count.nil? ? 0 : self.count / seconds
         self.errors.add(:count, "运动的步数太频繁") if count_per_second > 1
       end
     end
@@ -71,7 +71,7 @@ class Sport < ActiveRecord::Base
     def cal_weekly increase
       year = self.date.year
       cweek = self.date.cweek
-      sport = Sport::Weekly.where(user: self.user, year: year, cweek: cweek).first_or_initialize
+      sport = Sport::Weekly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year, cweek: cweek).first_or_initialize
       sport.increment :count, increase
       sport.save
     end
@@ -79,14 +79,14 @@ class Sport < ActiveRecord::Base
     def cal_monthly increase
       year = self.date.year
       month = self.date.month
-      sport = Sport::Monthly.where(user: self.user, year: year, month: month).first_or_initialize
+      sport = Sport::Monthly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year, month: month).first_or_initialize
       sport.increment :count, increase
       sport.save
     end
 
     def cal_yearly increase
       year = self.date.year
-      sport = Sport::Yearly.where(user: self.user, year: year).first_or_initialize
+      sport = Sport::Yearly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year).first_or_initialize
       sport.increment :count, increase
       sport.save
     end
