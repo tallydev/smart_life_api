@@ -15,6 +15,7 @@
 #  name          :string(191)
 #  nation        :string(191)
 #  addr          :string(191)
+#  community     :string(191)
 #
 # Indexes
 #

@@ -143,7 +143,7 @@ class Order < ActiveRecord::Base
   	def cal_price
   		_sum = 0.00
   		self.its_cart_items.each {|cart_item| _sum += cart_item.amount}
-      self.postage = _sum < 50 ? 8.00 : 0.00
+      self.postage = _sum < 50 ? (AdminUser.first.postage || 8.00) : 0.00
   		self.price = _sum + self.postage 
   	end
 

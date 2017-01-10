@@ -2,15 +2,17 @@
 #
 # Table name: sport_yearlies
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  count      :integer
-#  year       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  user_id        :integer
+#  count          :integer
+#  year           :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  subdistrict_id :integer
 #
 # Indexes
 #
+#  fk_rails_039bd99631              (subdistrict_id)
 #  index_sport_yearlies_on_user_id  (user_id)
 #
 

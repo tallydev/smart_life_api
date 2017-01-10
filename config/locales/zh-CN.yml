@@ -26,6 +26,7 @@ zh-CN:
     attributes:
       admin_user:
         email: "邮箱"
+        postage: "邮费"
       user:
         phone: "手机号码"
         sms_token: "短信验证码"

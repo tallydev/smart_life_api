@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :string(191)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  postage                :float(24)
 #
 # Indexes
 #
@@ -24,6 +25,7 @@
 
 FactoryGirl.define do
   factory :admin_user do
-    
+    email "hahaha@qq.com"
+    password "hahaha"
   end
 end

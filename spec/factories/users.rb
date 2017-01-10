@@ -17,9 +17,11 @@
 #  updated_at             :datetime         not null
 #  authentication_token   :string(30)
 #  phone                  :string(191)
+#  subdistrict_id         :integer
 #
 # Indexes
 #
+#  fk_rails_30f1da5737                  (subdistrict_id)
 #  index_users_on_authentication_token  (authentication_token) UNIQUE
 #  index_users_on_phone                 (phone) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE

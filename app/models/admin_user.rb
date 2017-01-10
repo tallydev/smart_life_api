@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :string(191)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  postage                :float(24)
 #
 # Indexes
 #

@@ -9,6 +9,7 @@ resource "订单与支付相关接口" do
 	header "X-User-Phone", user_attrs[:phone]
 
 	before do 
+    @AdminUser = create(:admin_user, postage: 10.0)
 		@products = create_list(:product, 3)
     @user = create(:user)
     @contact = create(:contact)
