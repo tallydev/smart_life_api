@@ -49,7 +49,7 @@ class SmsToken < ActiveRecord::Base
 
   def self.order_message name, order_number
     tpl_id = 1689954
-    phone = "13605028695" #{}"18314109392"
+    phone = "18314109392"
     # company = "慧生活"
     sms_hash = {name: name, order_number: order_number}
       
