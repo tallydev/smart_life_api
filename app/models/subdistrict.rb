@@ -44,7 +44,6 @@ class Subdistrict < ActiveRecord::Base
 		 		_districts[_x.keys[0]] = _x.values[0]
 		 		_xx = []
 		 		city.values[0].each do |district|
-		 			p district
 		 			_xx = Subdistrict.get_son(district, true)
 		 			_subdistricts[_xx.keys[0]] = _xx.values[0]
 	 			end
@@ -61,7 +60,7 @@ class Subdistrict < ActiveRecord::Base
 	def self.get_son some, last=false
 		last ?
 		{some.keys[0] => some.values[0].map { |x| "#{x.keys[0]}@*@#{x.values[0][:id]}"}} :
-		{some.keys[0] => some.values[0].map { |x| { x.keys[0] => x.values[0] }}}  
+		{some.keys[0] => some.values[0].map { |x| x.keys[0] }}  
 		
 	end
 
