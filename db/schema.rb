@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110015304) do
+ActiveRecord::Schema.define(version: 20170111033207) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -199,13 +199,15 @@ ActiveRecord::Schema.define(version: 20170110015304) do
   create_table "products", force: :cascade do |t|
     t.string   "title",           limit: 191
     t.float    "price",           limit: 24
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "count",           limit: 4
     t.text     "detail",          limit: 65535
     t.integer  "state",           limit: 4
     t.integer  "product_sort_id", limit: 4
     t.float    "after_discount",  limit: 24
+    t.datetime "expiration_time"
+    t.integer  "product_type",    limit: 4,     default: 0
   end
 
   add_index "products", ["product_sort_id"], name: "fk_rails_8c0953ced4", using: :btree

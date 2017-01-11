@@ -12,6 +12,8 @@
 #  state           :integer
 #  product_sort_id :integer
 #  after_discount  :float(24)
+#  expiration_time :datetime
+#  product_type    :integer          default(0)
 #
 # Indexes
 #
@@ -35,9 +37,17 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
   validates_numericality_of :count, greater_than_or_equal_to: 0, only_integer: true, message: "库存必须是正整数"
 
+  default_scope { where( product_type: 0 ) }
+
   scope :state_is, -> (state) {where(state: state)}
   scope :for_sale, -> {where(state: 1)}
   scope :product_sort_is, -> (id) {where(product_sort_id: id)}
+
+  enum product_type: {
+    supermarket: 0,
+    promotion: 1,
+  }
+
   enum state: {
     for_sale: 0,
     sale_off: 1,

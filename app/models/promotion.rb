@@ -20,8 +20,10 @@
 #  fk_rails_8c0953ced4  (product_sort_id)
 #
 
-require 'rails_helper'
+class Promotion < Product
+	# 限量销售
+	scope :get_promotions, -> { Product.unscoped.all.where(product_type: 1) }
 
-RSpec.describe Product, type: :model do
-  it { should have_many(:product_banners) } 
+
+	
 end

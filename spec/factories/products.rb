@@ -12,6 +12,8 @@
 #  state           :integer
 #  product_sort_id :integer
 #  after_discount  :float(24)
+#  expiration_time :datetime
+#  product_type    :integer          default(0)
 #
 # Indexes
 #
