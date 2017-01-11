@@ -26,7 +26,6 @@ FactoryGirl.define do
     price 1.5
     count 10
 
-
     after(:build) do |product|
     	product.product_banners << FactoryGirl.create(:product_banner)
   	end
@@ -36,5 +35,21 @@ FactoryGirl.define do
     #  	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
     #  	product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
   	# end
+  end
+
+  factory :promotion do 
+    title "promotion title"
+    price 1.5
+    count 10
+
+    after(:build) do |promotion|
+      promotion.product_banners << FactoryGirl.create(:product_banner)
+    end
+    association :product_cover, factory: :image, photo_type: "product_cover"
+    association :product_detail, factory: :image, photo_type: "product_detail"
+    # after(:build) do |product, eval|
+    #   product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
+    #   product.thumbs << FactoryGirl.create(:image, imageable_id: product.id, photo_type: 'thumb')
+    # end
   end
 end

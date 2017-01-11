@@ -75,6 +75,41 @@ resource "订单与支付相关接口" do
     end
   end
 
+  post 'orders/create_by_promotion' do
+    parameter :promotion_id, "所选 限量销售商品的 id", required: true
+    parameter :promotion_count, "所选 限量销售商品的 数量", required: true
+    parameter :contact_id, "联系人id", required: true, scope: :order
+
+    before do 
+      p @promotion = create(:promotion, product_type: 1, count: 5)
+      # p "+====================================="
+      # p Product.all 
+      # p "+====================================="
+      # p Promotion.all
+    end
+
+    let(:promotion_id) { @promotion.id }
+    let(:promotion_count) { 2 }
+    let(:contact_id) { @contact.id }
+
+    example "限量销售  创建订单成功" do
+      do_request
+      puts response_body
+      expect(status).to eq 201
+    end
+
+    # describe "限量销售 创建订单失败" do 
+
+    #   let(:cart_item_ids) {[@cart_item2.id, @cart_item4.id]}
+
+    #   example "创建订单失败" do
+    #     do_request
+    #     puts response_body
+    #     expect(status).to eq 422
+    #   end
+    # end
+  end
+
   post 'orders/:id/create_payment' do
 
     parameter :pay_way, "支付渠道 alipay wx", require: true

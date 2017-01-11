@@ -12,7 +12,8 @@ ActiveAdmin.register ProductBanner do
 		column "" do |product_banner|
 			if i == 1 
         i -= 1
-        link_to "返回商品详情", admin_product_path(product_banner.product)
+        link_to "返回商品详情", admin_product_path(product_banner.product) if product_banner.product.product_type == "supermarket"
+        link_to "返回限量销售商品详情", admin_promotion_path(product_banner.product) if product_banner.product.product_type == "promotion"
       end
 		end
 

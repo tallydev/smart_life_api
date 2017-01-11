@@ -33,6 +33,20 @@ class OrdersController < ApplicationController
     end
   end
 
+  def create_by_promotion #params[:promotion_id] params[:promotion_count] 
+    # 生成对应 cart_item
+    @promotion = Promotion.find(params[:promotion_id])
+    @cart_item = current_user.cart_items.create!(product_id: @promotion.id, count: params[:promotion_count])
+    # 创建订单 
+    @order = Order.create_one(current_user.id, [@cart_item.id], params[:order].try(:contact_id))
+    @order.cart_items
+    if @order.is_a?(Order)
+      respond_with @order, template: 'orders/show', status: 201
+    else
+      render json: { error: @order.to_s }, status: 422
+    end
+  end
+
   # def update
   #   @order.update(order_params)
   #   respond_with @order, template: "orders/show", status: 201

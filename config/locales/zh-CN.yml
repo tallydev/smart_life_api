@@ -19,6 +19,7 @@ zh-CN:
       sport/monthly: "3.每月统计"
       activity/sqhd: "社区活动"
       product: "商品"
+      promotion: "限量销售"
       product_banner: "商品轮播图"
       product_sort: "商品类别"
       order: "订单交易记录"
@@ -103,6 +104,7 @@ zh-CN:
         sort: "分类"
         discount_rate: "折扣"
         after_discount: "优惠价"
+        expiration_time: "到期时间"
       product_banner:
         back: "返回"
         thumb: "详情图" 

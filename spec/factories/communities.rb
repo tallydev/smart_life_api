@@ -16,6 +16,5 @@
 FactoryGirl.define do
   factory :community do
     name "new community"
-
   end
 end

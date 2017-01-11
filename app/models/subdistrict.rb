@@ -34,7 +34,7 @@ class Subdistrict < ActiveRecord::Base
 		_data = {"province" => Subdistrict.list}
 		
 		_provinces = Subdistrict.get_son(_data).values[0]
-		_cities = _data.values[0].map{|province| Subdistrict.get_son(province)}
+		_cities = _data.values[0].map{|province| Subdistrict.get_son(province)}[0]
 		_districts = {}
 		_subdistricts = {}
 		_data.values[0].each do |province| 

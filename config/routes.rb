@@ -76,7 +76,14 @@ Rails.application.routes.draw do
       post 'recover_stocks' 
       post 'create_payment'   
     end
+    collection do 
+      post 'create_by_promotion'
+    end
   end
+  ############################################################
+
+  ################### 限量销售 ####################
+  resources :promotions, only: [:index, :show] 
   ##########################################################
 
   ################  健康小屋体检机器相关的接口路由   ###################
@@ -93,7 +100,8 @@ Rails.application.routes.draw do
 
   ################  分社区相关的接口路由   ###################
   resources :subdistricts
-
+  ##########################################################
+  ##
   ############# Pingpp Routes ###########################
   post 'get_pingpp_pay_order', to: 'pingpp#get_pay_order'
   post 'get_pingpp_webhooks', to: 'pingpp#get_pingpp_webhooks'

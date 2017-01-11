@@ -38,8 +38,11 @@ class Product < ActiveRecord::Base
   validates_numericality_of :count, greater_than_or_equal_to: 0, only_integer: true, message: "库存必须是正整数"
 
   # 精品超市
-  default_scope { where( product_type: 0 ) }
-
+  # default_scope 会改变其他模型对该模型的关联查询{ where( product_type: 0 ) }
+  scope :supermarket, -> {where(product_type: 0)}
+  # 限量销售
+  scope :promotion, -> {where(product_type: 1)}
+  
   scope :state_is, -> (state) {where(state: state)}
   scope :for_sale, -> {where(state: 1)}
   scope :product_sort_is, -> (id) {where(product_sort_id: id)}
