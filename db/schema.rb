@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111033207) do
+ActiveRecord::Schema.define(version: 20170111053908) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -91,6 +91,15 @@ ActiveRecord::Schema.define(version: 20170111033207) do
   add_index "cart_items", ["order_id"], name: "index_cart_items_on_order_id", using: :btree
   add_index "cart_items", ["product_id"], name: "index_cart_items_on_product_id", using: :btree
   add_index "cart_items", ["user_id"], name: "index_cart_items_on_user_id", using: :btree
+
+  create_table "communities", force: :cascade do |t|
+    t.string   "name",           limit: 191
+    t.integer  "subdistrict_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "communities", ["subdistrict_id"], name: "index_communities_on_subdistrict_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -340,6 +349,7 @@ ActiveRecord::Schema.define(version: 20170111033207) do
   add_index "users", ["subdistrict_id"], name: "fk_rails_30f1da5737", using: :btree
 
   add_foreign_key "admin_users", "subdistricts"
+  add_foreign_key "communities", "subdistricts"
   add_foreign_key "ping_requests", "orders"
   add_foreign_key "products", "product_sorts"
   add_foreign_key "sport_monthlies", "subdistricts"

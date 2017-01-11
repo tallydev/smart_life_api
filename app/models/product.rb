@@ -37,6 +37,7 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
   validates_numericality_of :count, greater_than_or_equal_to: 0, only_integer: true, message: "库存必须是正整数"
 
+  # 精品超市
   default_scope { where( product_type: 0 ) }
 
   scope :state_is, -> (state) {where(state: state)}

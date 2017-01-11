@@ -23,7 +23,7 @@
 class Promotion < Product
 	# 限量销售
 	scope :get_promotions, -> { Product.unscoped.all.where(product_type: 1) }
-
+	
 
 	
 end

@@ -15,6 +15,7 @@ class Subdistrict < ActiveRecord::Base
 	# 社区模型
 	# province 省 city 市 subdistrict 街道 
 	has_many :users
+	has_many :communities
 	# has_many :sports
 	# has_many :sport_weeklies
 	# has_many :sport_monthlies
@@ -26,7 +27,7 @@ class Subdistrict < ActiveRecord::Base
 	
 	def self.list
 		_all = Subdistrict.all.to_a
-		_all.chunk{ |x| x.province }.map{|province| {province[0] => province[1].chunk{ |x| x.city }.map{|city| {city[0] => city[1].chunk{ |x| x.district  }.map{|district| { district[0] => district[1].map{ |x| { x.subdistrict => x }}}}}}}}
+		_all.chunk{ |x| x.province }.map{|province| {province[0] => province[1].chunk{ |x| x.city }.map{|city| {city[0] => city[1].chunk{ |x| x.district  }.map{|district| { district[0] => district[1].map{ |x| { x.subdistrict => x.output }}}}}}}}
 	end 
 
 	def self.list2
@@ -43,7 +44,8 @@ class Subdistrict < ActiveRecord::Base
 		 		_districts[_x.keys[0]] = _x.values[0]
 		 		_xx = []
 		 		city.values[0].each do |district|
-		 			_xx = Subdistrict.get_son(district)
+		 			p district
+		 			_xx = Subdistrict.get_son(district, true)
 		 			_subdistricts[_xx.keys[0]] = _xx.values[0]
 	 			end
 	 		end
@@ -56,11 +58,24 @@ class Subdistrict < ActiveRecord::Base
 	 	}
 	end
 
-	def self.get_son some
-		{some.keys[0] => some.values[0].map { |x| x.keys[0]}}
+	def self.get_son some, last=false
+		last ?
+		{some.keys[0] => some.values[0].map { |x| "#{x.keys[0]}@*@#{x.values[0][:id]}"}} :
+		{some.keys[0] => some.values[0].map { |x| { x.keys[0] => x.values[0] }}}  
+		
 	end
 
+	def output
+		{
+			"id": id,
+		  "province": province,
+      "city": city,
+      "subdistrict": subdistrict,
+      "district": district,
+      "communities": communities.collect(&:name)
+    }
 
-	# province: "1", city: "4", district: "4", subdistrict: "4")
+	end
+
 
 end
