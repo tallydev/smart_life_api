@@ -35,6 +35,8 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :price, on: :create, message: "商品价格不能为空"
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
+  validates_presence_of :after_discount, on: :create, message: "商品折后价格不能为空"
+  validates_numericality_of :after_discount, greater_than: 0, message: "商品折后价格必须是数字"
   validates_numericality_of :count, greater_than_or_equal_to: 0, only_integer: true, message: "库存必须是正整数"
 
   # 精品超市
