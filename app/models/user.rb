@@ -71,8 +71,9 @@ class User < ActiveRecord::Base
     false
   end
 
-  def his_sports
-    Sport.get_const(subdistrict_id).where(user: self)
+  def his_sports (range) # daily, weekly, monthly, yearly
+    _class_name = range == "daily" ? "Sport" : "Sport::#{range.titleize}"
+    _class_name.constantize.get_const(subdistrict_id).where(user: self)
   end
 
   # def set_sport_count count

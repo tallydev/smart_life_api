@@ -21,6 +21,7 @@ class Subdistrict < ActiveRecord::Base
 	# has_many :sport_monthlies
 	# has_many :sport_yearlies
 
+	after_create :check_submeter_table
 	def name
 		"#{province}#{city}#{district}#{subdistrict}"
 	end
@@ -76,5 +77,12 @@ class Subdistrict < ActiveRecord::Base
 
 	end
 
+	def check_submeter_table
+		NeedSubmeter.each do |class_name|
+			Subdistrict.each do |subdistrict|
+				class_name.constantize.create_submeter_table(subdistrict.id)
+			end
+		end
+	end
 
 end

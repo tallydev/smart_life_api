@@ -2,14 +2,7 @@
  
 NeedSubmeter = ["Sport", "Sport::Weekly", "Sport::Monthly", "Sport::Yearly"]
 # Sport::Weekly
-NeedSubmeter.each do |class_name|
-
-	# 定义 对应子模型名常量
-	Subdistrict.all.each do |subdistrict| 
-	  Object.const_set(  
-	       "P#{subdistrict.id}#{class_name.delete("::")}",   
-	        Class.new(class_name.constantize) { |x| x.table_name ="p#{subdistrict.id}_#{class_name.delete("::").downcase.pluralize}" })    
-	end  
+NeedSubmeter.each do |class_name| 
 
 	# 为需分表的对应模型  定义所需方法
 	class_name.constantize.class_eval do 
@@ -18,6 +11,9 @@ NeedSubmeter.each do |class_name|
 		  ActiveRecord::Schema.define do
 			  execute("CREATE TABLE p#{subdistrict_id}_#{_class.name.downcase.delete("::").pluralize} LIKE #{_class.name.downcase.pluralize.tr_s("::", "_")};")
 			end
+
+		rescue => e
+			 "#{e}".include?("already exists")
 		end
 
 		def self.drop_submeter_table subdistrict_id
@@ -37,4 +33,11 @@ NeedSubmeter.each do |class_name|
 
 	end
 
+	# 定义 对应子模型名常量
+	Subdistrict.all.each do |subdistrict| 
+	  Object.const_set(  
+	       "P#{subdistrict.id}#{class_name.delete("::")}",   
+	        Class.new(class_name.constantize) { |x| x.table_name ="p#{subdistrict.id}_#{class_name.delete("::").downcase.pluralize}" })    
+	end 
+	
 end
