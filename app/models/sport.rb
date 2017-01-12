@@ -20,8 +20,7 @@
 #
 
 class Sport < ActiveRecord::Base
-  ###### 注: 修改 字段 需 同步修改下方子表定义 ######
-  ######     新的迁移需要 同步对子表操作  ##########
+  ######   注:  新的迁移需要 同步对子表操作  #######
   belongs_to :user
 
   before_save :cal_relations
@@ -90,27 +89,5 @@ class Sport < ActiveRecord::Base
       sport.increment :count, increase
       sport.save
     end
-
-    begin #分表
-      def self.new_table subdistrict_id
-        _class = self
-        ActiveRecord::Schema.define do
-          execute("CREATE TABLE #{_class.name.downcase}#{subdistrict_id}s LIKE #{_class.name.downcase}s;")
-        end
-      end
-
-      def self.drop_table subdistrict_id
-        _class = self
-        ActiveRecord::Schema.define do
-          drop_table "#{_class.name.downcase}#{subdistrict_id}s".to_sym 
-        end
-      end
-
-      def self.get_const subdistrict_id
-        Object.const_get("#{self.name}#{subdistrict_id}", Class.new(self))
-      rescue
-        Object.const_set("#{self.name}#{subdistrict_id}", Class.new(self))
-      end
-
-    end
+    
 end 
