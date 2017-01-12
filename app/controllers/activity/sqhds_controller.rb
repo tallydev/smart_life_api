@@ -6,7 +6,7 @@ class Activity::SqhdsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @activity_sqhds = Activity::Sqhd.all
+    p @activity_sqhds = Activity::Sqhd.all.reverse_order
     respond_with(@activity_sqhds)
   end
 
