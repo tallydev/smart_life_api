@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111053908) do
+ActiveRecord::Schema.define(version: 20170112095803) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 20170111053908) do
     t.integer  "row_order",  limit: 4
     t.string   "area",       limit: 191
     t.string   "street",     limit: 191
+    t.string   "province",   limit: 191
+    t.string   "city",       limit: 191
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
@@ -173,6 +175,458 @@ ActiveRecord::Schema.define(version: 20170111053908) do
     t.float    "postage",    limit: 24,  default: 0.0
     t.datetime "paid_time"
   end
+
+  create_table "p10_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 10
+  end
+
+  add_index "p10_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p10_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p10_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 10
+  end
+
+  add_index "p10_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p10_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p10_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p10_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 10
+  end
+
+  add_index "p10_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p10_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p10_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 10
+  end
+
+  add_index "p10_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p10_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p13_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 13
+  end
+
+  add_index "p13_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p13_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p13_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 13
+  end
+
+  add_index "p13_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p13_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p13_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p13_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 13
+  end
+
+  add_index "p13_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p13_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p13_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 13
+  end
+
+  add_index "p13_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p13_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p15_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 15
+  end
+
+  add_index "p15_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p15_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p15_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 15
+  end
+
+  add_index "p15_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p15_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p15_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p15_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 15
+  end
+
+  add_index "p15_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p15_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p15_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "subdistrict_id", limit: 4, default: 15
+  end
+
+  add_index "p15_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p15_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p1_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 1
+  end
+
+  add_index "p1_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p1_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p1_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 1
+  end
+
+  add_index "p1_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p1_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p1_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p1_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 1
+  end
+
+  add_index "p1_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p1_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p1_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 1
+  end
+
+  add_index "p1_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p1_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p2_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "subdistrict_id", limit: 4
+  end
+
+  add_index "p2_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p2_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p2_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4
+  end
+
+  add_index "p2_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p2_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p2_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p6_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 6
+  end
+
+  add_index "p6_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p6_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p6_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 6
+  end
+
+  add_index "p6_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p6_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p6_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p6_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 6
+  end
+
+  add_index "p6_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p6_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p6_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 6
+  end
+
+  add_index "p6_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p6_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p7_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 7
+  end
+
+  add_index "p7_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p7_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p7_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 7
+  end
+
+  add_index "p7_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p7_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p7_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p7_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 7
+  end
+
+  add_index "p7_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p7_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p7_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 7
+  end
+
+  add_index "p7_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p7_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p8_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 8
+  end
+
+  add_index "p8_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p8_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p8_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 8
+  end
+
+  add_index "p8_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p8_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p8_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p8_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 8
+  end
+
+  add_index "p8_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p8_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p8_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 8
+  end
+
+  add_index "p8_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p8_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
+
+  create_table "p9_sportmonthlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "month",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 9
+  end
+
+  add_index "p9_sportmonthlies", ["subdistrict_id"], name: "fk_rails_a99218879b", using: :btree
+  add_index "p9_sportmonthlies", ["user_id"], name: "index_sport_monthlies_on_user_id", using: :btree
+
+  create_table "p9_sports", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4,   default: 9
+  end
+
+  add_index "p9_sports", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "p9_sports", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "p9_sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "p9_sportweeklies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.integer  "cweek",          limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 9
+  end
+
+  add_index "p9_sportweeklies", ["subdistrict_id"], name: "fk_rails_239ba97fd8", using: :btree
+  add_index "p9_sportweeklies", ["user_id"], name: "index_sport_weeklies_on_user_id", using: :btree
+
+  create_table "p9_sportyearlies", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "count",          limit: 4
+    t.integer  "year",           limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "subdistrict_id", limit: 4, default: 9
+  end
+
+  add_index "p9_sportyearlies", ["subdistrict_id"], name: "fk_rails_039bd99631", using: :btree
+  add_index "p9_sportyearlies", ["user_id"], name: "index_sport_yearlies_on_user_id", using: :btree
 
   create_table "ping_requests", force: :cascade do |t|
     t.string   "object_type", limit: 191
@@ -244,6 +698,21 @@ ActiveRecord::Schema.define(version: 20170111053908) do
   add_index "sport1s", ["date"], name: "index_sports_on_date", using: :btree
   add_index "sport1s", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
   add_index "sport1s", ["user_id"], name: "index_sports_on_user_id", using: :btree
+
+  create_table "sport6s", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.date     "date"
+    t.integer  "count",          limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "platform",       limit: 191
+    t.integer  "version",        limit: 4
+    t.integer  "subdistrict_id", limit: 4
+  end
+
+  add_index "sport6s", ["date"], name: "index_sports_on_date", using: :btree
+  add_index "sport6s", ["subdistrict_id"], name: "fk_rails_4416303325", using: :btree
+  add_index "sport6s", ["user_id"], name: "index_sports_on_user_id", using: :btree
 
   create_table "sport_monthlies", force: :cascade do |t|
     t.integer  "user_id",        limit: 4

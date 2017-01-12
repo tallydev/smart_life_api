@@ -1,1 +1,1 @@
-json.extract! @contact, :id, :name, :phone, :area, :street, :community, :address, :is_default
+json.partial! "contacts/contact", contact: @contact

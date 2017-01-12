@@ -13,6 +13,8 @@
 #  row_order  :integer
 #  area       :string(191)
 #  street     :string(191)
+#  province   :string(191)
+#  city       :string(191)
 #
 # Indexes
 #

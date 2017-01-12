@@ -12,5 +12,5 @@
 require 'rails_helper'
 
 RSpec.describe Banner, type: :model do
-  it { should have_one(:image) } 
+
 end

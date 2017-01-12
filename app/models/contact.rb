@@ -13,6 +13,8 @@
 #  row_order  :integer
 #  area       :string(191)
 #  street     :string(191)
+#  province   :string(191)
+#  city       :string(191)
 #
 # Indexes
 #
@@ -28,6 +30,6 @@ class Contact < ActiveRecord::Base
   attr_accessor :is_default
 
   def output
-  	"#{area} #{street} #{community} #{address}"
+  	"#{province} #{city} #{area} #{street} #{community} #{address}"
   end
 end
