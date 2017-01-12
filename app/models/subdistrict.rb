@@ -21,7 +21,10 @@ class Subdistrict < ActiveRecord::Base
 	# has_many :sport_monthlies
 	# has_many :sport_yearlies
 
-	after_create :check_submeter_table
+	after_create :check_submeter_tables
+	# after_destroy :migrate_data
+	after_destroy :drop_its_submeter_tables
+
 	def name
 		"#{province}#{city}#{district}#{subdistrict}"
 	end
@@ -77,9 +80,25 @@ class Subdistrict < ActiveRecord::Base
 
 	end
 
-	def check_submeter_table
+	def migrate_data
+		NeedSubmeter.	
+	end
+
+	def drop_its_submeter_tables
+		ActiveRecord::Base.transaction do 
+			NeedSubmeter.each do |class_name|
+				class_name.constantize.drop_submeter_table(self.id)
+			end
+		end
+		rescue => error
+			error
+	end
+
+private
+
+	def check_submeter_tables
 		NeedSubmeter.each do |class_name|
-			Subdistrict.each do |subdistrict|
+			Subdistrict.all.each do |subdistrict|
 				class_name.constantize.create_submeter_table(subdistrict.id)
 			end
 		end

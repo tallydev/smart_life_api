@@ -13,7 +13,7 @@ NeedSubmeter.each do |class_name|
 			end
 
 		rescue => e
-			 "#{e}".include?("already exists")
+			 logger.info "e"
 		end
 
 		def self.drop_submeter_table subdistrict_id
@@ -38,6 +38,8 @@ NeedSubmeter.each do |class_name|
 	  Object.const_set(  
 	       "P#{subdistrict.id}#{class_name.delete("::")}",   
 	        Class.new(class_name.constantize) { |x| x.table_name ="p#{subdistrict.id}_#{class_name.delete("::").downcase.pluralize}" })    
+
+	  # 创建表格
 	end 
-	
+
 end
