@@ -71,16 +71,28 @@ class User < ActiveRecord::Base
     false
   end
 
-  def his_sports (range) # daily, weekly, monthly, yearly
+  def his_sports range="daily" # daily, weekly, monthly, yearly
     _class_name = range == "daily" ? "Sport" : "Sport::#{range.titleize}"
     _class_name.constantize.get_const(subdistrict_id).where(user: self)
   end
 
-  # def set_sport_count count
-  #   Sport::Weekly.where(user: self).last.update(count: count)
-  #   Sport::Monthly.where(user: self).last.update(count: count)
-  #   Sport::Yearly.where(user: self).last.update(count: count)
-  # end
+  # 改变社区 数据迁移
+  def migrate_data old_id, new_id
+    NeedSubmeter.each do |class_name|
+      _old_class = class_name.safe_constantize.get_const(old_id)
+      _new_class = class_name.safe_constantize.get_const(new_id)
+
+      _old_class.where(user_id: self.id).each do |_old_item|
+        _new_item = _new_class.new(_old_item.attributes.except("id", "updated_at", "created_at", "subdistrict_id"))
+        ActiveRecord::Base.transaction do  
+          _old_item.destroy!
+          _new_item.save!
+        end
+      end
+    end
+    rescue => error
+      error
+  end
 
   def self.reset_user_password params
     phone = params[:phone]

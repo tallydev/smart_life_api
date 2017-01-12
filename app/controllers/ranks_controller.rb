@@ -5,28 +5,28 @@ class RanksController < ApplicationController
 
   def daily
     @date = Time.zone.today
-    @relations = Sport.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
+    @relations = Sport.get_const(current_user.subdistrict_id).filter_date(@date)
     @top_sports = top_sports
     respond_with(@top_sports, template: "ranks/index")
   end
 
   def weekly
     @date = Time.zone.today
-    @relations = Sport::Weekly.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
+    @relations = Sport::Weekly.get_const(current_user.subdistrict_id).filter_date(@date)
     @top_sports = top_sports
     respond_with(@top_sports, template: "ranks/index")
   end
 
   def monthly
     @date = Time.zone.today
-    @relations = Sport::Monthly.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
+    @relations = Sport::Monthly.get_const(current_user.subdistrict_id).filter_date(@date)
     @top_sports = top_sports
     respond_with(@top_sports, template: "ranks/index")
   end
 
   def yearly
     @date = Time.zone.today
-    @relations = Sport::Yearly.subdistrict_is(current_user.subdistrict_id).filter_date(@date)
+    @relations = Sport::Yearly.get_const(current_user.subdistrict_id).filter_date(@date)
     @top_sports = top_sports
     respond_with(@top_sports, template: "ranks/index")
   end

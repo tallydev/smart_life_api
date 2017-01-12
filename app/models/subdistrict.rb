@@ -65,7 +65,6 @@ class Subdistrict < ActiveRecord::Base
 		last ?
 		{some.keys[0] => some.values[0].map { |x| "#{x.keys[0]}@*@#{x.values[0][:id]}"}} :
 		{some.keys[0] => some.values[0].map { |x| x.keys[0] }}  
-		
 	end
 
 	def output
@@ -80,9 +79,25 @@ class Subdistrict < ActiveRecord::Base
 
 	end
 
-	def migrate_data
-		NeedSubmeter.	
+	def self.migrate_data old_id, new_id, user_id
+		NeedSubmeter.each do |class_name|
+			_old_class = class_name.safe_constantize.get_const(old_id)
+			_new_class = class_name.safe_constantize.get_const(new_id)
+
+			_old_class.where(user_id: user_id).each do |_old_item|
+				_new_item = _new_class.new(_old_item.attributes.except("id", "updated_at", "created_at", "subdistrict_id"))
+				ActiveRecord::Base.transaction do  
+					_old_item.destroy!
+					_new_item.save!
+				end
+			end
+		end
+		rescue => error
+			error
 	end
+ # q.attributes.merge({"subdistrict_id"=>1, "id"=> nil, "updated_at" => nil, "created_at" => nil})
+ # q.attributes.except("id", "updated_at", "created_at").merge({"subdistrict_id"=>1})
+ # q.attributes.except("id", "updated_at", "created_at", "subdistrict_id")
 
 	def drop_its_submeter_tables
 		ActiveRecord::Base.transaction do 
@@ -93,8 +108,6 @@ class Subdistrict < ActiveRecord::Base
 		rescue => error
 			error
 	end
-
-private
 
 	def check_submeter_tables
 		NeedSubmeter.each do |class_name|

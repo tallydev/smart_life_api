@@ -3,6 +3,11 @@ require 'acceptance_helper'
 resource "用户注册登录" do
   header "Accept", "application/json"
 
+  before do
+    @subdistrict = create(:subdistrict)
+    @user = create(:user, subdistrict: @subdistrict)
+  end
+
   get "user_info" do
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
@@ -11,8 +16,6 @@ resource "用户注册登录" do
     header "X-User-Phone", user_attrs[:phone]
 
     before do
-      @subdistrict = create(:subdistrict)
-      @user = create(:user, subdistrict: @subdistrict)
       @user.info.update_attributes(user_info_attrs)
     end
 
@@ -31,11 +34,6 @@ resource "用户注册登录" do
 
     header "X-User-Token", user_attrs[:authentication_token]
     header "X-User-Phone", user_attrs[:phone]
-
-    before do
-      @user = create(:user)
-      @subdistrict = create(:subdistrict)
-    end
 
     parameter :nickname, "昵称", require: false, scope: :user_info
     parameter :avatar_attributes, "头像", require: false, scope: :user_info
