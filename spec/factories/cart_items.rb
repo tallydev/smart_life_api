@@ -6,7 +6,7 @@
 #  product_id :integer
 #  user_id    :integer
 #  count      :integer
-#  amount     :float(24)
+#  amount     :float
 #  state      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

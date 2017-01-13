@@ -2,13 +2,13 @@
 #
 # Table name: banners
 #
-#  id         :integer          not null, primary key
-#  title      :string(191)
-#  position   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  type       :string
-#  type_id    :integer
+#  id          :integer          not null, primary key
+#  title       :string
+#  position    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  banner_type :string
+#  type_id     :integer
 #
 
 FactoryGirl.define do

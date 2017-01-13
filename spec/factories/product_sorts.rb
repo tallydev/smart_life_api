@@ -3,7 +3,7 @@
 # Table name: product_sorts
 #
 #  id         :integer          not null, primary key
-#  title      :string(191)
+#  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

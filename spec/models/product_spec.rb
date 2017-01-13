@@ -3,21 +3,17 @@
 # Table name: products
 #
 #  id              :integer          not null, primary key
-#  title           :string(191)
-#  price           :float(24)
+#  title           :string
+#  price           :float
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  count           :integer
-#  detail          :text(65535)
+#  detail          :text
 #  state           :integer
 #  product_sort_id :integer
-#  after_discount  :float(24)
+#  after_discount  :float
 #  expiration_time :datetime
 #  product_type    :integer          default(0)
-#
-# Indexes
-#
-#  fk_rails_8c0953ced4  (product_sort_id)
 #
 
 require 'rails_helper'

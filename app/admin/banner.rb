@@ -1,7 +1,7 @@
 ActiveAdmin.register Banner do
   # menu parent: "首页轮播图"
   actions :all 
-  permit_params :title, :position, banner_cover_attributes: [:id, :desc, :photo, :_destroy], banner_detail_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :title, :position, :banner_type, :type_id, banner_cover_attributes: [:id, :desc, :photo, :_destroy], banner_detail_attributes: [:id, :desc, :photo, :_destroy]
 
   # controller do 
     
@@ -25,7 +25,7 @@ ActiveAdmin.register Banner do
     # id_column
     column :title
     column :position
-    column :type
+    column :banner_type
     column :type_id
     # column :created_at
     # column :updated_at
@@ -45,7 +45,7 @@ ActiveAdmin.register Banner do
     f.inputs do 
       f.input :title
       f.input :position
-      f.input :type
+      f.input :banner_type, as: :select, collection: ["图片详情", "精品超市", "限量销售", "社区活动"], include_blank: false
       f.input :type_id
 
       f.fields_for :banner_cover, for: [:banner_cover, f.object.banner_cover || f.object.build_banner_cover] do |cf|
@@ -71,7 +71,7 @@ ActiveAdmin.register Banner do
     attributes_table do
       row :title
       row :position
-      row :type
+      row :banner_type
       row :type_id
       # row :created_at
       # row :updated_at

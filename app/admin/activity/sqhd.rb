@@ -6,6 +6,7 @@ ActiveAdmin.register Activity::Sqhd do
     detail_image_attributes: [:id, :desc, :photo, :_destroy]
 
   index do
+    column :id
     column :title
     column :image do |activity|
       link_to(image_tag(activity.image.photo.url(:mini)), activity.image.photo.url) if activity.image

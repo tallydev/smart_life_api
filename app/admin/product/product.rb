@@ -54,6 +54,7 @@ ActiveAdmin.register Product do
     selectable_column
     # id_column
     # column :state
+    column :id
     column :title
     column :price
     column :after_discount

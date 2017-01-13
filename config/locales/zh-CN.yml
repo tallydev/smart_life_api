@@ -89,10 +89,12 @@ zh-CN:
         count: "步数"
         updated_at: "最后更新时间"
       activity/sqhd:
+        id: "活动编号"
         title: "活动标题"
         image: "活动主图"
         detail_image: "活动详细图"
       product:
+        id: "商品编号"
         title: "名称"
         price: "单价"
         count: "库存"
@@ -123,6 +125,10 @@ zh-CN:
         title: "标题"
         position: "位置"
         imgae: "图片"
+        banner_type: "类型"
+        type_id: "响应内容编号"
+        banner_cover: "缩略图"
+        banner_detail: "详情图"
       cart_item:
         title: "商品名称"
         count: "商品数量"
