@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112095803) do
+ActiveRecord::Schema.define(version: 20170113082223) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -71,10 +71,19 @@ ActiveRecord::Schema.define(version: 20170112095803) do
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "banners", force: :cascade do |t|
+<<<<<<< HEAD
     t.string   "title",      limit: 191
     t.integer  "position",   limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+=======
+    t.string   "title"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "type"
+    t.integer  "type_id"
+>>>>>>> add type and type_id to banners
   end
 
   create_table "cart_items", force: :cascade do |t|

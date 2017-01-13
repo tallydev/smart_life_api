@@ -7,6 +7,8 @@
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  type       :string
+#  type_id    :integer
 #
 
 class Banner < ActiveRecord::Base

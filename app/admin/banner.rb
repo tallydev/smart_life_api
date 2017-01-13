@@ -25,6 +25,8 @@ ActiveAdmin.register Banner do
     # id_column
     column :title
     column :position
+    column :type
+    column :type_id
     # column :created_at
     # column :updated_at
     column :banner_cover do |banner|
@@ -43,6 +45,8 @@ ActiveAdmin.register Banner do
     f.inputs do 
       f.input :title
       f.input :position
+      f.input :type
+      f.input :type_id
 
       f.fields_for :banner_cover, for: [:banner_cover, f.object.banner_cover || f.object.build_banner_cover] do |cf|
         image = cf.object
@@ -67,6 +71,8 @@ ActiveAdmin.register Banner do
     attributes_table do
       row :title
       row :position
+      row :type
+      row :type_id
       # row :created_at
       # row :updated_at
       row :banner_cover do
