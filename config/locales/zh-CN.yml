@@ -125,8 +125,8 @@ zh-CN:
         title: "标题"
         position: "位置"
         imgae: "图片"
-        banner_type: "类型"
-        type_id: "响应内容编号"
+        banner_type: "响应类型"
+        type_id: "跳转内容编号(可选)"
         banner_cover: "缩略图"
         banner_detail: "详情图"
       cart_item:
