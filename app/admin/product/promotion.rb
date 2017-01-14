@@ -1,7 +1,7 @@
 ActiveAdmin.register Promotion do
   # menu parent: "限量销售商品相关"
   actions :all
-  permit_params :title, :price, :count, :expiration_time, :detail, :after_discount, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :id, :title, :price, :count, :expiration_time, :detail, :after_discount, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
   menu priority: 7
   # filter :state, emun: true
   
@@ -48,6 +48,7 @@ ActiveAdmin.register Promotion do
     selectable_column
     # id_column
     # column :state
+    column :id
     column :title
     column :price
     column :after_discount
@@ -107,6 +108,7 @@ ActiveAdmin.register Promotion do
 
   show do |product|
     attributes_table do
+      row :id
       row :title
       row :price
       row :after_discount
