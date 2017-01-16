@@ -30,8 +30,9 @@ class UserInfosController < ApplicationController
   end
 
   def update
-    @user_info.update(user_info_params)
-    current_user.update(subdistrict_id: (params[:user].try(:subdistrict_id) || Subdistrict.first.id))
+    @user_info.update(user_info_params) if params[:user_info]
+    current_user.update(user_params)
+    
     respond_with(@user_info, template: "user_infos/show")
   end
 
@@ -62,4 +63,9 @@ class UserInfosController < ApplicationController
         :phone, :password, :sms_token
         )
     end
+
+    def user_params
+      params.require(:user).permit(:subdistrict_id)
+    end
 end
+

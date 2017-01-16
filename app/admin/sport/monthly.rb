@@ -4,9 +4,9 @@ ActiveAdmin.register Sport::Monthly do
 
   controller do 
     #更改默认搜索范围
-    #index仅显示 正在销售
+    #index仅显示 当前社区
     def scoped_collection
-      Sport.subdistrict_is(current_admin_user.subdistrict_id)
+      Sport::Monthly.subdistrict_is(current_admin_user.subdistrict_id)
     end
   end
   
