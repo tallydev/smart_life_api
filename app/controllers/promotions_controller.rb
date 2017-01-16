@@ -8,7 +8,7 @@ class PromotionsController < ApplicationController
 		page = params[:page] || 1
     per_page = params[:per_page] || 10
     # 复用 product 的 view
-		@products = @promotions = Promotion.all.paginate(page: page, per_page: per_page)
+		@products = @promotions = Promotion.for_sale.paginate(page: page, per_page: per_page)
 		respond_with @products, template: 'products/index'
 	end
 
