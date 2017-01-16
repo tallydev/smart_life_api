@@ -19,8 +19,7 @@
 #
 
 class Sport < ActiveRecord::Base
-  ###### 注: 修改 字段 需 同步修改下方子表定义 ######
-  ######     新的迁移需要 同步对子表操作  ##########
+  ######   注:  新的迁移需要 同步对子表操作  #######
   belongs_to :user
 
   before_save :cal_relations
@@ -30,9 +29,9 @@ class Sport < ActiveRecord::Base
   scope :filter_date, ->(date) { where(date: date) }
   scope :subdistrict_is, ->(subdistrict_id) { where(subdistrict_id: subdistrict_id)}
   
-  validates_uniqueness_of :date, scope: :user_id
-  validates_presence_of :version
-  validate :count_validate
+  # validates_uniqueness_of :date, scope: :user_id
+  # validates_presence_of :version
+  # validate :count_validate
 
   def tag
     date.to_s
@@ -70,46 +69,31 @@ class Sport < ActiveRecord::Base
     def cal_weekly increase
       year = self.date.year
       cweek = self.date.cweek
-      sport = Sport::Weekly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year, cweek: cweek).first_or_initialize
+      # sport = Sport::Weekly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year, cweek: cweek).first_or_initialize
+      sport = Sport::Weekly.get_const(user.subdistrict_id).where(user: self.user, year: year, cweek: cweek).first_or_initialize
+      logger.info "+++++++"
+      logger.info "#{sport}"
       sport.increment :count, increase
-      sport.save
+      logger.info "+++++++" unless sport.save
     end
 
     def cal_monthly increase
       year = self.date.year
       month = self.date.month
-      sport = Sport::Monthly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year, month: month).first_or_initialize
+      sport = Sport::Monthly.get_const(user.subdistrict_id).where(user: self.user, year: year, month: month).first_or_initialize
+      logger.info "+++++++"
+      logger.info "#{sport}"
       sport.increment :count, increase
-      sport.save
+      logger.info "+++++++" unless sport.save
     end
 
     def cal_yearly increase
       year = self.date.year
-      sport = Sport::Yearly.subdistrict_is(self.subdistrict_id).where(user: self.user, year: year).first_or_initialize
+      sport = Sport::Yearly.get_const(user.subdistrict_id).where(user: self.user, year: year).first_or_initialize
+      logger.info "+++++++"
+      logger.info "#{sport}"
       sport.increment :count, increase
-      sport.save
+      logger.info "+++++++" unless sport.save
     end
-
-    begin #分表
-      def self.new_table subdistrict_id
-        _class = self
-        ActiveRecord::Schema.define do
-          execute("CREATE TABLE #{_class.name.downcase}#{subdistrict_id}s LIKE #{_class.name.downcase}s;")
-        end
-      end
-
-      def self.drop_table subdistrict_id
-        _class = self
-        ActiveRecord::Schema.define do
-          drop_table "#{_class.name.downcase}#{subdistrict_id}s".to_sym 
-        end
-      end
-
-      def self.get_const subdistrict_id
-        Object.const_get("#{self.name}#{subdistrict_id}", Class.new(self))
-      rescue
-        Object.const_set("#{self.name}#{subdistrict_id}", Class.new(self))
-      end
-
-    end
+    
 end 

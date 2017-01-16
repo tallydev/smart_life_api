@@ -21,6 +21,10 @@ class Subdistrict < ActiveRecord::Base
 	# has_many :sport_monthlies
 	# has_many :sport_yearlies
 
+	after_create :check_submeter_tables
+	# after_destroy :migrate_data
+	after_destroy :drop_its_submeter_tables
+
 	def name
 		"#{province}#{city}#{district}#{subdistrict}"
 	end
@@ -61,7 +65,6 @@ class Subdistrict < ActiveRecord::Base
 		last ?
 		{some.keys[0] => some.values[0].map { |x| "#{x.keys[0]}@*@#{x.values[0][:id]}"}} :
 		{some.keys[0] => some.values[0].map { |x| x.keys[0] }}  
-		
 	end
 
 	def output
@@ -76,5 +79,42 @@ class Subdistrict < ActiveRecord::Base
 
 	end
 
+	def self.migrate_data old_id, new_id, user_id
+		NeedSubmeter.each do |class_name|
+			_old_class = class_name.safe_constantize.get_const(old_id)
+			_new_class = class_name.safe_constantize.get_const(new_id)
+
+			_old_class.where(user_id: user_id).each do |_old_item|
+				_new_item = _new_class.new(_old_item.attributes.except("id", "updated_at", "created_at", "subdistrict_id"))
+				ActiveRecord::Base.transaction do  
+					_old_item.destroy!
+					_new_item.save!
+				end
+			end
+		end
+		rescue => error
+			error
+	end
+ # q.attributes.merge({"subdistrict_id"=>1, "id"=> nil, "updated_at" => nil, "created_at" => nil})
+ # q.attributes.except("id", "updated_at", "created_at").merge({"subdistrict_id"=>1})
+ # q.attributes.except("id", "updated_at", "created_at", "subdistrict_id")
+
+	def drop_its_submeter_tables
+		ActiveRecord::Base.transaction do 
+			NeedSubmeter.each do |class_name|
+				class_name.constantize.drop_submeter_table(self.id)
+			end
+		end
+		rescue => error
+			error
+	end
+
+	def check_submeter_tables
+		NeedSubmeter.each do |class_name|
+			Subdistrict.all.each do |subdistrict|
+				class_name.constantize.create_submeter_table(subdistrict.id)
+			end
+		end
+	end
 
 end

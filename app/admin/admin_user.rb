@@ -1,6 +1,7 @@
 ActiveAdmin.register AdminUser do
-  permit_params :postage #:email, :password, :password_confirmation
   menu parent: "系统设置" 
+  permit_params :postage, :subdistrict_id, :email, :password, :password_confirmation
+
   index do
     selectable_column
     id_column
@@ -9,6 +10,10 @@ ActiveAdmin.register AdminUser do
     # column :sign_in_count
     # column :created_at
     column :postage
+    column :subdistrict_id
+    # column "所属社区" do |admin|
+    #   admin.subdistrict.name
+    # end
     actions
   end
 
@@ -19,10 +24,12 @@ ActiveAdmin.register AdminUser do
 
   form do |f|
     f.inputs "Admin Details" do
-      # f.input :email
-      # f.input :password
-      # f.input :password_confirmation
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
       f.input :postage
+      f.input :subdistrict_id
+
     end
     f.actions
   end
@@ -31,6 +38,9 @@ ActiveAdmin.register AdminUser do
     attributes_table do
       row :email
       row :postage
+      row "所属社区" do 
+        admin_user.subdistrict.name
+      end
       # row :created_at
       # row :updated_at
 
