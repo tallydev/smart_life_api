@@ -42,6 +42,7 @@ FactoryGirl.define do
     title "promotion title"
     price 1.5
     count 10
+    after_discount 1
 
     after(:build) do |promotion|
       promotion.product_banners << FactoryGirl.create(:product_banner)

@@ -31,8 +31,17 @@ class UserInfosController < ApplicationController
 
   def update
     @user_info.update(user_info_params) if params[:user_info]
+    _subdistrict_id_was = current_user.subdistrict_id
     current_user.update(user_params) if params[:user]
-    
+    p "=++++==++==++====+==++=+="
+    p _subdistrict_id_was
+    p "+++++======+++===++====+="
+    p current_user.subdistrict_id
+    unless _subdistrict_id_was == current_user.subdistrict_id
+      p "========"
+      current_user.migrate_data(_subdistrict_id_was, current_user.subdistrict_id_was)
+    end
+
     respond_with(@user_info, template: "user_infos/show")
   end
 
