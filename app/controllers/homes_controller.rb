@@ -5,6 +5,7 @@ class HomesController < ApplicationController
   # 其他内容
   def home_info
     @banners = Banner.all
+    @promotion = Promotion.first
     respond_with @banners, template: 'homes/home_info', status: 200
   end
 
