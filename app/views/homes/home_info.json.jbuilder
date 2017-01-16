@@ -8,5 +8,5 @@ end
 # 新品上市模块
 json.newer do
   json.url image_url @promotion ? @promotion.product_cover.try(:url, :medium) : ""
-  json.end_time @promotion ? @promotion.expiration_time : (Time.zone.now + 3.hour).strftime("%F %T")
+  json.end_time @promotion ? @promotion.expiration_time : Time.zone.now
 end
