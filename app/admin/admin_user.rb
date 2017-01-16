@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
   permit_params :postage #:email, :password, :password_confirmation
-
+  menu parent: "系统设置" 
   index do
     selectable_column
     id_column

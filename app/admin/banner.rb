@@ -1,23 +1,9 @@
 ActiveAdmin.register Banner do
   # menu parent: "首页轮播图"
+  # menu parent: "系统设置" 
   actions :all 
+  # menu priority: 1
   permit_params :title, :position, :banner_type, :type_id, banner_cover_attributes: [:id, :desc, :photo, :_destroy], banner_detail_attributes: [:id, :desc, :photo, :_destroy]
-
-  # controller do 
-    
-  #   def destroy
-  #     @banner_sort =  bannerSort.find(params[:id])
-
-  #     ActiveRecord::Base.transaction do
-  #       @banner_sort.banners.each do |banner|
-  #       	banner.banner_sort_id = nil
-  #       	banner.save
-  #     	end
-  #       @banner_sort.destroy
-  #   	end
-  #     redirect_to :back
-  #   end
-  # end
 
   index do 
 

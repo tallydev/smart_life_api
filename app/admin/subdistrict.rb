@@ -1,5 +1,6 @@
 ActiveAdmin.register Subdistrict do
 	# menu parent, "社区相关"
+  menu parent: "系统设置"  
   actions :index, :show, :edit, :update, :new
   permit_params :province, :city, :district, :subdistrict
   index do 

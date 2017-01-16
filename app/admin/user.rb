@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   actions :index, :show
-
+  menu parent: "系统设置" 
   index do
     selectable_column
     id_column

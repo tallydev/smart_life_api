@@ -1,8 +1,8 @@
 ActiveAdmin.register Promotion do
   # menu parent: "限量销售商品相关"
+  menu parent: "购物"
   actions :all
   permit_params :id, :title, :price, :count, :expiration_time, :detail, :after_discount, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
-  menu priority: 7
   # filter :state, emun: true
   
   controller do 

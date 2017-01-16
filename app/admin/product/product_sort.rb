@@ -1,5 +1,6 @@
 ActiveAdmin.register ProductSort do
   # menu parent: "商品相关"
+  menu parent: "购物"
   actions :all 
   permit_params :title, product_sort_icon_attributes: [:id, :desc, :photo, :_destroy]
 

@@ -1,6 +1,7 @@
 ActiveAdmin.register Activity::Sqhd do
   # menu parent: "预约信息"
-
+  menu priority: 9
+  # 
   permit_params :title,
     image_attributes: [:id, :desc, :photo, :_destroy],
     detail_image_attributes: [:id, :desc, :photo, :_destroy]

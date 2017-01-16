@@ -1,5 +1,6 @@
 ActiveAdmin.register Order do
 	# menu parent, "商品相关"
+  menu parent: "购物" 
   actions :index, :show
 
   filter :title

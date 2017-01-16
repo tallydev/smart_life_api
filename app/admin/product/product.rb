@@ -1,5 +1,6 @@
 ActiveAdmin.register Product do
   # menu parent: "商品相关"
+  menu parent: "购物", parent_priority: 1
   actions :all
   permit_params :title, :price, :count, :detail, :after_discount, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
   
