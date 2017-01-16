@@ -31,7 +31,7 @@ class UserInfosController < ApplicationController
 
   def update
     @user_info.update(user_info_params) if params[:user_info]
-    current_user.update(user_params)
+    current_user.update(user_params) if params[:user]
     
     respond_with(@user_info, template: "user_infos/show")
   end
