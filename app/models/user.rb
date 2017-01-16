@@ -84,14 +84,13 @@ class User < ActiveRecord::Base
 
       _old_class.where(user_id: self.id).each do |_old_item|
         _new_item = _new_class.new(_old_item.attributes.except("id", "updated_at", "created_at", "subdistrict_id"))
-        ActiveRecord::Base.transaction do  
-          _old_item.destroy！
-          _new_item.save！
-        end
+        # ActiveRecord::Base.transaction do  
+        _old_item.destroy if _new_item.save
+        # end
       end
     end
-    rescue => error
-      error
+    # rescue => error
+    #   error
   end
 
   def self.reset_user_password params
