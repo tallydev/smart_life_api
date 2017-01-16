@@ -79,14 +79,14 @@ class User < ActiveRecord::Base
   # 改变社区 数据迁移
   def migrate_data old_id, new_id
     NeedSubmeter.each do |class_name|
-      _old_class = class_name.safe_constantize.get_const(old_id)
+      _old_class = class_name.safe_constantize#.get_const(old_id)
       _new_class = class_name.safe_constantize.get_const(new_id)
 
       _old_class.where(user_id: self.id).each do |_old_item|
         _new_item = _new_class.new(_old_item.attributes.except("id", "updated_at", "created_at", "subdistrict_id"))
         ActiveRecord::Base.transaction do  
-          _old_item.destroy!
-          _new_item.save!
+          _old_item.destroy！
+          _new_item.save！
         end
       end
     end

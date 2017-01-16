@@ -10,8 +10,6 @@ class SportsController < ApplicationController
       @sport.count = sport_params[:count]
       @sport.platform = sport_params[:platform]
       @sport.version = sport_params[:version]
-      p "++++++++"
-      p current_user.subdistrict_id
       @sport.subdistrict_id = current_user.subdistrict_id
       @sport.save  
     end
