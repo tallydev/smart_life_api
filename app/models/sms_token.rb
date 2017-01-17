@@ -47,11 +47,12 @@ class SmsToken < ActiveRecord::Base
     result = ChinaSMS.to phone, sms_hash, {tpl_id: tpl_id}
   end
 
-  def self.order_message name, order_number
-    tpl_id = 1689954
+  def self.order_message number, number1
+    tpl_id = 1695506
     phone = "15887063853" #"18314109392"
     # company = "慧生活"
-    sms_hash = {name: name, order_number: order_number}
+    #   【慧生活】您的订单编号：#number#,物流信息：#number1#
+    sms_hash = {number: number, number1: number1}
       
     ChinaSMS.use :yunpian, password: "20846dadd786980de1e0170d8a045cf1"
     
