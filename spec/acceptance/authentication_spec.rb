@@ -2,6 +2,9 @@ require 'acceptance_helper'
 
 resource "用户注册登录" do
   header "Accept", "application/json"
+  before do 
+    # create(:subdistrict)
+  end
 
   post "/users" do
     parameter :phone, "用户注册的手机号码", required: true, scope: :user
