@@ -4,6 +4,7 @@ ActiveAdmin.register Order do
   actions :index, :show
 
   filter :title
+  filter :order_type
   # filter :state, emun: true
 
   
