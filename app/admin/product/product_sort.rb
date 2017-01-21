@@ -5,7 +5,18 @@ ActiveAdmin.register ProductSort do
   permit_params :title, product_sort_icon_attributes: [:id, :desc, :photo, :_destroy]
 
   controller do 
-    
+    #更改默认搜索范围
+    #index仅显示 当前社区
+    def scoped_collection
+      ProductSort.subdistrict_is(current_admin_user.subdistrict_id)
+    end
+
+    def create
+      super
+      @product_sort.subdistrict_id = current_admin_user.subdistrict_id
+      @product_sort.save  
+    end
+
     def destroy
       @product_sort =  ProductSort.find(params[:id])
 

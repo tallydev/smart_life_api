@@ -7,14 +7,14 @@ ActiveAdmin.register Promotion do
   
   controller do 
     #更改默认搜索范围
-    # index仅显示 正在销售
+    # index仅显示 当前社区中正在销售的商品
     def scoped_collection
-      Promotion.for_sale
+      Promotion.subdistrict_is(current_admin_user.subdistrict_id).for_sale
     end
     
     def destroy
       ActiveRecord::Base.transaction do
-        @promotion = Promotion.find(params[:id])
+        @promotion = Promotion.subdistrict_is(current_admin_user.subdistrict_id).find(params[:id])
         @promotion.sale_off!
         @promotion.count = 0 #防止下架限量销售商品加入购物车
         @promotion.cart_items.each do |cart_item|
@@ -31,11 +31,11 @@ ActiveAdmin.register Promotion do
     #   super
     # end
 
-    # def create
-    #   super
-    #   @promotion.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
-    #   @promotion.save
-    # end
+    def create
+      super
+      @promotion.subdistrict_id = current_admin_user.subdistrict_id
+      @promotion.save
+    end
 
     # private
     #   def sort_params

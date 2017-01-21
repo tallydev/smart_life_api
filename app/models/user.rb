@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :orders, dependent: :destroy
   belongs_to :subdistrict
+  scope :subdistrict_is, -> (subdistrict_id){where(subdistrict_id: subdistrict_id)}
 
   # virtual attribute
   attr_accessor :sms_token

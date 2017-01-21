@@ -14,14 +14,14 @@ ActiveAdmin.register Product do
   
   controller do 
     #更改默认搜索范围
-    #index仅显示 正在销售
+    #index仅显示 当前社区中 正在销售的商品
     def scoped_collection
-      Product.supermarket.for_sale
+      Product.subdistrict_is(current_admin_user.subdistrict_id).supermarket.for_sale
     end
     
     def destroy
       ActiveRecord::Base.transaction do
-        @product = Product.find(params[:id])
+        @product = Product.subdistrict_is(current_admin_user.subdistrict_id).find(params[:id])
         @product.sale_off!
         @product.count = 0 #防止下架商品加入购物车
         @product.cart_items.each do |cart_item|
@@ -41,6 +41,7 @@ ActiveAdmin.register Product do
     def create
       super
       @product.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
+      @product.subdistrict_id = current_admin_user.subdistrict_id
       @product.save
     end
 
@@ -63,7 +64,7 @@ ActiveAdmin.register Product do
     column :count
     column :detail
     column :sort
-    column :subdistrict_id
+    # column :subdistrict_id
     # column :created_at
     # column :updated_at
     column :product_cover do |product|
@@ -91,8 +92,8 @@ ActiveAdmin.register Product do
       f.input :after_discount,  min: 0
       f.input :count
       f.input :detail
-      f.input :subdistrict_id
-      f.input :sort, as: :select, collection: ProductSort.all.collect(&:title)
+      # f.input :subdistrict_id
+      f.input :sort, as: :select, collection: ProductSort.subdistrict_is(current_admin_user.subdistrict_id).collect(&:title)
       f.fields_for :product_cover, for: [:product_cover, f.object.product_cover || f.object.build_product_cover] do |cf|
         image = cf.object
         cf.input :photo, as: :file, label: "商品主图", hint: (image.try(:photo).blank?) \
@@ -121,7 +122,7 @@ ActiveAdmin.register Product do
       row :count
       row :detail
       row :sort
-      row :subdistrict_id
+      # row :subdistrict_id
       # row :created_at
       # row :updated_at
       row :product_cover do

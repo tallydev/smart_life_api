@@ -22,7 +22,7 @@ class ProductSort < ActiveRecord::Base
   scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
   
   validates_presence_of :title, message: "分类名称不能为空"
-  validates_uniqueness_of :title, message: "分类名称不能重复"
+  # validates_uniqueness_of :title, message: "分类名称不能重复"
 
   scope :title_is, ->(title) {where(title: title)}
 end

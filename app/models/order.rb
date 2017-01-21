@@ -28,6 +28,7 @@ class Order < ActiveRecord::Base
 	belongs_to :user
 	has_many :cart_items, dependent: :destroy
   has_many :ping_requests, dependent: :destroy
+  
   belongs_to :subdistrict
   scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
   

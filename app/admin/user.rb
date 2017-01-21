@@ -1,6 +1,15 @@
 ActiveAdmin.register User do
   actions :index, :show
   menu parent: "系统设置" 
+
+  controller do 
+    #更改默认搜索范围
+    #index仅显示 当前社区
+    def scoped_collection
+      User.subdistrict_is(current_admin_user.subdistrict_id)
+    end
+  end
+
   index do
     selectable_column
     id_column

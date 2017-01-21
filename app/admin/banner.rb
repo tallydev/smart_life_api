@@ -5,8 +5,24 @@ ActiveAdmin.register Banner do
   # menu priority: 1
   permit_params :title, :position, :banner_type, :type_id, banner_cover_attributes: [:id, :desc, :photo, :_destroy], banner_detail_attributes: [:id, :desc, :photo, :_destroy]
 
-  index do 
+  controller do 
+    #更改默认搜索范围
+    #index仅显示 当前社区
+    def scoped_collection
+      Banner.subdistrict_is(current_admin_user.subdistrict_id)
+    end
 
+    def create
+      super
+      @banner.subdistrict_id = current_admin_user.subdistrict_id
+      @banner.save
+    end
+
+    private
+
+  end
+
+  index do 
     selectable_column
     # id_column
     column :title

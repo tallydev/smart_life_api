@@ -6,6 +6,23 @@ ActiveAdmin.register Activity::Sqhd do
     image_attributes: [:id, :desc, :photo, :_destroy],
     detail_image_attributes: [:id, :desc, :photo, :_destroy]
 
+  controller do 
+    #更改默认搜索范围
+    #index仅显示 当前社区
+    def scoped_collection
+      Activity::Sqhd.subdistrict_is(current_admin_user.subdistrict_id)
+    end
+
+    def create
+      super
+      @activity_sqhd.subdistrict_id = current_admin_user.subdistrict_id
+      @activity_sqhd.save
+    end
+
+    private
+
+  end
+
   index do
     column :id
     column :title

@@ -11,7 +11,7 @@ ActiveAdmin.register Order do
     #更改默认搜索范围
     #index仅显示 正在销售
     def scoped_collection
-      Order.paid
+      Order.subdistrict_is(current_admin_user.subdistrict_id).paid
     end
   end
 
