@@ -1,10 +1,11 @@
 class BannersController < ApplicationController
+  acts_as_token_authentication_handler_for User
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @banners = Banner.all
+    @banners = Banner.subdistrict_is(current_user.subdistrict_id)
     respond_with(@banners)
   end
 
@@ -38,7 +39,7 @@ class BannersController < ApplicationController
 
   private
     def set_banner
-      @banner = Banner.find(params[:id])
+      @banner = Banner.subdistrict_is(current_user.subdistrict_id).find(params[:id])
     end
 
     def banner_params

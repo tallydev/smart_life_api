@@ -96,6 +96,7 @@ zh-CN:
         title: "活动标题"
         image: "活动主图"
         detail_image: "活动详细图"
+        subdistrict_id: "社区id"
       product:
         id: "商品编号"
         title: "名称"
@@ -110,6 +111,7 @@ zh-CN:
         discount_rate: "折扣"
         after_discount: "优惠价"
         expiration_time: "到期时间"
+        subdistrict_id: "社区id"
       product_banner:
         back: "返回"
         thumb: "详情图" 
@@ -124,6 +126,7 @@ zh-CN:
         phone: "成交人"
         paid_time_output: "成交时间"
         user: "用户"
+
       banner:
         title: "标题"
         position: "位置"
@@ -135,7 +138,7 @@ zh-CN:
       cart_item:
         title: "商品名称"
         count: "商品数量"
-
+        after_discount: "单价"
 
   appointment_state:
     commited: "已提交"

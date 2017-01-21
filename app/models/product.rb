@@ -3,17 +3,23 @@
 # Table name: products
 #
 #  id              :integer          not null, primary key
-#  title           :string
-#  price           :float
+#  title           :string(191)
+#  price           :float(24)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  count           :integer
-#  detail          :text
+#  detail          :text(65535)
 #  state           :integer
 #  product_sort_id :integer
-#  after_discount  :float
+#  after_discount  :float(24)
 #  expiration_time :datetime
 #  product_type    :integer          default(0)
+#  subdistrict_id  :integer          default(1)
+#
+# Indexes
+#
+#  fk_rails_4f43a87044  (subdistrict_id)
+#  fk_rails_8c0953ced4  (product_sort_id)
 #
 
 class Product < ActiveRecord::Base
@@ -28,6 +34,9 @@ class Product < ActiveRecord::Base
   has_many :product_banners
   has_many :cart_items
   belongs_to :product_sort
+  
+  belongs_to :subdistrict
+  scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
 
   validates_presence_of :price, on: :create, message: "商品价格不能为空"
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
@@ -41,6 +50,7 @@ class Product < ActiveRecord::Base
   # 限量销售
   scope :promotion, -> {where(product_type: 1)}
   
+  scope :subdistrict_id, ->(id){where(subdistrict_id: id)}
   scope :state_is, -> (state) {where(state: state)}
   scope :for_sale, -> {where(state: 1)}
   scope :product_sort_is, -> (id) {where(product_sort_id: id)}

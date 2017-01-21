@@ -9,7 +9,7 @@ class CartItemsController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @cart_items = current_user.cart_items.editing.paginate(page: page, per_page: per_page)
+    @cart_items = current_user.cart_items.subdistrict_is(current_user.subdistrict_id).editing.paginate(page: page, per_page: per_page)
     respond_with(@cart_items)
   end
 
@@ -26,11 +26,11 @@ class CartItemsController < ApplicationController
   # end
 
   def create
-    @cart_item = current_user.cart_items.editing.product_id_is(params[:cart_item][:product_id]).try(:first)
+    @cart_item = current_user.cart_items.subdistrict_is(current_user.subdistrict_id).editing.product_id_is(params[:cart_item][:product_id]).try(:first)
     if @cart_item
       @cart_item.count += params[:cart_item][:count].to_i
     else
-      @cart_item = current_user.cart_items.build(cart_item_params)
+      @cart_item = current_user.cart_items.subdistrict_is(current_user.subdistrict_id).build(cart_item_params)
     end
     @cart_item.save
     respond_with(@cart_item)
@@ -56,7 +56,7 @@ class CartItemsController < ApplicationController
 
   private
     def set_cart_item
-      @cart_item = current_user.cart_items.editing.find(params[:id])
+      @cart_item = current_user.cart_items.subdistrict_is(current_user.subdistrict_id).editing.find(params[:id])
     end
 
     def cart_item_params
@@ -72,6 +72,6 @@ class CartItemsController < ApplicationController
     end
 
     def check_stocks
-      CartItem.check_stocks(current_user.cart_items)
+      CartItem.check_stocks(current_user.cart_items.subdistrict_is(current_user.subdistrict_id))
     end
 end

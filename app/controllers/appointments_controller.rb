@@ -8,7 +8,7 @@ class AppointmentsController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @appointments = current_user.appointments.paginate(page: page, per_page: per_page)
+    @appointments = current_user.appointments.subdistrict_is(current_user.subdistrict_id).paginate(page: page, per_page: per_page)
     respond_with(@appointments)
   end
 
@@ -27,7 +27,7 @@ class AppointmentsController < ApplicationController
   def create
     type = "Appointment::#{appointment_params[:type].capitalize}"
     count = appointment_params[:count]
-    @appointment = current_user.appointments.build(type: type, count: count)
+    @appointment = current_user.appointments.subdistrict_is(current_user.subdistrict_id).build(type: type, count: count)
     @appointment.save
     respond_with(@appointment)
   end
@@ -44,7 +44,7 @@ class AppointmentsController < ApplicationController
 
   private
     def set_appointment
-      @appointment = current_user.appointments.find(params[:id])
+      @appointment = current_user.appointments.subdistrict_is(current_user.subdistrict_id).find(params[:id])
     end
 
     def appointment_params

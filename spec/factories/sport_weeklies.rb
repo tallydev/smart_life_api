@@ -13,6 +13,7 @@
 #
 # Indexes
 #
+#  fk_rails_239ba97fd8              (subdistrict_id)
 #  index_sport_weeklies_on_user_id  (user_id)
 #
 

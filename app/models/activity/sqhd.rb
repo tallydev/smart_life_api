@@ -2,10 +2,15 @@
 #
 # Table name: activity_sqhds
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  title          :string(191)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  subdistrict_id :integer          default(1)
+#
+# Indexes
+#
+#  fk_rails_0d7048cc4e  (subdistrict_id)
 #
 
 class Activity::Sqhd < ActiveRecord::Base
@@ -15,4 +20,7 @@ class Activity::Sqhd < ActiveRecord::Base
   accepts_nested_attributes_for :detail_image, allow_destroy: true
 
   has_many :appointments, as: :aptable
+
+  belongs_to :subdistrict
+  scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
 end

@@ -59,9 +59,10 @@ ActiveAdmin.register Order do
         _contact ? _contact.name : ""
       end
 
-      table_for order.cart_items do
+      table_for order.cart_items do 
         column :title
         column :count
+        column :after_discount, as: "dna"
       end
 
       row " " do

@@ -2,8 +2,13 @@ require "acceptance_helper"
 
 resource "限量销售相关接口" do
   header "Accept", "application/json"
+  user_attrs = FactoryGirl.attributes_for(:user)
 
-  before do 
+  header "X-User-Token", user_attrs[:authentication_token]
+  header "X-User-Phone", user_attrs[:phone]
+
+  before do
+    @user = create(:user)
     @promotions = create_list(:promotion, 5, expiration_time: Time.now.tomorrow)
   end
 

@@ -2,18 +2,20 @@
 #
 # Table name: cart_items
 #
-#  id         :integer          not null, primary key
-#  product_id :integer
-#  user_id    :integer
-#  count      :integer
-#  amount     :float
-#  state      :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  order_id   :integer
+#  id             :integer          not null, primary key
+#  product_id     :integer
+#  user_id        :integer
+#  count          :integer
+#  amount         :float(24)
+#  state          :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  order_id       :integer
+#  subdistrict_id :integer          default(1)
 #
 # Indexes
 #
+#  fk_rails_6d8172cbfc             (subdistrict_id)
 #  index_cart_items_on_order_id    (order_id)
 #  index_cart_items_on_product_id  (product_id)
 #  index_cart_items_on_user_id     (user_id)
@@ -26,7 +28,9 @@ class CartItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :user
   belongs_to :order
-
+  belongs_to :subdistrict
+  scope :subdistrict_is, -> (subdistrict_id){where(subdistrict_id: subdistrict_id)}
+  
   validates_presence_of :user, on: :create, message: "购物车的用户信息不能为空"
   validates_presence_of :product, on: :create, message: "购买的商品不存在"
   validates_presence_of :count, on: :save, message: "请输入购买商品的数量"
@@ -34,6 +38,7 @@ class CartItem < ActiveRecord::Base
 
   # before_save :add_product_info, only: :create
   before_save :cal_amount
+  before_save :set_subdistrict_id
 
   scope :state_is, -> (state){where(state: state)}
   scope :in_ids, -> (ids){where(id: ids)}
@@ -85,6 +90,10 @@ class CartItem < ActiveRecord::Base
 
     def cal_amount
       self.amount = self.after_discount.to_f * self.count
+    end
+
+    def set_subdistrict_id
+      self.subdistrict_id = self.product.subdistrict_id
     end
 
 end

@@ -8,12 +8,13 @@
 #  count          :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  platform       :string
+#  platform       :string(191)
 #  version        :integer
 #  subdistrict_id :integer
 #
 # Indexes
 #
+#  fk_rails_4416303325      (subdistrict_id)
 #  index_sports_on_date     (date)
 #  index_sports_on_user_id  (user_id)
 #

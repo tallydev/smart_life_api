@@ -2,17 +2,22 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  seq        :string
-#  state      :integer
-#  pay_way    :string
-#  price      :float
-#  contact_id :integer
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  postage    :float            default(0.0)
-#  paid_time  :datetime
+#  id             :integer          not null, primary key
+#  seq            :string(191)
+#  state          :integer
+#  pay_way        :string(191)
+#  price          :float(24)
+#  contact_id     :integer
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  postage        :float(24)        default(0.0)
+#  paid_time      :datetime
+#  subdistrict_id :integer          default(1)
+#
+# Indexes
+#
+#  fk_rails_c3a7ece3a4  (subdistrict_id)
 #
 
 class Order < ActiveRecord::Base
@@ -22,7 +27,9 @@ class Order < ActiveRecord::Base
 	belongs_to :user
 	has_many :cart_items, dependent: :destroy
   has_many :ping_requests, dependent: :destroy
-
+  belongs_to :subdistrict
+  scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
+  
   before_save :cal_price
 	after_create :set_seq
 
@@ -110,6 +117,7 @@ class Order < ActiveRecord::Base
 
         cart_item.save!
       end
+      _order.subdistrict_id = _order.cart_items.first.subdistrict_id
       _order.save!
       _order
   	end   

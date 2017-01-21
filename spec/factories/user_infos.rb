@@ -4,18 +4,18 @@
 #
 #  id            :integer          not null, primary key
 #  user_id       :integer
-#  nickname      :string
-#  identity_card :string
+#  nickname      :string(191)
+#  identity_card :string(191)
 #  sex           :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  birth         :date
-#  slogan        :string
-#  pay_password  :string
-#  name          :string
-#  nation        :string
-#  addr          :string
-#  community     :string
+#  slogan        :string(191)
+#  pay_password  :string(191)
+#  name          :string(191)
+#  nation        :string(191)
+#  addr          :string(191)
+#  community     :string(191)
 #
 # Indexes
 #

@@ -4,6 +4,16 @@ resource "购物相关接口" do
   header "Accept", "application/json"
 
   describe '商品的相关接口' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @subdistrict = create(:subdistrict)
+    end
+
     get 'products' do
       parameter :page, "页码", required: false
       parameter :per_page, "每页个数", required: false
@@ -12,7 +22,7 @@ resource "购物相关接口" do
       let(:per_page) { 10 }
 
       before do
-        @products = create_list(:product, 3)
+        @products = create_list(:product, 3, subdistrict: @subdistrict)
       end
 
       example "查看商品列表" do
@@ -41,6 +51,8 @@ resource "购物相关接口" do
 
       example "按类别 查询 商品列表" do
         do_request
+        p "====+++====+++=="
+        p @user
         puts response_body
         expect(status).to eq 200
       end
@@ -281,8 +293,13 @@ resource "购物相关接口" do
   end
 
   describe "商品分类项目相关接口" do
+    user_attrs = FactoryGirl.attributes_for(:user)
 
-    before do 
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
       @product_sorts = create_list(:product_sort, 3)
     end
 

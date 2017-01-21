@@ -3,7 +3,7 @@
 # Table name: communities
 #
 #  id             :integer          not null, primary key
-#  name           :string
+#  name           :string(191)
 #  subdistrict_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

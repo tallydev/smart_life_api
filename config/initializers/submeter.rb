@@ -60,7 +60,7 @@ end
 
 # 定义 create_submeter_table 方法后 检查子表
 
-Subdistrict.all.each do |subdistrict| 
-	subdistrict.check_submeter_tables
-end 
+# Subdistrict.all.each do |subdistrict| 
+# 	subdistrict.check_submeter_tables
+# end 
 	  

@@ -12,6 +12,7 @@
 #
 # Indexes
 #
+#  fk_rails_039bd99631              (subdistrict_id)
 #  index_sport_yearlies_on_user_id  (user_id)
 #
 

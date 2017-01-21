@@ -2,10 +2,15 @@
 #
 # Table name: product_sorts
 #
-#  id         :integer          not null, primary key
-#  title      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :integer          not null, primary key
+#  title          :string(191)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  subdistrict_id :integer          default(1)
+#
+# Indexes
+#
+#  fk_rails_33238a7e68  (subdistrict_id)
 #
 
 FactoryGirl.define do

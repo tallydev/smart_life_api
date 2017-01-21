@@ -3,8 +3,8 @@
 # Table name: sms_tokens
 #
 #  id         :integer          not null, primary key
-#  phone      :string
-#  token      :string
+#  phone      :string(191)
+#  token      :string(191)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

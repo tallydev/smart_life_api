@@ -3,12 +3,12 @@
 # Table name: subdistricts
 #
 #  id          :integer          not null, primary key
-#  province    :string
-#  city        :string
-#  subdistrict :string
+#  province    :string(191)
+#  city        :string(191)
+#  subdistrict :string(191)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  district    :string
+#  district    :string(191)
 #
 
 require 'rails_helper'

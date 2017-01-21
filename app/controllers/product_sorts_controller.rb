@@ -1,10 +1,11 @@
 class ProductSortsController < ApplicationController
   before_action :set_product_sort, only: [:show, :edit, :update, :destroy]
-
+  acts_as_token_authentication_handler_for User
+  
   respond_to :html
 
   def index
-    @product_sorts = ProductSort.all
+    @product_sorts = ProductSort.subdistrict_is(current_user.subdistrict_id)
     respond_with(@product_sorts)
   end
 
@@ -39,7 +40,7 @@ class ProductSortsController < ApplicationController
 
   private
     def set_product_sort
-      @product_sort = ProductSort.find(params[:id])
+      @product_sort = ProductSort.subdistrict_is(current_user.subdistrict_id).find(params[:id])
     end
 
     def product_sort_params
