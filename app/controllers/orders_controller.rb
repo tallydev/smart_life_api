@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
     @promotion = Promotion.find(params[:promotion_id])
     @cart_item = current_user.cart_items.create!(product_id: @promotion.id, count: params[:promotion_count])
     # 创建订单 
-    @order = Order.create_one(current_user.id, [@cart_item.id], params[:order].try(:contact_id))
+    @order = Order.create_one(current_user.id, [@cart_item.id], params[:order].try(:contact_id), "限量销售")
     @order.cart_items
     if @order.is_a?(Order)
       respond_with @order, template: 'orders/show', status: 201

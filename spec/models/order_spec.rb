@@ -14,6 +14,7 @@
 #  postage        :float(24)        default(0.0)
 #  paid_time      :datetime
 #  subdistrict_id :integer          default(1)
+#  order_type     :string(191)      default("精品超市")
 #
 # Indexes
 #

@@ -26,6 +26,7 @@ ActiveAdmin.register Order do
     # column :without_postage
     column :postage
     column :paid_time_output
+    column :order_type
     # column :created_at
     # column :updated_at
     actions
@@ -43,6 +44,7 @@ ActiveAdmin.register Order do
       # row :without_postage
       row :postage
       row :paid_time_output
+      row :order_type
       # row :created_at
       # row :updated_at
       _contact = order.contact

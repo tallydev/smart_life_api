@@ -14,6 +14,7 @@
 #  postage        :float(24)        default(0.0)
 #  paid_time      :datetime
 #  subdistrict_id :integer          default(1)
+#  order_type     :string(191)      default("精品超市")
 #
 # Indexes
 #
@@ -104,7 +105,7 @@ class Order < ActiveRecord::Base
     CartItem.where(order_id: self.id)  
   end
 
-  def self.create_one user_id, ids, contact_id
+  def self.create_one user_id, ids, contact_id, order_type="精品超市"
   	ActiveRecord::Base.transaction do  
   	  _order = Order.new(user_id: user_id, contact_id: contact_id)
       _order.save!
@@ -118,6 +119,7 @@ class Order < ActiveRecord::Base
 
         cart_item.save!
       end
+      _order.order_type = order_type
       _order.save!
       _order
   	end   
