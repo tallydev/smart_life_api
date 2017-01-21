@@ -31,6 +31,7 @@ class Order < ActiveRecord::Base
   scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
   
   before_save :cal_price
+  before_save :set_subdistrict_id
 	after_create :set_seq
 
   default_scope {order("created_at DESC")}
@@ -117,7 +118,6 @@ class Order < ActiveRecord::Base
 
         cart_item.save!
       end
-      _order.subdistrict_id = _order.cart_items.first.subdistrict_id
       _order.save!
       _order
   	end   
@@ -160,5 +160,9 @@ class Order < ActiveRecord::Base
       self.postage = _sum < 50 ? (AdminUser.first.postage || 8.00) : 0.00
   		self.price = _sum + self.postage 
   	end
+
+    def set_subdistrict_id
+      self.subdistrict_id = self.cart_items.firts.subdistrict_id
+    end
 
 end

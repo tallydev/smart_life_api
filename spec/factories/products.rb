@@ -10,6 +10,7 @@
 #  count           :integer
 #  detail          :text(65535)
 #  state           :integer
+#  classify_id     :integer
 #  product_sort_id :integer
 #  after_discount  :float(24)
 #  expiration_time :datetime
@@ -18,8 +19,9 @@
 #
 # Indexes
 #
-#  fk_rails_4f43a87044  (subdistrict_id)
-#  fk_rails_8c0953ced4  (product_sort_id)
+#  fk_rails_4f43a87044            (subdistrict_id)
+#  fk_rails_8c0953ced4            (product_sort_id)
+#  index_products_on_classify_id  (classify_id)
 #
 
 FactoryGirl.define do
