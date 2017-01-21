@@ -12,8 +12,21 @@ ActiveAdmin.register Order do
     #更改默认搜索范围
     #index仅显示 正在销售
     def scoped_collection
-      Order.subdistrict_is(current_admin_user.subdistrict_id).paid
+      Order.subdistrict_is(current_admin_user.subdistrict_id).state_is([2,3])
     end
+
+  end
+
+  member_action :shipping, method: :put do
+    @order = Order.find(params[:id])
+    @order.shipped!
+    redirect_to :back
+  end
+
+  member_action :cannel_shipping, method: :put do
+    @order = Order.find(params[:id])
+    @order.paid!
+    redirect_to :back
   end
 
   index do 
@@ -30,6 +43,13 @@ ActiveAdmin.register Order do
     column :order_type
     # column :created_at
     # column :updated_at
+    column "发货" do |order|
+      if order.state == "paid"
+        link_to "确认发货","/admin/orders/#{order.id}/shipping", method: :put
+      else
+        link_to "已发货","/admin/orders/#{order.id}/cannel_shipping", method: :put
+      end
+    end
     actions
   end
 

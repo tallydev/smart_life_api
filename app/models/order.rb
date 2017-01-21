@@ -37,17 +37,18 @@ class Order < ActiveRecord::Base
 	after_create :set_seq
 
   default_scope {order("created_at DESC")}
-  # scope :state_is, -> (state){where(state: state)}
+  scope :state_is, -> (state){where(state: state)}
 
 	enum state: {
     unpaid: 1,
     paid: 2,
+    shipped: 3,
     canceled: 9
   }
 
 	aasm column: :state, enum: true do
 		state :unpaid, initial: true
-    state :paid, :canceled, :disable
+    state :paid, :canceled, :disable, :shipped
 
     event :pay do
       transitions from: :unpaid, to: :paid, after: :pay_each_cart_item

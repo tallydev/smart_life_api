@@ -126,7 +126,7 @@ zh-CN:
         phone: "成交人"
         paid_time_output: "成交时间"
         user: "用户"
-        order: "订单类型"
+        order_type: "订单类型"
 
       banner:
         title: "标题"

@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :create, :destroy] do 
     member do 
       post 'recover_stocks' 
-      post 'create_payment'   
+      post 'create_payment' 
     end
     collection do 
       post 'create_by_promotion'
