@@ -166,7 +166,7 @@ class Order < ActiveRecord::Base
   	end
 
     def set_subdistrict_id
-      self.subdistrict_id = self.cart_items.first.subdistrict_id
+      self.subdistrict_id = self.cart_items.first.subdistrict_id unless self.cart_items.first.nil?
     end
 
 end
