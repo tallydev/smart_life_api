@@ -104,9 +104,9 @@ class Order < ActiveRecord::Base
     # 发送通知短信
     SmsToken.order_message self.seq, _sms_content
   end
-  # id@*@title@*@after_discount@*@price@;@ ....
+  # id@*@title@*@after_discount@*@price@*@count@;@ ....
   def restore_cart_item_info
-    self.cart_item_info = self.cart_items.map { |cart_item| "#{cart_item.id}@*@#{cart_item.title}@*@#{cart_item.after_discount}@*@#{cart_item.price}"}.join("@;@") if self.cart_item_info.empty?
+    self.cart_item_info = self.cart_items.map { |cart_item| "#{cart_item.id}@*@#{cart_item.title}@*@#{cart_item.after_discount}@*@#{cart_item.price}@*@#{cart_item.count}"}.join("@;@") if self.cart_item_info.nil? || self.cart_item_info.empty? 
     self.save
   end
 
@@ -122,7 +122,6 @@ class Order < ActiveRecord::Base
       _order.save!
 
       ids = ids.split(",").map {|x| x.to_i } if ids.is_a?(String) #postman 测试时
-                                           p "ids ==  #{ids}"
       CartItem.in_ids(ids).each do |cart_item|
     		_product = cart_item.product
     		if cart_item.count > cart_item.product.count

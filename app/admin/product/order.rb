@@ -81,11 +81,22 @@ ActiveAdmin.register Order do
       row "联系人" do 
         _contact ? _contact.name : ""
       end
+      # order.cart_item_info.split("@;@")
+      _cart_items =  order.cart_item_info.split("@;@").map do |cart_item|
+        _info = cart_item.split("@*@")
+        { 
+          "名称" => _info[1],
+          "折后价" => _info[2].to_f,
+          "数量" => _info[4].to_i,
+          "该项总价" => (_info[2].to_f * _info[4].to_i).round(1)
+        }
+      end
 
-      table_for order.cart_items do 
-        column :title
-        column :count
-        column :after_discount, as: "dna"
+      table_for _cart_items do 
+        column "名称"
+        column "数量"
+        column "折后价"
+        column "该项总价" 
       end
 
       row " " do

@@ -8,10 +8,11 @@ else
     _info = cart_item.split("@*@")
     _thumb_url = image_url CartItem.find(_info[0]).product.try(:product_cover).try(:url, :medium)
     { 
-    	id: _info[0],
+    	id: _info[0].to_i,
       title: _info[1],
-      after_discount: _info[2],
-      amount: _info[3],
+      after_discount: _info[2].to_f,
+      price: _info[3].to_f,
+      count: _info[4].to_i,
       thumb: _thumb_url
     }
   end
