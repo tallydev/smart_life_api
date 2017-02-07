@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121054326) do
+ActiveRecord::Schema.define(version: 20170207064431) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -188,12 +188,13 @@ ActiveRecord::Schema.define(version: 20170121054326) do
     t.float    "price",          limit: 24
     t.integer  "contact_id",     limit: 4
     t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.float    "postage",        limit: 24,  default: 0.0
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.float    "postage",        limit: 24,    default: 0.0
     t.datetime "paid_time"
-    t.integer  "subdistrict_id", limit: 4,   default: 1
-    t.string   "order_type",     limit: 191, default: "精品超市"
+    t.integer  "subdistrict_id", limit: 4,     default: 1
+    t.string   "order_type",     limit: 191,   default: "精品超市"
+    t.text     "cart_item_info", limit: 65535
   end
 
   add_index "orders", ["subdistrict_id"], name: "fk_rails_c3a7ece3a4", using: :btree

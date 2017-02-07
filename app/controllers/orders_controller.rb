@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
   # end
 
   def create #params [id数组]
+             p "iddd == #{params[:cart_item_ids]}"
     @order = Order.create_one(current_user.id, params[:cart_item_ids], params[:order].try(:contact_id))
     if @order.is_a?(Order)
       respond_with @order, template: 'orders/show', status: 201

@@ -15,6 +15,7 @@
 #  paid_time      :datetime
 #  subdistrict_id :integer          default(1)
 #  order_type     :string(191)      default("精品超市")
+#  cart_item_info :text(65535)
 #
 # Indexes
 #
@@ -51,7 +52,7 @@ class Order < ActiveRecord::Base
     state :paid, :canceled, :disable, :shipped
 
     event :pay do
-      transitions from: :unpaid, to: :paid, after: :pay_each_cart_item
+      transitions from: :unpaid, to: :paid, after: [:pay_each_cart_item, :restore_cart_item_info]
     end
 
     event :cancel do
@@ -93,6 +94,7 @@ class Order < ActiveRecord::Base
     self.paid_time.strftime("%Y-%m-%d %H:%M:%S") if self.paid_time
   end
 
+  #####  after pay #######
   def pay_each_cart_item
     _sms_content = "下单人姓名: #{self.user.user_info.nickname}, 电话: #{self.user.phone}, 地址: #{self.contact.output}, 订单详情: "
     self.its_cart_items.each do |cart_item| 
@@ -102,7 +104,14 @@ class Order < ActiveRecord::Base
     # 发送通知短信
     SmsToken.order_message self.seq, _sms_content
   end
+  # id@*@title@*@after_discount@*@price@;@ ....
+  def restore_cart_item_info
+    self.cart_item_info = self.cart_items.map { |cart_item| "#{cart_item.id}@*@#{cart_item.title}@*@#{cart_item.after_discount}@*@#{cart_item.price}"}.join("@;@") if self.cart_item_info.empty?
+    self.save
+  end
 
+  ########################
+  
   def its_cart_items
     CartItem.where(order_id: self.id)  
   end
@@ -111,6 +120,9 @@ class Order < ActiveRecord::Base
   	ActiveRecord::Base.transaction do  
   	  _order = Order.new(user_id: user_id, contact_id: contact_id)
       _order.save!
+
+      ids = ids.split(",").map {|x| x.to_i } if ids.is_a?(String) #postman 测试时
+                                           p "ids ==  #{ids}"
       CartItem.in_ids(ids).each do |cart_item|
     		_product = cart_item.product
     		if cart_item.count > cart_item.product.count

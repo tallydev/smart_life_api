@@ -15,6 +15,7 @@
 #  paid_time      :datetime
 #  subdistrict_id :integer          default(1)
 #  order_type     :string(191)      default("精品超市")
+#  cart_item_info :text(65535)
 #
 # Indexes
 #
