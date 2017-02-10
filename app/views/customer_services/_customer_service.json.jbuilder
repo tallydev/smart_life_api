@@ -1,0 +1,1 @@
+json.extract! customer_service, :name, :phone

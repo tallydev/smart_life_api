@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207064431) do
+ActiveRecord::Schema.define(version: 20170210080900) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -135,6 +135,16 @@ ActiveRecord::Schema.define(version: 20170207064431) do
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
+
+  create_table "customer_services", force: :cascade do |t|
+    t.string   "name",           limit: 191
+    t.string   "phone",          limit: 191
+    t.integer  "subdistrict_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "customer_services", ["subdistrict_id"], name: "index_customer_services_on_subdistrict_id", using: :btree
 
   create_table "examinations", force: :cascade do |t|
     t.integer  "user_info_id", limit: 4
@@ -530,6 +540,7 @@ ActiveRecord::Schema.define(version: 20170207064431) do
   add_foreign_key "banners", "subdistricts"
   add_foreign_key "cart_items", "subdistricts"
   add_foreign_key "communities", "subdistricts"
+  add_foreign_key "customer_services", "subdistricts"
   add_foreign_key "orders", "subdistricts"
   add_foreign_key "ping_requests", "orders"
   add_foreign_key "product_sorts", "subdistricts"

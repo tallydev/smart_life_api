@@ -3,10 +3,10 @@ require "acceptance_helper"
 resource "订单与支付相关接口" do
   header "Accept", "application/json"
 
-  user_attrs = FactoryGirl.attributes_for(:user)
+ #  user_attrs = FactoryGirl.attributes_for(:user)
 
-	header "X-User-Token", user_attrs[:authentication_token]
-	header "X-User-Phone", user_attrs[:phone]
+	# header "X-User-Token", user_attrs[:authentication_token]
+	# header "X-User-Phone", user_attrs[:phone]
 
 	before do 
     @AdminUser = create(:admin_user, postage: 10.0)
@@ -21,6 +21,8 @@ resource "订单与支付相关接口" do
     @cart_item3 = create(:cart_item, user: @user, product: @products.last)
     @cart_item4 = create(:cart_item, user: @user, product: @products.last,
                                       count: 100)
+    header "X-User-Token", @user.authentication_token
+    header "X-User-Phone", @user.phone
   end
 
 

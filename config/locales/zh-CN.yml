@@ -26,6 +26,7 @@ zh-CN:
       banner: "首页轮播图"
       subdistrict: "社区"
       community: "小区"
+      customer_service: "客服信息"
     attributes:
       admin_user:
         email: "邮箱"
@@ -127,7 +128,6 @@ zh-CN:
         paid_time_output: "成交时间"
         user: "用户"
         order_type: "订单类型"
-
       banner:
         title: "标题"
         position: "位置"
@@ -140,6 +140,9 @@ zh-CN:
         title: "商品名称"
         count: "商品数量"
         after_discount: "单价"
+      customer_service: 
+        name: "姓名"
+        phone: "电话"
 
   appointment_state:
     commited: "已提交"

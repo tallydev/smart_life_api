@@ -21,9 +21,10 @@ class Subdistrict < ActiveRecord::Base
 	# has_many :sport_monthlies
 	# has_many :sport_yearlies
 
-	after_create :check_submeter_tables
-	# after_destroy :migrate_data
-	after_destroy :drop_its_submeter_tables
+	after_create :check_submeter_tables unless ENV['RAILS_ENV'] == "test"
+	after_destroy :drop_its_submeter_tables unless ENV['RAILS_ENV'] == "test"
+
+	# customer_services
 
 	def name
 		"#{province}#{city}#{district}#{subdistrict}"

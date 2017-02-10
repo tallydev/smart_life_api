@@ -3,14 +3,16 @@ require "acceptance_helper"
 resource "主页相关接口" do
   header "Accept", "application/json"
 
-  user_attrs = FactoryGirl.attributes_for(:user)
+  # user_attrs = FactoryGirl.attributes_for(:user)
 
-  header "X-User-Token", user_attrs[:authentication_token]
-  header "X-User-Phone", user_attrs[:phone]
+  # header "X-User-Token", user_attrs[:authentication_token]
+  # header "X-User-Phone", user_attrs[:phone]
 
   before do
-    create(:user)
+    @user = create(:user)
     create_list(:banner, 2)
+    header "X-User-Token", @user.authentication_token
+    header "X-User-Phone", @user.phone
   end
 
   get 'home' do

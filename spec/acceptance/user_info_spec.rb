@@ -6,14 +6,13 @@ resource "用户注册登录" do
   before do
     @subdistrict = create(:subdistrict)
     @user = create(:user, subdistrict: @subdistrict)
+    header "X-User-Token", @user.authentication_token
+    header "X-User-Phone", @user.phone
   end
 
   get "user_info" do
-    user_attrs = FactoryGirl.attributes_for(:user)
+    # user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
-
-    header "X-User-Token", user_attrs[:authentication_token]
-    header "X-User-Phone", user_attrs[:phone]
 
     before do
       @user.info.update_attributes(user_info_attrs)
@@ -32,8 +31,8 @@ resource "用户注册登录" do
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
     image_attrs = FactoryGirl.attributes_for(:image, photo_type: "avatar") 
 
-    header "X-User-Token", user_attrs[:authentication_token]
-    header "X-User-Phone", user_attrs[:phone]
+    # header "X-User-Token", user_attrs[:authentication_token]
+    # header "X-User-Phone", user_attrs[:phone]
 
     parameter :nickname, "昵称", require: false, scope: :user_info
     parameter :avatar_attributes, "头像", require: false, scope: :user_info

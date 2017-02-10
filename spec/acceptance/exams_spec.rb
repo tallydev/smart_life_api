@@ -15,6 +15,8 @@ resource "体检相关接口" do
     create(:exam_record2, user_info: @user_info)
     create(:exam_record1, user_info: @user_info)
     create(:exam_record, user_info: @user_info)
+    header "X-User-Token", @user.authentication_token
+    header "X-User-Phone", @user.phone
   end
 
   get 'reports' do

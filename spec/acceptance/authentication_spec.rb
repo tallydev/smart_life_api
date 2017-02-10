@@ -70,7 +70,7 @@ resource "用户注册登录" do
     parameter :password, "登录密码", required: true, scope: :user
 
     user_attrs = FactoryGirl.attributes_for :user
-    let(:phone) { user_attrs[:phone] }
+    let(:phone) { @user.phone }
     let(:password) { user_attrs[:password] }
 
     response_field :id, "用户ID"
@@ -96,7 +96,7 @@ resource "用户注册登录" do
     end
 
     user_attrs = FactoryGirl.attributes_for :user
-    let(:phone) { user_attrs[:phone] }
+    let(:phone) { @user.phone }
 
     response_field :id, "验证码ID"
     response_field :phone, "电话号码"
@@ -120,7 +120,7 @@ resource "用户注册登录" do
 
   #   user_attrs = FactoryGirl.attributes_for(:user)
 
-  #   let(:phone) { user_attrs[:phone] }
+  #   let(:phone) { @user.phone }
 
   #   example "用户已注册" do
   #     create(:user)
@@ -146,7 +146,7 @@ resource "用户注册登录" do
       end
 
       user_attrs = FactoryGirl.attributes_for :user
-      let(:phone) { user_attrs[:phone] }
+      let(:phone) { @user.phone }
       let(:password) { user_attrs[:password] }
       let(:sms_token) { "1981" }
 
@@ -158,22 +158,34 @@ resource "用户注册登录" do
     end
 
     describe "重置密码失败" do
-      user_attrs = FactoryGirl.attributes_for :user
-      let(:phone) { user_attrs[:phone] }
-      let(:password) { user_attrs[:password] }
-      
-      example "用户重置密码失败（用户不存在）" do
-        do_request
-        puts response_body
-        expect(status).to eq(422)
+      before do
+        @user = create(:user)
+        header "X-User-Token", @user.authentication_token
+        header "X-User-Phone", @user.phone
       end
 
-      let(:sms_token) { "98978" }
-      example "用户重置密码失败（短信验证码不正确）" do
-        create(:user)
-        do_request
-        puts response_body
-        expect(status).to eq(422)
+      user_attrs = FactoryGirl.attributes_for :user
+      describe do 
+        let(:phone) { @user.phone }
+        let(:password) { user_attrs[:password] }
+        let(:sms_token) { "98978" }
+        example "用户重置密码失败（短信验证码不正确）" do
+          do_request
+          puts response_body
+          expect(status).to eq(422)
+        end
+      end
+
+      describe do
+        let(:phone) { @user.phone + "**" }
+        let(:password) { user_attrs[:password] }
+        let(:sms_token) { "1981" }
+
+        example "用户重置密码失败（用户不存在）" do
+          do_request
+          puts response_body
+          expect(status).to eq(422)
+        end
       end
     end
     

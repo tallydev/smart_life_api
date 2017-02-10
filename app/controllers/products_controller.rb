@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  # acts_as_token_authentication_handler_for User  request.token.any?
+  # acts_as_token_authentication_handler_for User
   before_action :set_product, only: [:show, :edit, :update, :destroy, :create_thumb, :destroy_thumb]
   
   respond_to :html, :json 
