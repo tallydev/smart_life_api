@@ -6,7 +6,7 @@ class ProductSortsController < ApplicationController
 
   def index
     # @product_sorts = ProductSort.subdistrict_is(current_user.subdistrict_id)
-    @product_sorts = ProductSort.all
+    @product_sorts = ProductSort.subdistrict_with_token(request.headers.env["HTTP_X_USER_TOKEN"])
     respond_with(@product_sorts)
   end
 
@@ -42,7 +42,7 @@ class ProductSortsController < ApplicationController
   private
     def set_product_sort
       # @product_sort = ProductSort.subdistrict_is(current_user.subdistrict_id).find(params[:id])
-      @product_sort = ProductSort.find(params[:id])
+      @product_sort = ProductSort.subdistrict_with_token(request.headers.env["HTTP_X_USER_TOKEN"]).find(params[:id])
     end
 
     def product_sort_params

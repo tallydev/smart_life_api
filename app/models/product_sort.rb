@@ -20,6 +20,7 @@ class ProductSort < ActiveRecord::Base
 
   belongs_to :subdistrict
   scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
+  scope :subdistrict_with_token, ->(token){where(subdistrict_id: token.nil? ? Subdistrict.first.id : User.where(authentication_token: token).first.subdistrict_id)}
   
   validates_presence_of :title, message: "分类名称不能为空"
   # validates_uniqueness_of :title, message: "分类名称不能重复"

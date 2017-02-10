@@ -39,6 +39,7 @@ class Product < ActiveRecord::Base
   
   belongs_to :subdistrict
   scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
+  scope :subdistrict_with_token, ->(token){where(subdistrict_id: token.nil? ? Subdistrict.first.id : User.where(authentication_token: token).first.subdistrict_id)}
 
   validates_presence_of :price, on: :create, message: "商品价格不能为空"
   validates_numericality_of :price, greater_than: 0, message: "商品价格必须是数字"
