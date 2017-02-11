@@ -113,6 +113,8 @@ zh-CN:
         after_discount: "优惠价"
         expiration_time: "到期时间"
         subdistrict_id: "社区id"
+        initial_sales: "销量初始值"
+        sales: "总销量"
       product_banner:
         back: "返回"
         thumb: "详情图" 

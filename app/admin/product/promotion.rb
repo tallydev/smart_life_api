@@ -2,7 +2,7 @@ ActiveAdmin.register Promotion do
   # menu parent: "限量销售商品相关"
   menu parent: "购物"
   actions :all
-  permit_params :id, :title, :price, :count, :expiration_time, :detail, :after_discount, product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
+  permit_params :id, :title, :price, :count, :expiration_time, :detail, :after_discount, :initial_sales,product_cover_attributes: [:id, :desc, :photo, :_destroy], product_detail_attributes: [:id, :desc, :photo, :_destroy]
   # filter :state, emun: true
   
   controller do 
@@ -56,6 +56,8 @@ ActiveAdmin.register Promotion do
     column :count
     column :expiration_time
     column :detail
+    column :initial_sales
+    column :sales
     # column :sort
     # column :created_at
     # column :updated_at
@@ -84,6 +86,7 @@ ActiveAdmin.register Promotion do
       f.input :after_discount,  min: 0
       f.input :count
       f.input :expiration_time
+      f.input :initial_sales
 
       f.input :detail
       # f.input :sort, as: :select, collection: ProductSort.all.collect(&:title)
@@ -116,6 +119,8 @@ ActiveAdmin.register Promotion do
       row :count
       row :expiration_time
       row :detail
+      row :initial_sales
+      row :sales
       # row :sort
       # row :created_at
       # row :updated_at

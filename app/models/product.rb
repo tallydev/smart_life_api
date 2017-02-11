@@ -16,6 +16,7 @@
 #  expiration_time :datetime
 #  product_type    :integer          default(0)
 #  subdistrict_id  :integer          default(1)
+#  initial_sales   :integer          default(0)
 #
 # Indexes
 #
@@ -94,8 +95,8 @@ class Product < ActiveRecord::Base
   # end
 
   def sales #销量
-    _sum = 0
+    _sum = self.initial_sales
     self.cart_items.state_is(2).each { |cart_item| _sum += cart_item.count }
-    _sum
+    _sum 
   end
 end

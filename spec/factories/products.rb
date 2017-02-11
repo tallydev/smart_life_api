@@ -16,6 +16,7 @@
 #  expiration_time :datetime
 #  product_type    :integer          default(0)
 #  subdistrict_id  :integer          default(1)
+#  initial_sales   :integer          default(0)
 #
 # Indexes
 #

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210080900) do
+ActiveRecord::Schema.define(version: 20170211003613) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -416,6 +416,7 @@ ActiveRecord::Schema.define(version: 20170210080900) do
     t.datetime "expiration_time"
     t.integer  "product_type",    limit: 4,     default: 0
     t.integer  "subdistrict_id",  limit: 4,     default: 1
+    t.integer  "initial_sales",   limit: 4,     default: 0
   end
 
   add_index "products", ["classify_id"], name: "index_products_on_classify_id", using: :btree
