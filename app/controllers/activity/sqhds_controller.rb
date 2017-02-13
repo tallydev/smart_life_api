@@ -6,7 +6,7 @@ class Activity::SqhdsController < ApplicationController
   respond_to :html, :json
 
   def index
-    p @activity_sqhds = Activity::Sqhd.all.reverse_order
+    p @activity_sqhds = Activity::Sqhd.subdistrict_is(current_user.subdistrict_id).reverse_order
     respond_with(@activity_sqhds)
   end
 

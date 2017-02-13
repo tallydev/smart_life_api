@@ -5,8 +5,8 @@ class BannersController < ApplicationController
   respond_to :html
 
   def index
-    # @banners = Banner.subdistrict_is(current_user.subdistrict_id)
-    @banners = Banner.all
+    # 没有鉴权的旧版默认显示社区Id为1内容
+    @banners = Banner.subdistrict_with_token(request.headers.env["HTTP_X_USER_TOKEN"])
     respond_with(@banners)
   end
 
@@ -22,25 +22,24 @@ class BannersController < ApplicationController
   def edit
   end
 
-  def create
-    @banner = Banner.new(banner_params)
-    @banner.save
-    respond_with(@banner)
-  end
+  # def create
+  #   @banner = Banner.subdistrict_with_token(request.headers.env["HTTP_X_USER_TOKEN"]).builde(banner_params)
+  #   @banner.save
+  #   respond_with(@banner)
+  # end
 
-  def update
-    @banner.update(banner_params)
-    respond_with(@banner)
-  end
+  # def update
+  #   @banner.update(banner_params)
+  #   respond_with(@banner)
+  # end
 
-  def destroy
-    @banner.destroy
-    respond_with(@banner)
-  end
+  # def destroy
+  #   @banner.destroy
+  #   respond_with(@banner)
+  # end
 
   private
     def set_banner
-      # @banner = Banner.subdistrict_is(current_user.subdistrict_id).find(params[:id])
       @banner = Banner.find(params[:id])
     end
 

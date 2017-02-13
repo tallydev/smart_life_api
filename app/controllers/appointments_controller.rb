@@ -27,7 +27,7 @@ class AppointmentsController < ApplicationController
   def create
     type = "Appointment::#{appointment_params[:type].capitalize}"
     count = appointment_params[:count]
-    @appointment = current_user.appointments.subdistrict_is(current_user.subdistrict_id).build(type: type, count: count)
+    @appointment = current_user.appointments.subdistrict_is(current_user.subdistrict_id).appointments.build(type: type, count: count)
     @appointment.save
     respond_with(@appointment)
   end
