@@ -102,7 +102,8 @@ class Order < ActiveRecord::Base
       _sms_content += "#{cart_item.product.title} * #{cart_item.count}, "
     end
     # 发送通知短信
-    SmsToken.order_message self.seq, _sms_content
+    _phone = AdminUser.where(subdistrict_id: self.subdistrict_id).first.try(:sms_phone)
+    SmsToken.order_message self.seq, _sms_content, _phone
   end
   # id@*@title@*@after_discount@*@price@*@count@;@ ....
   def restore_cart_item_info

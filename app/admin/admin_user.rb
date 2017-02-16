@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
   menu parent: "系统设置" 
-  permit_params :postage, :subdistrict_id, :email, :password, :password_confirmation
+  permit_params :postage, :subdistrict_id, :email, :password, :password_confirmation, :sms_phone
 
   index do
     selectable_column
@@ -11,6 +11,7 @@ ActiveAdmin.register AdminUser do
     # column :created_at
     column :postage
     column :subdistrict_id
+    column :sms_phone
     # column "所属社区" do |admin|
     #   admin.subdistrict.name
     # end
@@ -29,6 +30,7 @@ ActiveAdmin.register AdminUser do
       f.input :password_confirmation
       f.input :postage
       f.input :subdistrict_id
+      f.input :sms_phone
 
     end
     f.actions
@@ -38,6 +40,7 @@ ActiveAdmin.register AdminUser do
     attributes_table do
       row :email
       row :postage
+      row :sms_phone
       row "所属社区" do 
         admin_user.subdistrict.name
       end

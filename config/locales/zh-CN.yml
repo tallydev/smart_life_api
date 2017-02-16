@@ -31,9 +31,10 @@ zh-CN:
       admin_user:
         email: "邮箱"
         postage: "邮费"
-        subdistrict_id: "所属社区id"
+        subdistrict_id: "所属社区"
         password: "密码"
         password_confirmation: "确认密码"
+        sms_phone: "短信接收号码"
       subdistrict: 
         province: "省"
         city: "市"

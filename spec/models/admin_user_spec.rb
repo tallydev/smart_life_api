@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  postage                :float(24)
 #  subdistrict_id         :integer
+#  sms_phone              :string(191)
 #
 # Indexes
 #
