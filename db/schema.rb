@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216083812) do
+ActiveRecord::Schema.define(version: 20170216091309) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -176,6 +176,16 @@ ActiveRecord::Schema.define(version: 20170216083812) do
 
   add_index "examinations", ["date"], name: "index_examinations_on_date", using: :btree
   add_index "examinations", ["user_info_id"], name: "index_examinations_on_user_info_id", using: :btree
+
+  create_table "home_blocks", force: :cascade do |t|
+    t.integer  "admin_user_id", limit: 4
+    t.string   "title",         limit: 191
+    t.integer  "ranking",       limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "home_blocks", ["admin_user_id"], name: "index_home_blocks_on_admin_user_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "title",              limit: 191
@@ -543,6 +553,7 @@ ActiveRecord::Schema.define(version: 20170216083812) do
   add_foreign_key "cart_items", "subdistricts"
   add_foreign_key "communities", "subdistricts"
   add_foreign_key "customer_services", "subdistricts"
+  add_foreign_key "home_blocks", "admin_users"
   add_foreign_key "orders", "subdistricts"
   add_foreign_key "ping_requests", "orders"
   add_foreign_key "product_sorts", "subdistricts"

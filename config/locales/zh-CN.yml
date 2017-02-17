@@ -27,6 +27,7 @@ zh-CN:
       subdistrict: "社区"
       community: "小区"
       customer_service: "客服信息"
+      home_block: '首页模块'
     attributes:
       admin_user:
         email: "邮箱"
@@ -146,6 +147,10 @@ zh-CN:
       customer_service: 
         name: "姓名"
         phone: "电话"
+      home_block:
+        title: '模块名'
+        ranking: '排序'
+        home_block_cover: '模块封面'
 
   appointment_state:
     commited: "已提交"

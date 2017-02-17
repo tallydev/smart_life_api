@@ -15,6 +15,7 @@ class Subdistrict < ActiveRecord::Base
 	# 社区模型
 	# province 省 city 市 subdistrict 街道 
 	has_many :users
+	has_many :admin_user
 	has_many :communities
 	# has_many :sports
 	# has_many :sport_weeklies
