@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  after_filter :check_subdistrict 
+  # after_filter :check_subdistrict 
 
 
 
@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def check_subdistrict
+  # def check_subdistrict
     # current_user.check_subdistrict
- end
+ # end
 end
