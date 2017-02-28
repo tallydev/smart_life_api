@@ -13,7 +13,7 @@ class SportsController < ApplicationController
       @sport.subdistrict_id = current_user.subdistrict_id
       @sport.save  
     end
-    respond_with(@sport)
+    respond_with @sport, template: 'sports/show'
   end
 
   def daily
