@@ -6,7 +6,7 @@ class HomesController < ApplicationController
   def home_info
     @banners = Banner.subdistrict_is(current_user.subdistrict_id).all
     # @banners = Banner.all
-    @promotion = Promotion.subdistrict_is(current_user.subdistrict_id).first
+    @promotion = Promotion.subdistrict_is(current_user.subdistrict_id).for_sale.first
     @home_blocks = current_user.subdistrict.admin_user.first.try(:home_blocks)
     respond_with @banners, template: 'homes/home_info', status: 200
   end
