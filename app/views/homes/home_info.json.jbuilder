@@ -8,7 +8,7 @@ end
 # 新品上市模块
 json.newer do
   json.url image_url @promotion ? @promotion.product_cover.try(:url, :medium) : ""
-  json.end_time @promotion ? @promotion.expiration_time : Time.zone.now
+  json.end_time @promotion ? (@promotion.expiration_time || Time.zone.now) : Time.zone.now
 end
 
 # 首页模块信息
