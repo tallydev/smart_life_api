@@ -23,10 +23,12 @@ class AppointmentsController < ApplicationController
 
   def edit
   end
-
+# Appointment.all.each do |appt|
+#   if appt.user && appt.user
   def create
     type = "Appointment::#{appointment_params[:type].capitalize}"
     count = appointment_params[:count]
+    p current_user.appointments.subdistrict_is(current_user.subdistrict_id)
     @appointment = current_user.appointments.subdistrict_is(current_user.subdistrict_id).build(type: type, count: count)
     @appointment.save
     respond_with(@appointment)
