@@ -17,7 +17,9 @@ class Activity::SqhdsController < ApplicationController
   def appoint
     type = "Appointment::Sqhd"
     count = appointment_params[:count]
-    @appointment = current_user.appointments.build(type: type, count: count, aptable: @activity_sqhd)
+    @appointment = current_user.appointments.subdistrict_is(current_user.subdistrict_id).build(
+      type: type, count: count, aptable: @activity_sqhd
+      )
     @appointment.save
     respond_with(@appointment, template: "appointments/show")
   end

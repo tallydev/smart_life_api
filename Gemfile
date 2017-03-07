@@ -74,6 +74,8 @@ gem 'font-awesome-sass-rails'
 # Rails plugin for a database-independent dump format, data.yml
 # Read more: https://github.com/yamldb/yaml_db
 gem 'yaml_db'
+# Ckeditor integration gem for rails http://ckeditor.com/
+gem 'ckeditor'
 ##################################################################
 
 # Use Unicorn as the app server
