@@ -17,6 +17,7 @@ class Subdistrict < ActiveRecord::Base
 	has_many :users
 	has_many :admin_user
 	has_many :communities
+	has_many :home_blocks
 	# has_many :sports
 	# has_many :sport_weeklies
 	# has_many :sport_monthlies

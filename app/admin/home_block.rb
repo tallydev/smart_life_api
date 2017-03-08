@@ -8,12 +8,12 @@ ActiveAdmin.register HomeBlock do
     #更改默认搜索范围
     #index仅显示 当前社区中 正在销售的商品
     def scoped_collection
-      current_admin_user.home_blocks
+      current_admin_user.subdistrict.home_blocks
     end
 
     def create
       super
-      @home_block.admin_user_id = current_admin_user.id
+      @home_block.subdistrict_id = current_admin_user.subdistrict_id
       @home_block.save
     end
 

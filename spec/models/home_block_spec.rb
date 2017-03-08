@@ -2,16 +2,16 @@
 #
 # Table name: home_blocks
 #
-#  id            :integer          not null, primary key
-#  admin_user_id :integer
-#  title         :string(191)
-#  ranking       :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id             :integer          not null, primary key
+#  title          :string(191)
+#  ranking        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  subdistrict_id :integer
 #
 # Indexes
 #
-#  index_home_blocks_on_admin_user_id  (admin_user_id)
+#  fk_rails_96bf08918a  (subdistrict_id)
 #
 
 require 'rails_helper'

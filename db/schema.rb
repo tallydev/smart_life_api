@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308015705) do
+ActiveRecord::Schema.define(version: 20170308025445) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -178,14 +178,14 @@ ActiveRecord::Schema.define(version: 20170308015705) do
   add_index "examinations", ["user_info_id"], name: "index_examinations_on_user_info_id", using: :btree
 
   create_table "home_blocks", force: :cascade do |t|
-    t.integer  "admin_user_id", limit: 4
-    t.string   "title",         limit: 191
-    t.integer  "ranking",       limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "title",          limit: 191
+    t.integer  "ranking",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "subdistrict_id", limit: 4
   end
 
-  add_index "home_blocks", ["admin_user_id"], name: "index_home_blocks_on_admin_user_id", using: :btree
+  add_index "home_blocks", ["subdistrict_id"], name: "fk_rails_96bf08918a", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "title",              limit: 191
@@ -575,7 +575,7 @@ ActiveRecord::Schema.define(version: 20170308015705) do
   add_foreign_key "cart_items", "subdistricts"
   add_foreign_key "communities", "subdistricts"
   add_foreign_key "customer_services", "subdistricts"
-  add_foreign_key "home_blocks", "admin_users"
+  add_foreign_key "home_blocks", "subdistricts"
   add_foreign_key "news", "news_sorts"
   add_foreign_key "news", "subdistricts"
   add_foreign_key "news_sorts", "subdistricts"
