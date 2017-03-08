@@ -21,5 +21,6 @@ class NewsSort < ActiveRecord::Base
   accepts_nested_attributes_for :news_sort_cover, allow_destroy: true
 
   default_scope {order(:rank)}
+  scope :title_is, -> (title) { where(title: title)}
 
 end

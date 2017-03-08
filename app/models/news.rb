@@ -23,4 +23,9 @@ class News < ActiveRecord::Base
   accepts_nested_attributes_for :news_cover, allow_destroy: true
   has_one :news_detail, -> { where photo_type: "news_detail" }, class_name: "Image", as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :news_detail, allow_destroy: true
+
+ 	def sort
+	  #定义方法 activeadmin中可以使用为 f.input :sort
+	  self.news_sort.try(:title)
+	end
 end

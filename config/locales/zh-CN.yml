@@ -28,6 +28,8 @@ zh-CN:
       community: "小区"
       customer_service: "客服信息"
       home_block: '首页模块'
+      news: 新闻
+      news_sort: 新闻分类
     attributes:
       admin_user:
         email: "邮箱"
@@ -151,6 +153,15 @@ zh-CN:
         title: '模块名'
         ranking: '排序'
         home_block_cover: '模块封面'
+      news:
+        title: 标题
+        content: 内容
+        news_cover: 封面图
+        sort: 新闻分类
+      news_sort: 
+        title: 标题
+        rank: 排序
+        news_sort_cover: 封面图
 
   appointment_state:
     commited: "已提交"
