@@ -3,7 +3,7 @@ require 'acceptance_helper'
 resource "用户注册登录" do
   header "Accept", "application/json"
   before do 
-    # create(:subdistrict)
+    @subdistrict = create(:subdistrict, id: 1)
   end
 
   post "/users" do

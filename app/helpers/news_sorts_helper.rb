@@ -1,0 +1,2 @@
+module NewsSortsHelper
+end

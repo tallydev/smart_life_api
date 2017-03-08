@@ -9,18 +9,30 @@ resource "订单与支付相关接口" do
 	# header "X-User-Phone", user_attrs[:phone]
 
 	before do 
-    @AdminUser = create(:admin_user, postage: 10.0)
-		@products = create_list(:product, 3)
-    @user = create(:user)
-    @contact = create(:contact)
+    @subdistrict = create(:subdistrict, id: 1)
+    @AdminUser = create(:admin_user, 
+      postage: 10.0, 
+      subdistrict: @subdistrict
+      )
+		@products = create_list(:product, 3,
+      subdistrict: @subdistrict)
+    @user = create(:user, subdistrict: @subdistrict)
+    @contact = create(:contact, user: @user)
     
-    @orders = create_list(:order, 2, user: @user, contact_id: @contact.id)
+    @orders = create_list(:order, 2, user: @user, contact_id: @contact.id, subdistrict: @subdistrict)
     @cart_item1 = create(:cart_item, user: @user, product: @products.first,
                           order: @orders.first)
-    @cart_item2 = create(:cart_item, user: @user, product: @products.second)
-    @cart_item3 = create(:cart_item, user: @user, product: @products.last)
-    @cart_item4 = create(:cart_item, user: @user, product: @products.last,
-                                      count: 100)
+    @cart_item2 = create(:cart_item, user: @user, 
+      product: @products.second, subdistrict: @subdistrict
+      )
+    @cart_item3 = create(:cart_item, user: @user, 
+      product: @products.last, 
+      subdistrict: @subdistrict
+      )
+    @cart_item4 = create(:cart_item, user: @user, 
+      product: @products.last, count: 100, 
+      subdistrict: @subdistrict
+      )
     header "X-User-Token", @user.authentication_token
     header "X-User-Phone", @user.phone
   end
@@ -83,7 +95,7 @@ resource "订单与支付相关接口" do
     parameter :contact_id, "联系人id", required: true, scope: :order
 
     before do 
-      p @promotion = create(:promotion, product_type: 1, count: 5)
+      p @promotion = create(:promotion, product_type: 1, count: 5, subdistrict: @subdistrict)
       # p "+====================================="
       # p Product.all 
       # p "+====================================="

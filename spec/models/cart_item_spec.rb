@@ -11,7 +11,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  order_id       :integer
-#  subdistrict_id :integer          default(1)
+#  subdistrict_id :integer
 #
 # Indexes
 #

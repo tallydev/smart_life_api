@@ -1,333 +1,334 @@
-# require "acceptance_helper"
+require "acceptance_helper"
 
-# resource "购物相关接口" do
-#   header "Accept", "application/json"
+resource "购物相关接口" do
+  header "Accept", "application/json"
 
-#   describe '商品的相关接口' do
-#     # user_attrs = FactoryGirl.attributes_for(:user)
+  describe '商品的相关接口' do
+    # user_attrs = FactoryGirl.attributes_for(:user)
 
-#     # header "X-User-Token", user_attrs[:authentication_token]
-#     # header "X-User-Phone", user_attrs[:phone]
+    # header "X-User-Token", user_attrs[:authentication_token]
+    # header "X-User-Phone", user_attrs[:phone]
 
-#     before do
-#       @user = create(:user)
-#       @subdistrict = create(:subdistrict)
-#       header "X-User-Token", @user.authentication_token
-#       header "X-User-Phone", @user.phone
-#     end
+    before do
+      @subdistrict = create(:subdistrict)
+      @user = create(:user)
+      header "X-User-Token", @user.authentication_token
+      header "X-User-Phone", @user.phone
+    end
 
-#     get 'products' do
-#       parameter :page, "页码", required: false
-#       parameter :per_page, "每页个数", required: false
+    get 'products' do
+      parameter :page, "页码", required: false
+      parameter :per_page, "每页个数", required: false
       
-#       let(:page) { 1 }
-#       let(:per_page) { 10 }
+      let(:page) { 1 }
+      let(:per_page) { 10 }
 
-#       before do
-#         @products = create_list(:product, 3, subdistrict: @subdistrict)
-#       end
+      before do
+        @products = create_list(:product, 3, subdistrict: @subdistrict)
+      end
 
-#       example "查看商品列表" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 200
-#       end
-#     end
+      example "查看商品列表" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
 
-#     get 'products/sort' do
-#       parameter :page, "页码", required: false
-#       parameter :per_page, "每页个数", required: false
-#       parameter :product_sort_id, "商品类别id", required: true
+    get 'products/sort' do
+      parameter :page, "页码", required: false
+      parameter :per_page, "每页个数", required: false
+      parameter :product_sort_id, "商品类别id", required: true
 
-#       let(:page) { 1 }
-#       let(:per_page) { 10 }
+      let(:page) { 1 }
+      let(:per_page) { 10 }
 
-#       before do
-#         @products = create_list(:product, 3)
-#         @product_sort = create(:product_sort, title: "我是分类")
-#         @products.second.product_sort_id = @product_sort.id 
-#         @products.second.save
-#       end
+      before do
+        @products = create_list(:product, 3)
+        @product_sort = create(:product_sort, title: "我是分类")
+        @products.second.product_sort_id = @product_sort.id 
+        @products.second.save
+      end
 
-#       let(:product_sort_id) { @product_sort.id }
+      let(:product_sort_id) { @product_sort.id }
 
-#       example "按类别 查询 商品列表" do
-#         do_request
-#         p "====+++====+++=="
-#         p @user
-#         puts response_body
-#         expect(status).to eq 200
-#       end
-#     end
+      example "按类别 查询 商品列表" do
+        do_request
+        p "====+++====+++=="
+        p @user
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
 
-#     get 'products/:id' do
-#       before do
-#         @product = create(:product)
-#       end
-#       let(:id) { @product.id }
+    get 'products/:id' do
+      before do
+        @product = create(:product)
+      end
+      let(:id) { @product.id }
 
-#       example "查看指定商品详情" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 200
-#       end
+      example "查看指定商品详情" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
       
-#     end  
-#   end
+    end  
+  end
 
-#   describe '购物车的相关接口' do
-#     # user_attrs = FactoryGirl.attributes_for(:user)
+  describe '购物车的相关接口' do
+    # user_attrs = FactoryGirl.attributes_for(:user)
 
-#     # header "X-User-Token", user_attrs[:authentication_token]
-#     # header "X-User-Phone", user_attrs[:phone]
+    # header "X-User-Token", user_attrs[:authentication_token]
+    # header "X-User-Phone", user_attrs[:phone]
 
-#     before do
-#       @products = create_list(:product, 3)
-#       @user = create(:user)
-#       create(:cart_item, user: @user, product: @products.first, count: 1)
-#       header "X-User-Token", @user.authentication_token
-#       header "X-User-Phone", @user.phone
-#     end
+    before do
+      @products = create_list(:product, 3)
+      @user = create(:user)
+      create(:cart_item, user: @user, product: @products.first, count: 1)
+      header "X-User-Token", @user.authentication_token
+      header "X-User-Phone", @user.phone
+    end
 
-#     post 'cart_items' do
-#       parameter :product_id, "产品的id", require: true, scope: :cart_item
-#       parameter :count, "产品的数量", require: true, scope: :cart_item
+    post 'cart_items' do
+      parameter :product_id, "产品的id", require: true, scope: :cart_item
+      parameter :count, "产品的数量", require: true, scope: :cart_item
 
-#       let(:product_id) { @products.first.id }
-#       let(:count) { 2 }
+      let(:product_id) { @products.first.id }
+      let(:count) { 2 }
 
-#       example "增加购物车一个项目" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 201 
-#       end
-#     end
+      example "增加购物车一个项目" do
+        do_request
+        puts response_body
+        expect(status).to eq 201 
+      end
+    end
 
-#     get 'cart_items' do
-#       parameter :page, "页码", required: false
-#       parameter :per_page, "每页个数", required: false
+    get 'cart_items' do
+      parameter :page, "页码", required: false
+      parameter :per_page, "每页个数", required: false
       
-#       let(:page) { 1 }
-#       let(:per_page) { 10 }
+      let(:page) { 1 }
+      let(:per_page) { 10 }
 
-#       before do
-#         @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
-#         p @cart_items.first.paid!
-#         p @cart_items
-#       end
+      before do
+        @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
+        p @cart_items.first.paid!
+        p @cart_items
+      end
 
-#       example "查看用户的购物车列表(购物中、已下架与库存不足）" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 200
-#       end
-#     end
+      example "查看用户的购物车列表(购物中、已下架与库存不足）" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
 
-#     get 'cart_items/:id' do
-#       before do
-#         @cart_item = create(:cart_item, user: @user, product: @products.first)
-#       end
+    get 'cart_items/:id' do
+      before do
+        @cart_item = create(:cart_item, user: @user, product: @products.first)
+      end
 
-#       let(:id) { @cart_item.id }
+      let(:id) { @cart_item.id }
 
-#       example "查看购物车单项详情" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(200)
-#       end
-#     end
+      example "查看购物车单项详情" do
+        do_request
+        puts response_body
+        expect(status).to eq(200)
+      end
+    end
 
-#     put 'cart_items/:id' do
-#       before do
-#         @cart_item = create(:cart_item, user: @user, product: @products.first)
-#       end
+    put 'cart_items/:id' do
+      before do
+        @cart_item = create(:cart_item, user: @user, product: @products.first)
+      end
 
-#       parameter :count, "产品的数量", require: true, scope: :cart_item
+      parameter :count, "产品的数量", require: true, scope: :cart_item
 
-#       let(:id) { @cart_item.id }
-#       let(:count) { 2 }
+      let(:id) { @cart_item.id }
+      let(:count) { 2 }
 
-#       example "修改购物车的数量成功" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(200)
-#       end
-#     end
+      example "修改购物车的数量成功" do
+        do_request
+        puts response_body
+        expect(status).to eq(200)
+      end
+    end
 
-#     put 'cart_items/:id' do
-#       before do
-#         @cart_item = create(:cart_item, user: @user, product: @products.first)
-#       end
+    put 'cart_items/:id' do
+      before do
+        @cart_item = create(:cart_item, user: @user, product: @products.first)
+      end
 
-#       parameter :count, "产品的数量", require: true, scope: :cart_item
+      parameter :count, "产品的数量", require: true, scope: :cart_item
 
-#       let(:id) { @cart_item.id }
-#       let(:count) { -1 }
+      let(:id) { @cart_item.id }
+      let(:count) { -1 }
 
-#       example "修改购物车的数量失败（购买的产品数量小于等于0）" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(422)
-#       end
-#     end
+      example "修改购物车的数量失败（购买的产品数量小于等于0）" do
+        do_request
+        puts response_body
+        expect(status).to eq(422)
+      end
+    end
 
-#     delete 'cart_items/:id' do
-#       before do
-#         @cart_item = create(:cart_item, user: @user, product: @products.first)
-#       end
+    delete 'cart_items/:id' do
+      before do
+        @cart_item = create(:cart_item, user: @user, product: @products.first)
+      end
 
-#       let(:id) { @cart_item.id }
+      let(:id) { @cart_item.id }
 
-#       example "删除（取消）购物车的物品" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(204)
-#       end
-#     end
+      example "删除（取消）购物车的物品" do
+        do_request
+        puts response_body
+        expect(status).to eq(204)
+      end
+    end
 
-#     # post 'cart_items/pay' do
-#     #   before do
-#     #     @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
-#     #   end
+    # post 'cart_items/pay' do
+    #   before do
+    #     @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
+    #   end
 
-#     #   parameter :cart_item_ids, "需要支付的购物清单列表", require: true, scope: :cart_item
+    #   parameter :cart_item_ids, "需要支付的购物清单列表", require: true, scope: :cart_item
 
-#     #   let(:cart_item_ids) { @cart_items.map(&:id) }
+    #   let(:cart_item_ids) { @cart_items.map(&:id) }
 
-#     #   example "支付购物列表成功" do
-#     #     do_request
-#     #     puts response_body
-#     #     expect(status).to eq 201
-#     #   end
-#     # end
-#   end
+    #   example "支付购物列表成功" do
+    #     do_request
+    #     puts response_body
+    #     expect(status).to eq 201
+    #   endZZ
+    # end
+  end
 
-#   describe '用户地址管理相关接口' do
-#     user_attrs = FactoryGirl.attributes_for(:user)
-#     # contact_attrs = FactoryGirl.attributes_for(:contact)
+  describe '用户地址管理相关接口' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    contact_attrs = FactoryGirl.attributes_for(:contact)
+    # contact_attrs = FactoryGirl.attributes_for(:contact)
 
-#     # header "X-User-Token", user_attrs[:authentication_token]
-#     # header "X-User-Phone", user_attrs[:phone]
+    # header "X-User-Token", user_attrs[:authentication_token]
+    # header "X-User-Phone", user_attrs[:phone]
 
-#     before do
-#       @user = create(:user)
-#       @contacts = create_list(:contact, 3, user: @user)
-#       header "X-User-Token", @user.authentication_token
-#       header "X-User-Phone", @user.phone
-#     end
+    before do
+      @user = create(:user)
+      @contacts = create_list(:contact, 3, user: @user)
+      header "X-User-Token", @user.authentication_token
+      header "X-User-Phone", @user.phone
+    end
 
-#     post 'contacts' do
-#       parameter :name, "联系人名称", require: true, scope: :contact
-#       parameter :phone, "联系人电话", require: true, scope: :contact
-#       parameter :area, "联系人社区所属地区", require: true, scope: :contact
-#       parameter :street, "联系人社区所属街道", require: true, scope: :contact
-#       parameter :community, "联系人社区", require: true, scope: :contact
-#       parameter :address, "联系人地址", require: true, scope: :contact
-#       parameter :is_default, "是否默认地址", require: true, scope: :contact
+    post 'contacts' do
+      parameter :name, "联系人名称", require: true, scope: :contact
+      parameter :phone, "联系人电话", require: true, scope: :contact
+      parameter :area, "联系人社区所属地区", require: true, scope: :contact
+      parameter :street, "联系人社区所属街道", require: true, scope: :contact
+      parameter :community, "联系人社区", require: true, scope: :contact
+      parameter :address, "联系人地址", require: true, scope: :contact
+      parameter :is_default, "是否默认地址", require: true, scope: :contact
 
-#       let(:name) { contact_attrs[:name] }
-#       let(:phone) { contact_attrs[:phone] }
-#       let(:area) { contact_attrs[:area] }
-#       let(:street) { contact_attrs[:street] }
-#       let(:community) { contact_attrs[:community] }
-#       let(:address) { contact_attrs[:address] }
-#       let(:is_default) { contact_attrs[:is_default] }
+      let(:name) { contact_attrs[:name] }
+      let(:phone) { contact_attrs[:phone] }
+      let(:area) { contact_attrs[:area] }
+      let(:street) { contact_attrs[:street] }
+      let(:community) { contact_attrs[:community] }
+      let(:address) { contact_attrs[:address] }
+      let(:is_default) { contact_attrs[:is_default] }
 
-#       example "增加一个联系人" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 201 
-#       end
-#     end
+      example "增加一个联系人" do
+        do_request
+        puts response_body
+        expect(status).to eq 201 
+      end
+    end
 
-#     get 'contacts' do
+    get 'contacts' do
 
-#       example "查看用户联系人列表" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 200
-#       end
-#     end
+      example "查看用户联系人列表" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
 
-#     get 'contacts/:id' do
+    get 'contacts/:id' do
 
-#       let(:id) { @contacts.first.id }
+      let(:id) { @contacts.first.id }
 
-#       example "查看用户联系人详情" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(200)
-#       end
-#     end
+      example "查看用户联系人详情" do
+        do_request
+        puts response_body
+        expect(status).to eq(200)
+      end
+    end
 
-#     put 'contacts/:id' do
+    put 'contacts/:id' do
 
-#       parameter :name, "联系人名称", require: true, scope: :contact
-#       parameter :phone, "联系人电话", require: true, scope: :contact
-#       parameter :area, "联系人社区所属地区", require: true, scope: :contact
-#       parameter :street, "联系人社区所属街道", require: true, scope: :contact
-#       parameter :community, "联系人社区", require: true, scope: :contact
-#       parameter :address, "联系人地址", require: true, scope: :contact
-#       parameter :is_default, "是否默认地址", require: true, scope: :contact
+      parameter :name, "联系人名称", require: true, scope: :contact
+      parameter :phone, "联系人电话", require: true, scope: :contact
+      parameter :area, "联系人社区所属地区", require: true, scope: :contact
+      parameter :street, "联系人社区所属街道", require: true, scope: :contact
+      parameter :community, "联系人社区", require: true, scope: :contact
+      parameter :address, "联系人地址", require: true, scope: :contact
+      parameter :is_default, "是否默认地址", require: true, scope: :contact
 
-#       let(:name) { contact_attrs[:name] }
-#       let(:phone) { contact_attrs[:phone] }
-#       let(:area) { contact_attrs[:area] }
-#       let(:street) { contact_attrs[:street] }
-#       let(:community) { contact_attrs[:community] }
-#       let(:address) { contact_attrs[:address] }
-#       let(:is_default) { contact_attrs[:is_default] }
-#       let(:id) { @contacts.first.id }
+      let(:name) { contact_attrs[:name] }
+      let(:phone) { contact_attrs[:phone] }
+      let(:area) { contact_attrs[:area] }
+      let(:street) { contact_attrs[:street] }
+      let(:community) { contact_attrs[:community] }
+      let(:address) { contact_attrs[:address] }
+      let(:is_default) { contact_attrs[:is_default] }
+      let(:id) { @contacts.first.id }
 
-#       example "修改用户联系人信息成功" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(200)
-#       end
-#     end
+      example "修改用户联系人信息成功" do
+        do_request
+        puts response_body
+        expect(status).to eq(200)
+      end
+    end
 
-#     delete 'contacts/:id' do
+    delete 'contacts/:id' do
 
-#       let(:id) { @contacts.first.id }
+      let(:id) { @contacts.first.id }
 
-#       example "删除用户联系人信息成功" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq(204)
-#       end
-#     end
-#   end
+      example "删除用户联系人信息成功" do
+        do_request
+        puts response_body
+        expect(status).to eq(204)
+      end
+    end
+  end
 
-#   describe "商品分类项目相关接口" do
-#     # user_attrs = FactoryGirl.attributes_for(:user)
+  describe "商品分类项目相关接口" do
+    # user_attrs = FactoryGirl.attributes_for(:user)
 
-#     # header "X-User-Token", user_attrs[:authentication_token]
-#     # header "X-User-Phone", user_attrs[:phone]
+    # header "X-User-Token", user_attrs[:authentication_token]
+    # header "X-User-Phone", user_attrs[:phone]
 
-#     before do
-#       @user = create(:user)
-#       @product_sorts = create_list(:product_sort, 3)
-#       header "X-User-Token", @user.authentication_token
-#       header "X-User-Phone", @user.phone
-#     end
+    before do
+      @user = create(:user)
+      @product_sorts = create_list(:product_sort, 3)
+      header "X-User-Token", @user.authentication_token
+      header "X-User-Phone", @user.phone
+    end
 
-#     get 'product_sorts' do
+    get 'product_sorts' do
 
-#       example "查看商品分类项目 列表" do
-#         do_request
-#         puts response_body
-#         expect(status).to eq 200
-#       end
-#     end
+      example "查看商品分类项目 列表" do
+        do_request
+        puts response_body
+        expect(status).to eq 200
+      end
+    end
 
-#     # get 'product_sorts/:id' do
+    # get 'product_sorts/:id' do
 
-#     #   example "查看用户联系人列表" do
-#     #     do_request
-#     #     puts response_body
-#     #     expect(status).to eq 200
-#     #   end
-#     # end
-#   end
+    #   example "查看用户联系人列表" do
+    #     do_request
+    #     puts response_body
+    #     expect(status).to eq 200
+    #   end
+    # end
+  end
 
-# end
+end

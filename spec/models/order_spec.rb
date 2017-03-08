@@ -13,7 +13,7 @@
 #  updated_at     :datetime         not null
 #  postage        :float(24)        default(0.0)
 #  paid_time      :datetime
-#  subdistrict_id :integer          default(1)
+#  subdistrict_id :integer
 #  order_type     :string(191)      default("精品超市")
 #  cart_item_info :text(65535)
 #

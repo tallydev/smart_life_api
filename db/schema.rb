@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307090319) do
+ActiveRecord::Schema.define(version: 20170308012600) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -63,13 +63,13 @@ ActiveRecord::Schema.define(version: 20170307090319) do
     t.integer  "user_id",        limit: 4
     t.string   "idname",         limit: 191
     t.string   "type",           limit: 191
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "count",          limit: 4
     t.integer  "state",          limit: 4
     t.integer  "aptable_id",     limit: 4
     t.string   "aptable_type",   limit: 191
-    t.integer  "subdistrict_id", limit: 4,   default: 1
+    t.integer  "subdistrict_id", limit: 4
   end
 
   add_index "appointments", ["aptable_type", "aptable_id"], name: "index_appointments_on_aptable_type_and_aptable_id", using: :btree
@@ -94,10 +94,10 @@ ActiveRecord::Schema.define(version: 20170307090319) do
     t.integer  "count",          limit: 4
     t.float    "amount",         limit: 24
     t.integer  "state",          limit: 4
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "order_id",       limit: 4
-    t.integer  "subdistrict_id", limit: 4,  default: 1
+    t.integer  "subdistrict_id", limit: 4
   end
 
   add_index "cart_items", ["order_id"], name: "index_cart_items_on_order_id", using: :btree
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 20170307090319) do
     t.datetime "updated_at",                                    null: false
     t.float    "postage",        limit: 24,    default: 0.0
     t.datetime "paid_time"
-    t.integer  "subdistrict_id", limit: 4,     default: 1
+    t.integer  "subdistrict_id", limit: 4
     t.string   "order_type",     limit: 191,   default: "精品超市"
     t.text     "cart_item_info", limit: 65535
   end
@@ -423,9 +423,9 @@ ActiveRecord::Schema.define(version: 20170307090319) do
 
   create_table "product_sorts", force: :cascade do |t|
     t.string   "title",          limit: 191
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "subdistrict_id", limit: 4,   default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "subdistrict_id", limit: 4
   end
 
   add_index "product_sorts", ["subdistrict_id"], name: "fk_rails_33238a7e68", using: :btree
@@ -443,7 +443,7 @@ ActiveRecord::Schema.define(version: 20170307090319) do
     t.float    "after_discount",  limit: 24
     t.datetime "expiration_time"
     t.integer  "product_type",    limit: 4,     default: 0
-    t.integer  "subdistrict_id",  limit: 4,     default: 1
+    t.integer  "subdistrict_id",  limit: 4
     t.integer  "initial_sales",   limit: 4,     default: 0
   end
 

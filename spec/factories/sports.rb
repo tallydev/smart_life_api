@@ -26,5 +26,5 @@ FactoryGirl.define do
     count 1
     platform "ios"
     version 10
-  end
+   end
 end

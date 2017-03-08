@@ -1,0 +1,17 @@
+<%= form_for(@news_sort) do |f| %>
+  <% if @news_sort.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@news_sort.errors.count, "error") %> prohibited this news_sort from being saved:</h2>
+
+      <ul>
+      <% @news_sort.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -13,7 +13,7 @@
 #  updated_at     :datetime         not null
 #  postage        :float(24)        default(0.0)
 #  paid_time      :datetime
-#  subdistrict_id :integer          default(1)
+#  subdistrict_id :integer
 #  order_type     :string(191)      default("精品超市")
 #  cart_item_info :text(65535)
 #
@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
   scope :subdistrict_is, ->(subdistrict_id){where(subdistrict_id: subdistrict_id)}
   
   before_save :cal_price
-  before_save :set_subdistrict_id
+  after_save :set_subdistrict_id
 	after_create :set_seq
 
   default_scope {order("created_at DESC")}
@@ -121,7 +121,6 @@ class Order < ActiveRecord::Base
   	ActiveRecord::Base.transaction do  
   	  _order = Order.new(user_id: user_id, contact_id: contact_id)
       _order.save!
-
       ids = ids.split(",").map {|x| x.to_i } if ids.is_a?(String) #postman 测试时
       CartItem.in_ids(ids).each do |cart_item|
     		_product = cart_item.product

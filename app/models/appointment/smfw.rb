@@ -12,7 +12,7 @@
 #  state          :integer
 #  aptable_id     :integer
 #  aptable_type   :string(191)
-#  subdistrict_id :integer          default(1)
+#  subdistrict_id :integer
 #
 # Indexes
 #

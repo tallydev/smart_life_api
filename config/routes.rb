@@ -96,6 +96,10 @@ Rails.application.routes.draw do
       get ':item', action: :show
     end
   end
+  resources :news_sorts, only: [:index, :show] do 
+    resources :news, only: [:index, :show]
+  end
+
   ##########################################################
   ##
   ################  客服信息相关的接口路由   ###################

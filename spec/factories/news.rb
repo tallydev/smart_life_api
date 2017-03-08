@@ -16,8 +16,9 @@
 
 FactoryGirl.define do
   factory :news do
-    news_sort nil
-    title "MyString"
-    content "MyText"
+    title "我是新闻标题"
+    content "我是新闻内容"
+    association :news_cover, factory: :image, photo_type: "news_cover"
+    association :news_detail, factory: :image, photo_type: "news_detail"
   end
 end

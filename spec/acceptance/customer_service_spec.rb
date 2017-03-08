@@ -7,6 +7,7 @@ resource "客服信息相关接口" do
   # header "X-User-Token", user_attrs[:authentication_token]
   # header "X-User-Phone", user_attrs[:phone]
   before do
+    @subdistrict = create(:subdistrict, id: 1)
   	@user = create(:user)
     @customer_services = create_list(:customer_service, 3)
     header "X-User-Token", @user.authentication_token

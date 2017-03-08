@@ -15,7 +15,7 @@
 #  after_discount  :float(24)
 #  expiration_time :datetime
 #  product_type    :integer          default(0)
-#  subdistrict_id  :integer          default(1)
+#  subdistrict_id  :integer
 #  initial_sales   :integer          default(0)
 #
 # Indexes

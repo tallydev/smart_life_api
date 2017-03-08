@@ -9,7 +9,8 @@ resource "预约相关接口" do
   # header "X-User-Phone", user_attrs[:phone]
 
   before do
-    @user = create(:user)
+  	@subdistrict = create(:subdistrict)
+    @user = create(:user, subdistrict: @subdistrict)
     header "X-User-Token", @user.authentication_token
     header "X-User-Phone", @user.phone
   end

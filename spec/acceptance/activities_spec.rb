@@ -9,7 +9,8 @@ resource "活动相关接口" do
   # header "X-User-Phone", user_attrs[:phone]
 
   before do
-    @user = create(:user)
+    @subdistrict = create(:subdistrict, id: 1)
+    @user = create(:user, subdistrict: @subdistrict)
     header "X-User-Token", @user.authentication_token
     header "X-User-Phone", @user.phone
   end
@@ -17,7 +18,7 @@ resource "活动相关接口" do
   get 'activity/sqhds' do
     
     before do
-      @appointments = create_list(:activity_sqhd, 3)
+      @appointments = create_list(:activity_sqhd, 3, subdistrict: @subdistrict)
     end
 
     example "社区活动列表查询" do
@@ -29,7 +30,7 @@ resource "活动相关接口" do
 
   post 'activity/sqhds/:id/appoint' do
     before do
-      @appointment = create(:activity_sqhd)
+      @appointment = create(:activity_sqhd, subdistrict: @subdistrict)
     end
 
     parameter :count, "预约的人数", require: true, scope: :appointment

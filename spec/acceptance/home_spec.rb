@@ -9,11 +9,26 @@ resource "主页相关接口" do
   # header "X-User-Phone", user_attrs[:phone]
 
   before do
-    @user = create(:user)
+    @subdistrict = create(:subdistrict, id: 1)
+    @user = create(:user, subdistrict: @subdistrict)
+    # 去除分社区 
+    [ Sport, Sport::Weekly, Sport::Monthly, Sport::Yearly ].each do |name|
+      name.class_exec{
+        def self.get_const(id) 
+          Object.const_get(name)
+        end
+      }
+    end
+
+    @sports =  create_list(:sport, 3, user: @user)
     create_list(:banner, 2)
+    
+
     header "X-User-Token", @user.authentication_token
     header "X-User-Phone", @user.phone
+
   end
+  
 
   get 'home' do
     example "用户获取主页 步数" do

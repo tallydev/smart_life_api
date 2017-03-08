@@ -11,7 +11,8 @@
 
 FactoryGirl.define do
   factory :news_sort do
-    rank 1
-    title "MyString"
+    sequence(:title) { |n| n }
+    sequence(:title) { |n| "市区动态#{n}" }
+    association :news_sort_icon, factory: :image, photo_type: "news_sort_icon"
   end
 end
