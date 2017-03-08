@@ -14,6 +14,13 @@ resource "购物相关接口" do
       @user = create(:user, subdistrict: @subdistrict)
       header "X-User-Token", @user.authentication_token
       header "X-User-Phone", @user.phone
+      @products = create_list(:product, 3, subdistrict: @subdistrict)
+
+      @product_sort = create(:product_sort, 
+        title: "我是分类", subdistrict: @subdistrict
+        )
+      @products.second.product_sort_id = @product_sort.id 
+      @products.second.save
     end
 
     get 'products' do
@@ -22,10 +29,6 @@ resource "购物相关接口" do
       
       let(:page) { 1 }
       let(:per_page) { 10 }
-
-      before do
-        @products = create_list(:product, 3, subdistrict: @subdistrict)
-      end
 
       example "查看商品列表" do
         do_request
@@ -42,13 +45,6 @@ resource "购物相关接口" do
       let(:page) { 1 }
       let(:per_page) { 10 }
 
-      before do
-        @products = create_list(:product, 3)
-        @product_sort = create(:product_sort, title: "我是分类")
-        @products.second.product_sort_id = @product_sort.id 
-        @products.second.save
-      end
-
       let(:product_sort_id) { @product_sort.id }
 
       example "按类别 查询 商品列表" do
@@ -61,10 +57,8 @@ resource "购物相关接口" do
     end
 
     get 'products/:id' do
-      before do
-        @product = create(:product)
-      end
-      let(:id) { @product.id }
+
+      let(:id) { @products.first.id }
 
       example "查看指定商品详情" do
         do_request
@@ -82,11 +76,16 @@ resource "购物相关接口" do
     # header "X-User-Phone", user_attrs[:phone]
 
     before do
-      @products = create_list(:product, 3)
-      @user = create(:user)
+      @subdistrict = create(:subdistrict)
+      @products = create_list(:product, 3, subdistrict: @subdistrict)
+      @user = create(:user, subdistrict: @subdistrict)
       create(:cart_item, user: @user, product: @products.first, count: 1)
       header "X-User-Token", @user.authentication_token
       header "X-User-Phone", @user.phone
+
+      @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
+      p @cart_items.second.paid!
+      p @cart_items
     end
 
     post 'cart_items' do
@@ -110,12 +109,6 @@ resource "购物相关接口" do
       let(:page) { 1 }
       let(:per_page) { 10 }
 
-      before do
-        @cart_items = create_list(:cart_item, 3, user: @user, product: @products.first)
-        p @cart_items.first.paid!
-        p @cart_items
-      end
-
       example "查看用户的购物车列表(购物中、已下架与库存不足）" do
         do_request
         puts response_body
@@ -124,11 +117,8 @@ resource "购物相关接口" do
     end
 
     get 'cart_items/:id' do
-      before do
-        @cart_item = create(:cart_item, user: @user, product: @products.first)
-      end
 
-      let(:id) { @cart_item.id }
+      let(:id) { @cart_items.first.id }
 
       example "查看购物车单项详情" do
         do_request
@@ -138,13 +128,10 @@ resource "购物相关接口" do
     end
 
     put 'cart_items/:id' do
-      before do
-        @cart_item = create(:cart_item, user: @user, product: @products.first)
-      end
 
       parameter :count, "产品的数量", require: true, scope: :cart_item
 
-      let(:id) { @cart_item.id }
+      let(:id) { @cart_items.first.id }
       let(:count) { 2 }
 
       example "修改购物车的数量成功" do
@@ -155,13 +142,10 @@ resource "购物相关接口" do
     end
 
     put 'cart_items/:id' do
-      before do
-        @cart_item = create(:cart_item, user: @user, product: @products.first)
-      end
 
       parameter :count, "产品的数量", require: true, scope: :cart_item
 
-      let(:id) { @cart_item.id }
+      let(:id) { @cart_items.first.id }
       let(:count) { -1 }
 
       example "修改购物车的数量失败（购买的产品数量小于等于0）" do
@@ -172,11 +156,8 @@ resource "购物相关接口" do
     end
 
     delete 'cart_items/:id' do
-      before do
-        @cart_item = create(:cart_item, user: @user, product: @products.first)
-      end
 
-      let(:id) { @cart_item.id }
+      let(:id) { @cart_items.first.id }
 
       example "删除（取消）购物车的物品" do
         do_request
