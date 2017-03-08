@@ -76,6 +76,7 @@ gem 'font-awesome-sass-rails'
 gem 'yaml_db'
 # Ckeditor integration gem for rails http://ckeditor.com/
 gem 'ckeditor'
+
 ##################################################################
 
 # Use Unicorn as the app server

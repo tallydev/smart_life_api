@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308025445) do
+ActiveRecord::Schema.define(version: 20170308165523) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -104,6 +104,20 @@ ActiveRecord::Schema.define(version: 20170308025445) do
   add_index "cart_items", ["product_id"], name: "index_cart_items_on_product_id", using: :btree
   add_index "cart_items", ["subdistrict_id"], name: "fk_rails_6d8172cbfc", using: :btree
   add_index "cart_items", ["user_id"], name: "index_cart_items_on_user_id", using: :btree
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",    limit: 191, null: false
+    t.string   "data_content_type", limit: 191
+    t.integer  "data_file_size",    limit: 4
+    t.string   "data_fingerprint",  limit: 191
+    t.string   "type",              limit: 30
+    t.integer  "width",             limit: 4
+    t.integer  "height",            limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "ckeditor_assets", ["type"], name: "index_ckeditor_assets_on_type", using: :btree
 
   create_table "classifies", force: :cascade do |t|
     t.string   "title",      limit: 191

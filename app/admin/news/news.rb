@@ -45,6 +45,7 @@ ActiveAdmin.register News do
     column :id
     column :title
     column :sort
+    # column :content
     # column :subdistrict_id
     # column :created_at
     # column :updated_at
@@ -62,7 +63,7 @@ ActiveAdmin.register News do
   form html: {multipart: true} do |f|
     f.inputs do 
       f.input :title
-      f.input :content 
+      f.input :content, :as => :ckeditor
       # f.input :subdistrict_id
       # f.input :sort, as: :select, collection: NewsSort.subdistrict_is(current_admin_user.subdistrict_id).collect(&:title)
       f.input :sort, as: :select, collection: NewsSort.all.collect(&:title)
@@ -87,9 +88,15 @@ ActiveAdmin.register News do
   end
 
   show do |news|
+	  # 跳转至edit
+
+	  html news.content
+
     attributes_table do
       row :title
       row :sort
+      row :content
+      
       # row :subdistrict_id
       # row :created_at
       # row :updated_at
@@ -98,6 +105,7 @@ ActiveAdmin.register News do
           link_to(image_tag(news.news_cover.photo.url(:medium)), news.news_cover.photo.url, target: "_blank")
         end
       end
+
 
       # row :news_detail do
       #   if news.news_detail
@@ -112,7 +120,9 @@ ActiveAdmin.register News do
       row " " do
         link_to "返回新闻列表", :back
       end
+
     end
+
   end
 
 end
