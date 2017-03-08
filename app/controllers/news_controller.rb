@@ -1,10 +1,13 @@
 class NewsController < ApplicationController
+  acts_as_token_authentication_handler_for User
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :json
 
   def index
-    @news = News.all
+    @news_sort = NewsSort.find_by_id(params[:news_sort_id])
+    raise 'news_sort_id 错误' unless @news_sort
+    @news = @news_sort.news
     respond_with(@news)
   end
 

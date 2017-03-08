@@ -1,7 +1,8 @@
 class NewsSortsController < ApplicationController
+  acts_as_token_authentication_handler_for User
   before_action :set_news_sort, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :json
 
   def index
     @news_sorts = NewsSort.all

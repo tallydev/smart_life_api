@@ -11,7 +11,7 @@ resource "购物相关接口" do
 
     before do
       @subdistrict = create(:subdistrict)
-      @user = create(:user)
+      @user = create(:user, subdistrict: @subdistrict)
       header "X-User-Token", @user.authentication_token
       header "X-User-Phone", @user.phone
     end

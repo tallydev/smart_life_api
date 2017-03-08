@@ -22,6 +22,7 @@ resource "主页相关接口" do
 
     @sports =  create_list(:sport, 3, user: @user)
     create_list(:banner, 2)
+    create_list(:home_block, 3)
     
 
     header "X-User-Token", @user.authentication_token

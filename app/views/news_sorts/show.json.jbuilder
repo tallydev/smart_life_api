@@ -1,1 +1,1 @@
-json.extract! @news_sort, :id, :created_at, :updated_at
+json.news_sort @news_sort, partial: 'news_sorts/news_sort', as: :news_sort

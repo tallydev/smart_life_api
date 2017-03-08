@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308012600) do
+ActiveRecord::Schema.define(version: 20170308015705) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -203,21 +203,26 @@ ActiveRecord::Schema.define(version: 20170308012600) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.integer  "news_sort_id", limit: 4
-    t.string   "title",        limit: 191
-    t.text     "content",      limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "news_sort_id",   limit: 4
+    t.string   "title",          limit: 191
+    t.text     "content",        limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "subdistrict_id", limit: 4
   end
 
   add_index "news", ["news_sort_id"], name: "index_news_on_news_sort_id", using: :btree
+  add_index "news", ["subdistrict_id"], name: "fk_rails_5785f550fc", using: :btree
 
   create_table "news_sorts", force: :cascade do |t|
-    t.integer  "rank",       limit: 4
-    t.string   "title",      limit: 191
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "rank",           limit: 4
+    t.string   "title",          limit: 191
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "subdistrict_id", limit: 4
   end
+
+  add_index "news_sorts", ["subdistrict_id"], name: "fk_rails_97499036d9", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.string   "seq",            limit: 191
@@ -572,6 +577,8 @@ ActiveRecord::Schema.define(version: 20170308012600) do
   add_foreign_key "customer_services", "subdistricts"
   add_foreign_key "home_blocks", "admin_users"
   add_foreign_key "news", "news_sorts"
+  add_foreign_key "news", "subdistricts"
+  add_foreign_key "news_sorts", "subdistricts"
   add_foreign_key "orders", "subdistricts"
   add_foreign_key "ping_requests", "orders"
   add_foreign_key "product_sorts", "subdistricts"

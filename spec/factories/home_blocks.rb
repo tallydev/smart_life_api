@@ -16,8 +16,9 @@
 
 FactoryGirl.define do
   factory :home_block do
-    admin_users nil
-    title "MyString"
-    ranking 1
+  	title_ary = ['智慧健康', '健步达人', '智慧家居', '社区活动', '社区IT', '上门服务', '精品超市', '限量发售'] 
+  	sequence(:title, 0) { |n| title_ary[n] }
+  	sequence(:ranking) { |n| n }
+    association :home_block_cover, factory: :image, photo_type: "home_block_cover"
   end
 end

@@ -1,1 +1,1 @@
-json.extract! @news, :id, :created_at, :updated_at
+json.news @news, partial: 'news/news', as: :news
