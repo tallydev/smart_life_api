@@ -75,7 +75,8 @@ gem 'font-awesome-sass-rails'
 # Read more: https://github.com/yamldb/yaml_db
 gem 'yaml_db'
 # Ckeditor integration gem for rails http://ckeditor.com/
-gem 'ckeditor'
+# gem 'ckeditor'
+gem 'ckeditor', github: 'galetahub/ckeditor'
 
 ##################################################################
 
