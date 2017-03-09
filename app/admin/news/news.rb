@@ -88,15 +88,13 @@ ActiveAdmin.register News do
   end
 
   show do |news|
-	  # 跳转至edit
-
-	  html news.content
 
     attributes_table do
       row :title
       row :sort
-      row :content
-      
+      row :content do 
+        news.content.html_safe 
+      end
       # row :subdistrict_id
       # row :created_at
       # row :updated_at
@@ -105,8 +103,6 @@ ActiveAdmin.register News do
           link_to(image_tag(news.news_cover.photo.url(:medium)), news.news_cover.photo.url, target: "_blank")
         end
       end
-
-
       # row :news_detail do
       #   if news.news_detail
       #     link_to(image_tag(news.news_detail.photo.url(:medium)), news.news_detail.photo.url(:s750), target: "_blank")
