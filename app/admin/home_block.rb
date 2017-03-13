@@ -31,7 +31,7 @@ ActiveAdmin.register HomeBlock do
 
   form html: {multipart: true} do |f|
     f.inputs do 
-      f.input :title, as: :select, collection: ['智慧健康', '健步达人', '智慧家居', '社区活动', '社区IT', '上门服务', '精品超市', '限量发售'] 
+      f.input :title, as: :select, collection: ['智慧健康', '健步达人', '智慧家居', '社区活动', '社区IT', '上门服务', '精品超市', '限量发售', '政府直通车'] 
       f.input :ranking
       f.fields_for :home_block_cover, for: [:home_block_cover, f.object.home_block_cover || f.object.build_home_block_cover] do |cf|
         image = cf.object
