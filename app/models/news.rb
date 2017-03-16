@@ -30,6 +30,6 @@ class News < ActiveRecord::Base
 	end
 
 	def content_replace_image_url 
-		content.gsub(/src=\"(.*)\"/, "src=\"http://220.163.125.158:8081/#{$1}\"")
+		content.gsub("src=\"/ckeditor_assets", " src=\"http://220.163.125.158:8081/ckeditor_assets")
 	end
 end
