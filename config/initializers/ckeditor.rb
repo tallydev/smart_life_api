@@ -39,7 +39,7 @@ Ckeditor.setup do |config|
 
   # Customize ckeditor assets path
   # By default: nil
-  # config.asset_path = 'http://www.example.com/assets/ckeditor/'
+  config.asset_path = 'http://220.163.125.158:8081/'
 
   # To reduce the asset precompilation time, you can limit plugins and/or languages to those you need:
   # By default: nil (no limit)

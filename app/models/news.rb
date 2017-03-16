@@ -28,4 +28,8 @@ class News < ActiveRecord::Base
 	  #定义方法 activeadmin中可以使用为 f.input :sort
 	  self.news_sort.try(:title)
 	end
+
+	def content_replace_image_url 
+		content.gsub(/src=\"(.*)\"/, "src=\"http://220.163.125.158:8081/#{$1}\"")
+	end
 end
