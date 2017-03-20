@@ -4,7 +4,7 @@ class HealthyService::Code2001
     user_info = UserInfo.find_by(identity_card: params["cardNo"])
     if user_info.present?
       user_info.name ||= params["fullname"]
-      user_info.sex ||= params["gender"] == "男" ? "male" : 'female'
+      user_info.sex = params["gender"] == "男" ? "male" : 'female'
       user_info.nation ||= params["nation"]
       user_info.birth ||= params["birthday"]
       user_info.addr ||= params["addr"]
