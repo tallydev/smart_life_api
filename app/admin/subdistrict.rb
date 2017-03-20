@@ -2,7 +2,7 @@ ActiveAdmin.register Subdistrict do
 	# menu parent, "社区相关"
   menu parent: "系统设置"  
   actions :index, :show, :edit, :update, :new
-  permit_params :province, :city, :district, :subdistrict
+  permit_params :province, :city, :district, :subdistrict, :property_phone
   index do 
   	# selectable_column
     id_column
@@ -14,6 +14,7 @@ ActiveAdmin.register Subdistrict do
     column :communities do |subdistrict|
       subdistrict.communities.collect(&:name).join(", ")
     end
+    column :property_phone
 
     column " " do  |subdistrict|
       link_to "编辑小区", admin_subdistrict_communities_path(subdistrict)
@@ -28,6 +29,7 @@ ActiveAdmin.register Subdistrict do
 	    row :city
 	    row :district
 	    row :subdistrict
+      row :property_phone
       # row :created_at
       # row :updated_at
       row "小区列表" do 
@@ -51,6 +53,7 @@ ActiveAdmin.register Subdistrict do
 	    f.input :city
 	    f.input :district
 	    f.input :subdistrict
+      f.input :property_phone
     end
     label "注： 不支持删除。"
     f.actions
