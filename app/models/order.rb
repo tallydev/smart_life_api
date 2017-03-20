@@ -119,7 +119,7 @@ class Order < ActiveRecord::Base
 
   def self.create_one user_id, ids, contact_id, order_type="精品超市"
   	ActiveRecord::Base.transaction do  
-  	  _order = Order.new(user_id: user_id, contact_id: contact_id)
+  	  _order = Order.new(user_id: user_id, contact_id: contact_id, subdistrict: User.find(user_id).subdistrict)
       _order.save!
       ids = ids.split(",").map {|x| x.to_i } if ids.is_a?(String) #postman 测试时
       CartItem.in_ids(ids).each do |cart_item|
