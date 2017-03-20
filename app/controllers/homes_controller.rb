@@ -4,7 +4,7 @@ class HomesController < ApplicationController
   respond_to :html, :json
   # 其他内容
   def home_info
-    @subdistrict = current_user.subdistrict_id
+    @subdistrict = current_user.subdistrict
     @banners = Banner.subdistrict_is(@subdistrict.id).all
     @promotion = Promotion.subdistrict_is(@subdistrict.id).for_sale.first
     @home_blocks = @subdistrict.try(:home_blocks)
