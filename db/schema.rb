@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308165523) do
+ActiveRecord::Schema.define(version: 20170320061303) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -533,12 +533,13 @@ ActiveRecord::Schema.define(version: 20170308165523) do
   add_index "sports", ["user_id"], name: "index_sports_on_user_id", using: :btree
 
   create_table "subdistricts", force: :cascade do |t|
-    t.string   "province",    limit: 191
-    t.string   "city",        limit: 191
-    t.string   "subdistrict", limit: 191
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "district",    limit: 191
+    t.string   "province",       limit: 191
+    t.string   "city",           limit: 191
+    t.string   "subdistrict",    limit: 191
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "district",       limit: 191
+    t.string   "property_phone", limit: 191
   end
 
   create_table "user_infos", force: :cascade do |t|

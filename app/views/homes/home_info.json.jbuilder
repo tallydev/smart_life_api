@@ -1,3 +1,5 @@
+# 社区信息
+json.subdistrict @subdistrict, :id, :property_phone
 # 轮播图
 json.banners @banners.each do |banner|
 	json.(banner, :id, :title, :position, :banner_type, :type_id)
@@ -12,9 +14,8 @@ json.newer do
 end
 
 # 首页模块信息
-# if
-	json.home_blocks  @home_blocks && @home_blocks.each do |home_block| 
-		json.(home_block, :title, :ranking)
-		json.home_block_cover image_url home_block.home_block_cover.try(:url, :s750)
-	end
-# end
+json.home_blocks  @home_blocks && @home_blocks.each do |home_block| 
+	json.(home_block, :title, :ranking)
+	json.home_block_cover image_url home_block.home_block_cover.try(:url, :s750)
+end
+

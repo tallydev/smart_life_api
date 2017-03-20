@@ -2,13 +2,14 @@
 #
 # Table name: subdistricts
 #
-#  id          :integer          not null, primary key
-#  province    :string(191)
-#  city        :string(191)
-#  subdistrict :string(191)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  district    :string(191)
+#  id             :integer          not null, primary key
+#  province       :string(191)
+#  city           :string(191)
+#  subdistrict    :string(191)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  district       :string(191)
+#  property_phone :string(191)
 #
 
 FactoryGirl.define do

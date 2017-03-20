@@ -4,10 +4,10 @@ class HomesController < ApplicationController
   respond_to :html, :json
   # 其他内容
   def home_info
-    @banners = Banner.subdistrict_is(current_user.subdistrict_id).all
-    # @banners = Banner.all
-    @promotion = Promotion.subdistrict_is(current_user.subdistrict_id).for_sale.first
-    @home_blocks = current_user.subdistrict.try(:home_blocks)
+    @subdistrict = current_user.subdistrict_id
+    @banners = Banner.subdistrict_is(@subdistrict.id).all
+    @promotion = Promotion.subdistrict_is(@subdistrict.id).for_sale.first
+    @home_blocks = @subdistrict.try(:home_blocks)
     respond_with @banners, template: 'homes/home_info', status: 200
   end
 

@@ -43,7 +43,7 @@ class CartItem < ActiveRecord::Base
   scope :state_is, -> (state){where(state: state)}
   scope :in_ids, -> (ids){where(id: ids)}
   #"no_stock" 无法查询？
-  scope :editing, -> {where(state: [0, 8, 7])}
+  scope :editing, -> {where(state: [0, 8, 7, 'shopping'])}
   scope :product_id_is, -> (product_id){where(product_id: product_id)}
   enum state: {
     shopping: 0,
