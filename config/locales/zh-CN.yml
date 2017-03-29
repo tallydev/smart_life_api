@@ -44,6 +44,7 @@ zh-CN:
         district: "区/县"
         subdistrict: "街道社区"
         communities: "所辖小区"
+        property_phone: '物业电话'
       community: 
         name: "名称"
       user:

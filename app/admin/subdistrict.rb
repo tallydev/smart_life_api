@@ -1,7 +1,7 @@
 ActiveAdmin.register Subdistrict do
 	# menu parent, "社区相关"
   menu parent: "系统设置"  
-  actions :index, :show, :edit, :update, :new
+  actions :index, :show, :edit, :update, :new, :create
   permit_params :province, :city, :district, :subdistrict, :property_phone
   index do 
   	# selectable_column
