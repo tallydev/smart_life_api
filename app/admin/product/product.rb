@@ -34,13 +34,13 @@ ActiveAdmin.register Product do
 
     def update
       @product = Product.find(params[:id])
-      @product.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
+      @product.product_sort = ProductSort.title_is(sort_params[:sort]).subdistrict_is(current_admin_user.subdistrict_id).try(:first)
       super
     end
 
     def create
       super
-      @product.product_sort = ProductSort.title_is(sort_params[:sort]).try(:first)
+      @product.product_sort = ProductSort.title_is(sort_params[:sort]).subdistrict_is(current_admin_user.subdistrict_id).try(:first)
       @product.subdistrict_id = current_admin_user.subdistrict_id
       @product.save
     end

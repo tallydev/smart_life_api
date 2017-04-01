@@ -17,6 +17,12 @@ ActiveAdmin.register ProductSort do
       @product_sort.save  
     end
 
+    def update
+      super
+      @product_sort.subdistrict_id = current_admin_user.subdistrict_id
+      @product_sort.save
+    end
+
     def destroy
       @product_sort =  ProductSort.find(params[:id])
 
