@@ -42,7 +42,7 @@ zh-CN:
         province: "省"
         city: "市"
         district: "区/县"
-        subdistrict: "街道社区"
+        subdistrict: "街道"
         communities: "所辖社区"
         property_phone: '物业电话'
       community: 

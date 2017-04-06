@@ -17,10 +17,11 @@ ActiveAdmin.register Subdistrict do
     column :property_phone
 
     column " " do  |subdistrict|
-      link_to "编辑小区", admin_subdistrict_communities_path(subdistrict)
+      link_to "编辑社区", admin_subdistrict_communities_path(subdistrict)
     end
 
     actions
+    label "“小区”由用户手动填写。"
   end
 
   show do |subdistrict|
@@ -32,12 +33,12 @@ ActiveAdmin.register Subdistrict do
       row :property_phone
       # row :created_at
       # row :updated_at
-      row "小区列表" do 
+      row "社区列表" do 
         subdistrict.communities.collect(&:name).join(", ")
       end
 
       row " " do 
-        link_to "编辑小区", admin_subdistrict_communities_path(subdistrict)
+        link_to "编辑社区", admin_subdistrict_communities_path(subdistrict)
       end
 
       row " " do
