@@ -83,7 +83,8 @@ class Product < ActiveRecord::Base
   end
 
   def sort
-  #定义方法 activeadmin中可以使用为 f.input :sort
+  # 定义方法 activeadmin中可以使用为 f.input :sort
+  # 不做任何数据库操作，仅占位
     self.product_sort.try(:title)
   end
 
