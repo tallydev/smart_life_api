@@ -12,6 +12,7 @@
 #  updated_at     :datetime         not null
 #  order_id       :integer
 #  subdistrict_id :integer
+#  product_title  :string(191)
 #
 # Indexes
 #

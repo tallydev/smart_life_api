@@ -12,6 +12,7 @@
 #  updated_at     :datetime         not null
 #  order_id       :integer
 #  subdistrict_id :integer
+#  product_title  :string(191)
 #
 # Indexes
 #
@@ -59,7 +60,7 @@ class CartItem < ActiveRecord::Base
     state :unpaid, :paid, :canceled, :no_stocks, :sale_off
 
     event :pay do
-      transitions from: :unpaid, to: :paid
+      transitions from: :unpaid, to: :paid, :after => :backup_title
     end
 
     event :cancel do
@@ -71,7 +72,11 @@ class CartItem < ActiveRecord::Base
     I18n.t :"cart_item_state.#{state}"
   end
 
-  delegate :title, :price, :after_discount, :discount_rate, :product_sort, :sales, to: :product, allow_nil: true
+  def title
+    self.product_title || self.product.title
+  end
+
+  delegate :price, :after_discount, :discount_rate, :product_sort, :sales, to: :product, allow_nil: true
 
   def self.check_stocks cart_items
     cart_items.each do |cart_item|
@@ -94,6 +99,11 @@ class CartItem < ActiveRecord::Base
 
     def set_subdistrict_id
       self.subdistrict_id = self.product.subdistrict_id
+    end
+
+    def backup_title
+      self.product_title = self.product.title
+      self.save
     end
 
 end
