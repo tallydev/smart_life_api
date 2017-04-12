@@ -4,17 +4,14 @@ ActiveAdmin.register Order do
   actions :index, :show
 
   filter :title
-  filter :order_type
-  # filter :state, emun: true
+  filter :paid_time
 
-  
   controller do 
     #更改默认搜索范围
     #index仅显示 正在销售
     def scoped_collection
       Order.subdistrict_is(current_admin_user.subdistrict_id).state_is([2,3])
     end
-
   end
 
   member_action :shipping, method: :put do
@@ -29,7 +26,35 @@ ActiveAdmin.register Order do
     redirect_to :back
   end
 
+  collection_action :sales_xls, method: :post do 
+    begin
+      @xls_file = XlsService.new(current_admin_user).order_cart_items(params)
+      request.format = "xls"
+      respond_to do |format|
+          format.xls {
+              send_data( @xls_file,
+                  :type => "text/excel;charset=utf-8; header=present",
+                  :filename => "hahaha.xls" )
+          }
+      end
+    rescue => error
+      redirect_to :back
+    end
+  end
+
+  action_item :xls, only: :index do 
+    link_to '下载销售统计表', "/admin/orders/sales_xls?" + params.to_param, method: :post
+  end
+
   index do 
+# p self.class
+#    p self.instance_variable_get(:@arbre_context) 
+#      p '======='
+#      p self.instance_variable_get(:@children)
+#       p '======='
+#       p self.instance_variable_get(:@attributes)
+#       p '======='
+#       p self.instance_variable_get(:@parent)
   	# selectable_column
     # id_column
     # column :state
@@ -43,11 +68,12 @@ ActiveAdmin.register Order do
     column :order_type
     # column :created_at
     # column :updated_at
+p 'do index table now'
     column "发货" do |order|
       if order.state == "paid"
-        link_to "确认发货","/admin/orders/#{order.id}/shipping", method: :put
+        link_to "确认发货", "/admin/orders/#{order.id}/shipping", method: :put
       else
-        link_to "已发货","/admin/orders/#{order.id}/cannel_shipping", method: :put
+        link_to "已发货", "/admin/orders/#{order.id}/cannel_shipping", method: :put
       end
     end
     actions

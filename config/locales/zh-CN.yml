@@ -133,6 +133,7 @@ zh-CN:
         postage: "运费"
         phone: "成交人"
         paid_time_output: "成交时间"
+        paid_time: "成交时间"
         user: "用户"
         order_type: "订单类型"
       banner:

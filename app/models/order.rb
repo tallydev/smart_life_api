@@ -38,8 +38,13 @@ class Order < ActiveRecord::Base
 	after_create :set_seq
 
   default_scope {order("created_at DESC")}
-  scope :state_is, -> (state){where(state: state)}
-
+  scope :state_is, -> (state){ where(state: state) }
+  scope :paid_time_in, ->(start_time, end_time){ 
+    start_time && end_time ?
+      where("paid_time > ? AND paid_time < ?", start_time, end_time) :
+      all 
+  }
+  
 	enum state: {
     unpaid: 1,
     paid: 2,

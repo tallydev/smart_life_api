@@ -246,6 +246,7 @@ GEM
       activesupport (>= 3.0.0)
       mustache (~> 1.0, >= 0.99.4)
       rspec (~> 3.0, >= 3.0.0)
+    ruby-ole (1.2.12.1)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -262,6 +263,11 @@ GEM
       actionmailer (>= 3.2.6, < 5)
       actionpack (>= 3.2.6, < 5)
       devise (~> 3.2)
+    spreadsheet (1.1.4)
+      ruby-ole (>= 1.0)
+    spreadsheet_on_rails (1.0.0)
+      rails (>= 3.0.1)
+      spreadsheet
     spring (1.7.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -330,6 +336,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   shoulda-matchers (~> 3.1)
   simple_token_authentication (~> 1.0)
+  spreadsheet_on_rails
   spring
   sqlite3
   turbolinks

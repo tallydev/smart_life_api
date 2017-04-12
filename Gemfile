@@ -77,7 +77,8 @@ gem 'yaml_db'
 # Ckeditor integration gem for rails http://ckeditor.com/
 # gem 'ckeditor'
 gem 'ckeditor', github: 'galetahub/ckeditor'
-
+# A Rails plugin to generate xls documents by using rxls templates. 
+gem "spreadsheet_on_rails"
 ##################################################################
 
 # Use Unicorn as the app server
