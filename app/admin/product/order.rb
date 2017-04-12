@@ -28,13 +28,13 @@ ActiveAdmin.register Order do
 
   collection_action :sales_xls, method: :post do 
     begin
-      @xls_file = XlsService.new(current_admin_user).order_cart_items(params)
+      @xls_file, filename = XlsService.new(current_admin_user, params).order_cart_items
       request.format = "xls"
       respond_to do |format|
           format.xls {
               send_data( @xls_file,
                   :type => "text/excel;charset=utf-8; header=present",
-                  :filename => "hahaha.xls" )
+                  :filename => filename )
           }
       end
     rescue => error
@@ -47,14 +47,6 @@ ActiveAdmin.register Order do
   end
 
   index do 
-# p self.class
-#    p self.instance_variable_get(:@arbre_context) 
-#      p '======='
-#      p self.instance_variable_get(:@children)
-#       p '======='
-#       p self.instance_variable_get(:@attributes)
-#       p '======='
-#       p self.instance_variable_get(:@parent)
   	# selectable_column
     # id_column
     # column :state

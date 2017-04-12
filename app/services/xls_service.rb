@@ -1,16 +1,17 @@
 class XlsService
 
-	def initialize admin
+	def initialize admin, params
+		@params = params
 		@admin = admin
 		@subdistrict = admin.subdistrict
 		@work_book = Spreadsheet::Workbook.new
 		@xls_report = StringIO.new
 	end
 
-	def order_cart_items params
-		query = params['q']
+	def order_cart_items 
+		query = @params['q']
 
-		 @orders = Order.paid.subdistrict_is(
+		 @orders = Order.state_is([2, 3]).subdistrict_is(
 				@subdistrict.id
 			).paid_time_in(
 				query&.[]('paid_time_gteq_date'), 
@@ -21,15 +22,21 @@ class XlsService
 
     add_sale_table
     add_sale_statistics_table
-
+    
     @work_book.write @xls_report
-    @xls_report.string
+    [ @xls_report.string, order_cart_items_filename(query) ]
 	end
 
 	private
 
-		def create_table params
-			
+		def order_cart_items_filename query
+			start_time = query&.[]('paid_time_gteq_date')
+			end_time = query&.[]('paid_time_lteq_date')
+			[
+				"#{@subdistrict.subdistrict}" ,
+			 	start_time && "-#{start_time}-#{end_time}",
+			 	'.xls'
+			 ].join('')
 		end
 
 		def add_sale_table 

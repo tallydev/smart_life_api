@@ -38,7 +38,7 @@ NeedSubmeter.each do |class_name|
 	Subdistrict.all.each do |subdistrict| 
 	  Object.const_set(  
 	       "P#{subdistrict.id}#{class_name.delete("::")}",   
-	        Class.new(class_name.safe_constantize) { |x| x.table_name ="p#{subdistrict.id}_#{class_name.delete("::").downcase.pluralize}" })    
+	        Class.new(class_name.safe_constantize) { |x| x.table_name = "p#{subdistrict.id}_#{class_name.delete("::").downcase.pluralize}" })    
 	  # 数据唯一性验证
 	  # 允许数据冗余
 	  "P#{subdistrict.id}#{class_name.delete("::")}".safe_constantize.class_eval do 
