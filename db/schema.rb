@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410020433) do
+ActiveRecord::Schema.define(version: 20170428085452) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 191
@@ -541,6 +541,7 @@ ActiveRecord::Schema.define(version: 20170410020433) do
     t.datetime "updated_at",                 null: false
     t.string   "district",       limit: 191
     t.string   "property_phone", limit: 191
+    t.string   "alarm_phone",    limit: 191
   end
 
   create_table "user_infos", force: :cascade do |t|

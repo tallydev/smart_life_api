@@ -10,6 +10,7 @@
 #  updated_at     :datetime         not null
 #  district       :string(191)
 #  property_phone :string(191)
+#  alarm_phone    :string(191)
 #
 
 require 'rails_helper'
