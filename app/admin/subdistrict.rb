@@ -15,6 +15,7 @@ ActiveAdmin.register Subdistrict do
       subdistrict.communities.collect(&:name).join(", ")
     end
     column :property_phone
+    column :alarm_phone
 
     column " " do  |subdistrict|
       link_to "编辑社区", admin_subdistrict_communities_path(subdistrict)
