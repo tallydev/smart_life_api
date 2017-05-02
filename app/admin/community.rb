@@ -10,7 +10,7 @@ ActiveAdmin.register Community do
 
     column :name
     column " " do 
-      link_to "返回社区列表", admin_subdistricts_path
+      link_to "返回街道列表", admin_subdistricts_path
     end 
     actions
   end
@@ -22,7 +22,7 @@ ActiveAdmin.register Community do
       # row :updated_at
 
       row " " do
-        link_to "返回小区列表", admin_subdistrict_communities_path(community.subdistrict)
+        link_to "返回街道列表", admin_subdistrict_communities_path(community.subdistrict)
       end
     end
   end

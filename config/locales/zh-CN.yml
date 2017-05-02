@@ -6,8 +6,8 @@ zh-CN:
       appointment/itfw: "IT服务预约"
       appointment/itfw: "IT服务预约"
       appointment/itxt: "IT学堂预约"
-      appointment/sqhd: "社区活动预约"
-      appointment/sqhd: "社区活动预约"
+      appointment/sqhd: "街道活动预约"
+      appointment/sqhd: "街道活动预约"
       appointment/xpss: "新品上市预约"
       appointment/zhjk: "智慧健康预约"
       appointment/znjj: "智能家居预约"
@@ -17,14 +17,14 @@ zh-CN:
       sport: "1.每日统计"
       sport/weekly: "2.每周统计"
       sport/monthly: "3.每月统计"
-      activity/sqhd: "社区活动"
+      activity/sqhd: "街道活动"
       product: "商品"
       promotion: "限量销售"
       product_banner: "商品轮播图"
       product_sort: "商品类别"
       order: "订单交易记录"
       banner: "首页轮播图"
-      subdistrict: "社区"
+      subdistrict: "街道"
       community: "小区"
       customer_service: "客服信息"
       home_block: '首页模块'
@@ -34,7 +34,7 @@ zh-CN:
       admin_user:
         email: "邮箱"
         postage: "邮费"
-        subdistrict_id: "所属社区"
+        subdistrict_id: "所属街道"
         password: "密码"
         password_confirmation: "确认密码"
         sms_phone: "短信接收号码"
@@ -43,7 +43,7 @@ zh-CN:
         city: "市"
         district: "区/县"
         subdistrict: "街道"
-        communities: "所辖社区"
+        communities: "所辖街道"
         property_phone: '物业电话'
         alarm_phone: '报警电话'
       community: 
@@ -103,7 +103,7 @@ zh-CN:
         title: "活动标题"
         image: "活动主图"
         detail_image: "活动详细图"
-        subdistrict_id: "社区id"
+        subdistrict_id: "街道id"
       product:
         id: "商品编号"
         title: "名称"
@@ -118,7 +118,7 @@ zh-CN:
         discount_rate: "折扣"
         after_discount: "优惠价"
         expiration_time: "到期时间"
-        subdistrict_id: "社区id"
+        subdistrict_id: "街道id"
         initial_sales: "销量初始值"
         sales: "总销量"
       product_banner:

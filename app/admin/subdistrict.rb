@@ -18,7 +18,7 @@ ActiveAdmin.register Subdistrict do
     column :alarm_phone
 
     column " " do  |subdistrict|
-      link_to "编辑社区", admin_subdistrict_communities_path(subdistrict)
+      link_to "编辑小区", admin_subdistrict_communities_path(subdistrict)
     end
 
     actions
@@ -35,12 +35,12 @@ ActiveAdmin.register Subdistrict do
       row :alarm_phone
       # row :created_at
       # row :updated_at
-      row "社区列表" do 
+      row "小区列表" do 
         subdistrict.communities.collect(&:name).join(", ")
       end
 
       row " " do 
-        link_to "编辑社区", admin_subdistrict_communities_path(subdistrict)
+        link_to "编辑小区", admin_subdistrict_communities_path(subdistrict)
       end
 
       row " " do
