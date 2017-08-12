@@ -3,14 +3,10 @@
 # Table name: product_sorts
 #
 #  id             :integer          not null, primary key
-#  title          :string(191)
+#  title          :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  subdistrict_id :integer
-#
-# Indexes
-#
-#  fk_rails_33238a7e68  (subdistrict_id)
 #
 
 class ProductSort < ActiveRecord::Base

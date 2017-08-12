@@ -3,8 +3,8 @@
 # Table name: customer_services
 #
 #  id             :integer          not null, primary key
-#  name           :string(191)
-#  phone          :string(191)
+#  name           :string
+#  phone          :string
 #  subdistrict_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

@@ -4,14 +4,10 @@
 #
 #  id             :integer          not null, primary key
 #  rank           :integer
-#  title          :string(191)
+#  title          :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  subdistrict_id :integer
-#
-# Indexes
-#
-#  fk_rails_97499036d9  (subdistrict_id)
 #
 
 require 'rails_helper'

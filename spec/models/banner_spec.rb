@@ -3,17 +3,13 @@
 # Table name: banners
 #
 #  id             :integer          not null, primary key
-#  title          :string(191)
+#  title          :string
 #  position       :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  subdistrict_id :integer          default(1)
-#  banner_type    :string(191)
+#  banner_type    :string
 #  type_id        :integer
-#
-# Indexes
-#
-#  fk_rails_7d50a4c40b  (subdistrict_id)
+#  subdistrict_id :integer          default(1)
 #
 
 require 'rails_helper'

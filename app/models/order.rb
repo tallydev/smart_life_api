@@ -3,23 +3,19 @@
 # Table name: orders
 #
 #  id             :integer          not null, primary key
-#  seq            :string(191)
+#  seq            :string
 #  state          :integer
-#  pay_way        :string(191)
-#  price          :float(24)
+#  pay_way        :string
+#  price          :float
 #  contact_id     :integer
 #  user_id        :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  postage        :float(24)        default(0.0)
+#  postage        :float            default(0.0)
 #  paid_time      :datetime
 #  subdistrict_id :integer
-#  order_type     :string(191)      default("精品超市")
-#  cart_item_info :text(65535)
-#
-# Indexes
-#
-#  fk_rails_c3a7ece3a4  (subdistrict_id)
+#  order_type     :string           default("精品超市")
+#  cart_item_info :text
 #
 
 class Order < ActiveRecord::Base

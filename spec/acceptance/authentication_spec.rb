@@ -59,6 +59,22 @@ resource "用户注册登录" do
 
   end
 
+  post '/user/token' do
+    before :each do
+     @user = create(:user)
+    end
+
+    parameter :phone, "用户手机号", required: true, scope: :user
+    user_attrs = FactoryGirl.attributes_for :user
+    let(:phone) { @user.phone }
+
+    example "用户登录成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+  end
+
   post "/users/sign_in" do
 
     before do

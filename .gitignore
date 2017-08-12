@@ -22,3 +22,5 @@
 /solr/
 /vendor/*
 /config/database.yml
+
+.ruby-version

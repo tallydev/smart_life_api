@@ -3,10 +3,10 @@
 # Table name: ckeditor_assets
 #
 #  id                :integer          not null, primary key
-#  data_file_name    :string(191)      not null
-#  data_content_type :string(191)
+#  data_file_name    :string           not null
+#  data_content_type :string
 #  data_file_size    :integer
-#  data_fingerprint  :string(191)
+#  data_fingerprint  :string
 #  type              :string(30)
 #  width             :integer
 #  height            :integer

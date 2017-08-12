@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   resource :home, only: [:show]
   get 'home_info', to: 'homes#home_info'
   
+  ######################################
+  # 为了新系统，增加老系统根据user手机号换取token的接口
+  ######################################
+  namespace :user do
+    resource :token, only: [:create]
+  end
   ############ SMS Routes ###################
   resources :sms_tokens, only: [:show]  do
     collection do

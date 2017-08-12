@@ -3,15 +3,11 @@
 # Table name: home_blocks
 #
 #  id             :integer          not null, primary key
-#  title          :string(191)
+#  title          :string
 #  ranking        :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  subdistrict_id :integer
-#
-# Indexes
-#
-#  fk_rails_96bf08918a  (subdistrict_id)
 #
 
 FactoryGirl.define do
