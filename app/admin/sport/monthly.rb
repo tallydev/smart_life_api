@@ -1,4 +1,4 @@
-unless Rails.env == 'development'
+if Rails.env != 'development' && Subdistrict.table_exists?
   Subdistrict.all.each do  |s|
     ActiveAdmin.register Sport::Monthly.get_const(s.id) do 
 

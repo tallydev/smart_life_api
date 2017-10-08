@@ -35,7 +35,7 @@ NeedSubmeter.each do |class_name|
 	end
 
 	# 定义 对应子模型名常量
-	Subdistrict.all.each do |subdistrict| 
+	Subdistrict.table_exists? && Subdistrict.all.each do |subdistrict| 
 	  Object.const_set(  
 	       "P#{subdistrict.id}#{class_name.delete("::")}",   
 	        Class.new(class_name.safe_constantize) { |x| x.table_name = "p#{subdistrict.id}_#{class_name.delete("::").downcase.pluralize}" })    
