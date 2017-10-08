@@ -22,5 +22,7 @@
 /solr/
 /vendor/*
 /config/database.yml
+/config/puma.rb
+/config/secrets.yml
 
 .ruby-version
